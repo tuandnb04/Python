@@ -23,6 +23,6 @@ account_balance = '12'
 # Hàm isinstance(): Kiểm tra biến có khớp với kiểu dữ liệu hay không (trả về bool)
 print(isinstance(account_balance, int)) # False
 
-# Kiểm tra nhiều kiểu dữ liệu cùng lúc (truyền tuple các kiểu):
+# Kiểm tra nhiều kiểu dữ liệu với toán tử Union '|' (Chuẩn Python mới nhất):
 account_balance = 12
-print(isinstance(account_balance, (int, float))) # True (nếu là 12 hoặc 12.0 đều trả về True)
+print(isinstance(account_balance, int | float)) # True (nếu là 12 hoặc 12.0 đều trả về True)
