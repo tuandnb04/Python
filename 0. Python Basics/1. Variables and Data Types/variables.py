@@ -17,11 +17,12 @@ total_score = 100
 # - Dùng dấu '#' cho comment đơn dòng (Python sẽ bỏ qua toàn bộ phần sau dấu '#' trên dòng đó).
 # - Comment nhiều dòng được tạo bằng nhiều dòng '#' liên tiếp.
 
-# In dữ liệu ra màn hình với hàm print()
-# - Chuỗi có thể đặt trong dấu nháy đơn ('...') hoặc nháy kép ("...").
-# - Phân tách nhiều giá trị bằng dấu phẩy, print() tự động chèn khoảng trắng ở giữa:
+# In dữ liệu ra màn hình terminal với hàm built-in print()
+# - Dấu nháy đơn ('...') hoặc nháy kép ("...") định nghĩa chuỗi (string) làm đối số (argument).
+# - Phân tách nhiều đối số bằng dấu phẩy, print() tự động chèn khoảng trắng ở giữa:
 print('Hello world!')
-print('My favorite colors are', 'blue', 'green', 'red')
+print('Hello', 'world!')                                # In ra: Hello world!
+print('My favorite colors are', 'blue', 'green', 'red') # In ra: My favorite colors are blue green red
 print('User info:', user_name, user_age, total_score)
 
 # Kiểu dữ liệu động (Dynamically-typed):
