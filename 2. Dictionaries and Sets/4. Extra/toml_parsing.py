@@ -13,7 +13,7 @@ backend = "kuzu"
 location = "./data/flask"
 """
 
-# 1. Parse chuỗi TOML thành dictionary bằng tomllib.loads()
+# Parse chuỗi TOML thành dictionary bằng tomllib.loads()
 config = tomllib.loads(toml_data)
 
 print("Project Name:", config["project"]["name"])

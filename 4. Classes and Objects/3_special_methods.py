@@ -1,6 +1,6 @@
 # Special / Dunder Methods (__name__): Phương thức đặc biệt tự động gọi khi dùng toán tử hoặc hàm built-in
 
-# 1. Ví dụ Class Book: __len__, __str__, __repr__, __eq__
+# Ví dụ Class Book: __len__, __str__, __repr__, __eq__
 class Book:
     def __init__(self, title, pages):
         self.title = title
@@ -35,7 +35,7 @@ print(eval(repr(book1)) == book1) # True (tái tạo lại chính đối tượn
 print(book1 == book2)    # True (gọi ngầm book1.__eq__(book2))
 
 
-# 2. Ví dụ Class Cart: Giỏ hàng với Container Dunder Methods
+# Ví dụ Class Cart: Giỏ hàng với Container Dunder Methods
 class Cart:
     def __init__(self):
         self.items = []

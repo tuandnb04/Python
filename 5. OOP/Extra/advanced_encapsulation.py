@@ -2,7 +2,7 @@
 from dataclasses import dataclass
 
 
-# 1. BẢN CHẤT CỦA HAI DẤU GẠCH DƯỚI (__) - CƠ CHẾ NAME MANGLING
+# BẢN CHẤT CỦA HAI DẤU GẠCH DƯỚI (__) - CƠ CHẾ NAME MANGLING
 # Trong Python, tiền tố __ KHÔNG thực sự biến thuộc tính thành private hoàn toàn.
 # Python tự động đổi tên __attribute thành: _ClassName__attribute
 # Mục đích chính: Tránh việc class con vô tình ghi đè (accidental overriding)
@@ -25,12 +25,12 @@ print(c.__dict__)
 # {'_Parent__data': 'Dữ liệu lớp cha', '_Child__data': 'Dữ liệu lớp con'}
 
 
-# 2. TỐI ƯU BỘ NHỚ VÀ KHÓA THUỘC TÍNH VỚI __slots__
+# TỐI ƯU BỘ NHỚ VÀ KHÓA THUỘC TÍNH VỚI __slots__
 # - Mặc định, mỗi instance class trong Python đều có 1 cuốn từ điển ngầm `__dict__`
 #   để chứa thuộc tính -> tốn RAM và cho phép bên ngoài gán thuộc tính lung tung.
 # - Dùng __slots__ để:
-#   1. Tiết kiệm 40% - 60% RAM khi tạo hàng triệu object.
-#   2. Ngăn chặn việc tùy tiện thêm thuộc tính rác ngoài danh sách khai báo.
+#   Tiết kiệm 40% - 60% RAM khi tạo hàng triệu object.
+#   Ngăn chặn việc tùy tiện thêm thuộc tính rác ngoài danh sách khai báo.
 
 print("\n--- 2. TỐI ƯU BỘ NHỚ VỚI __slots__ ---")
 class StrictWallet:
@@ -55,7 +55,7 @@ except AttributeError as e:
     print("Lỗi Slots khi gán thuộc tính lạ:", e)
 
 
-# 3. ĐÓNG BĂNG DỮ LIỆU BẤT BIẾN VỚI @dataclass(frozen=True)
+# ĐÓNG BĂNG DỮ LIỆU BẤT BIẾN VỚI @dataclass(frozen=True)
 # - Mutable (Có thể thay đổi): Dễ bị sửa đổi dữ liệu ngoài ý muốn.
 # - Immutable (Bất biến / Read-Only): Sinh ra để chỉ đọc, không thể thay đổi.
 # - @dataclass(frozen=True, slots=True): Cung cấp một model bất biến hoàn hảo,
@@ -73,19 +73,19 @@ account = ReadOnlyAccount(account_id="ACC-8899", owner="Alice", balance=500.0)
 print("Thông tin tài khoản:", account)
 print("Chủ sở hữu:", account.owner)
 
-# 1. Thử thay đổi số dư -> BỊ CHẶN
+# Thử thay đổi số dư -> BỊ CHẶN
 try:
     account.balance = 9999.0
 except Exception as e:
     print("Lỗi khi cố sửa giá trị (frozen):", type(e).__name__, "-", e)
 
-# 2. Thử thêm thuộc tính mới -> BỊ CHẶN
+# Thử thêm thuộc tính mới -> BỊ CHẶN
 try:
     account.note = "VIP"
 except Exception as e:
     print("Lỗi khi cố thêm thuộc tính mới (slots):", type(e).__name__, "-", e)
 
-# 3. Vì là bất biến (Immutable), đối tượng có thể dùng làm Key trong Dict hoặc Set:
+# Vì là bất biến (Immutable), đối tượng có thể dùng làm Key trong Dict hoặc Set:
 accounts_map = {
     account: "Hoạt động tốt"
 }

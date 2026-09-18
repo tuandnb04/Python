@@ -1,8 +1,8 @@
 # Quy trình giải quyết bài toán thuật toán:
-# 1. Hiểu đề bài: Xác định rõ Input, Output và Constraints (Ràng buộc)
-# 2. Viết mã giả (Pseudocode): Mô tả logic dạng văn bản dễ hiểu, độc lập ngôn ngữ
-# 3. Xét các trường hợp biên (Edge Cases): Ví dụ chuỗi rỗng "", mảng 1 phần tử
-# 4. Cài đặt, so sánh độ phức tạp và tối ưu (Refactoring)
+# Hiểu đề bài: Xác định rõ Input, Output và Constraints (Ràng buộc)
+# Viết mã giả (Pseudocode): Mô tả logic dạng văn bản dễ hiểu, độc lập ngôn ngữ
+# Xét các trường hợp biên (Edge Cases): Ví dụ chuỗi rỗng "", mảng 1 phần tử
+# Cài đặt, so sánh độ phức tạp và tối ưu (Refactoring)
 
 # Ví dụ bài toán: Đảo ngược chuỗi (Reverse a String)
 test_str = "hello"

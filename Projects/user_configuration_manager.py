@@ -54,7 +54,7 @@ print(delete_setting(test_settings, "volume"))
 print(view_settings(test_settings))
 
 
-# 8. Bài tập thực hành nâng cao: Trình phân tích Tần suất Từ (Word Frequency Analyzer)
+# Bài tập thực hành nâng cao: Trình phân tích Tần suất Từ (Word Frequency Analyzer)
 
 def analyze_text_frequency(text: str) -> dict[str, int]:
     """

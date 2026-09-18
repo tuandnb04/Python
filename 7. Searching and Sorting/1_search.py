@@ -1,4 +1,4 @@
-# 1. Linear Search (Tìm kiếm tuyến tính) - O(n) thời gian, O(1) không gian
+# Linear Search (Tìm kiếm tuyến tính) - O(n) thời gian, O(1) không gian
 # - Không yêu cầu mảng phải được sắp xếp
 def linear_search(arr, target):
     for i in range(len(arr)):
@@ -10,7 +10,7 @@ unsorted_list = [13, 4, 7, 9, 10]
 print("Linear search (find 9):", linear_search(unsorted_list, 9))   # 3
 print("Linear search (find 5):", linear_search(unsorted_list, 5))   # -1
 
-# 2. Binary Search (Tìm kiếm nhị phân) - O(log n) thời gian, O(1) không gian
+# Binary Search (Tìm kiếm nhị phân) - O(log n) thời gian, O(1) không gian
 # - ĐIỀU KIỆN BẮT BUỘC: Danh sách phải được sắp xếp tăng dần!
 def binary_search(arr, target):
     low, high = 0, len(arr) - 1

@@ -1,11 +1,11 @@
 # Tập hợp (Sets) trong Python là cấu trúc dữ liệu tích hợp sẵn
 # Các phần tử là DUY NHẤT (Unique) và KHÔNG CÓ THỨ TỰ (Unordered)
 
-# 1. Khởi tạo Set
+# Khởi tạo Set
 my_set = {1, 2, 3, 4, 5}
 empty_set = set()  # Bắt buộc dùng set() để tạo set rỗng (dùng {} sẽ tạo dict rỗng)
 
-# 2. Thêm và Xóa phần tử
+# Thêm và Xóa phần tử
 my_set.add(6)
 my_set.add(5)  # Không thay đổi vì 5 đã tồn tại
 print("Sau khi add:", my_set)  # {1, 2, 3, 4, 5, 6}
@@ -14,10 +14,10 @@ print("Sau khi add:", my_set)  # {1, 2, 3, 4, 5, 6}
 my_set.remove(4)
 my_set.discard(10)  # 10 không có trong set nhưng không bị lỗi
 
-# 3. Kiểm tra phần tử tồn tại với toán tử 'in'
+# Kiểm tra phần tử tồn tại với toán tử 'in'
 print(5 in my_set)  # True
 
-# 4. Kiểm tra quan hệ giữa các tập hợp
+# Kiểm tra quan hệ giữa các tập hợp
 my_set = {1, 2, 3, 4, 5}
 your_set = {2, 3, 4, 6}
 
@@ -25,7 +25,7 @@ print("issubset:", your_set.issubset(my_set))      # False (your_set có là t�
 print("issuperset:", my_set.issuperset(your_set))  # False (my_set có là tập cha của your_set không)
 print("isdisjoint:", my_set.isdisjoint(your_set))  # False (2 tập có rời nhau hoàn toàn không)
 
-# 5. Các phép toán tập hợp (Mathematical Set Operations)
+# Các phép toán tập hợp (Mathematical Set Operations)
 # Union (|) - Hợp: Lấy tất cả phần tử từ cả 2 tập hợp
 print("Union (|):", my_set | your_set)  # {1, 2, 3, 4, 5, 6}
 
@@ -46,7 +46,7 @@ print("my_set sau khi -= :", my_set)  # {1, 5}
 my_set.clear()
 print("After clear():", my_set)  # set()
 
-# 6. Kiến thức mở rộng: Đếm tần suất với collections.Counter
+# Kiến thức mở rộng: Đếm tần suất với collections.Counter
 from collections import Counter
 
 numbers = [1, 3, 4, 2, 2, 5, 3, 3, 1]

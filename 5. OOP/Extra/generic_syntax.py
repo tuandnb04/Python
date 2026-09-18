@@ -5,7 +5,7 @@
 #    + Cú pháp `[T]` trực quan, quen thuộc với các lập trình viên hiện đại (giống TypeScript, Rust, C++).
 #    + Tối ưu hóa hiệu năng kiểm tra kiểu (Type Checking) ở mức sâu hơn.
 
-# 1. Type Alias Statement với từ khóa 'type'
+# Type Alias Statement với từ khóa 'type'
 type Coordinates = tuple[float, float]
 type JSONDict = dict[str, str | int | bool]
 
@@ -14,7 +14,7 @@ data: JSONDict = {"status": "ok", "count": 42}
 print("Coordinates:", point)
 print("JSONDict:", data)
 
-# 2. Generic Function với cú pháp [T] trực tiếp (không cần TypeVar)
+# Generic Function với cú pháp [T] trực tiếp (không cần TypeVar)
 def get_first_element[T](items: list[T]) -> T:
     return items[0]
 
@@ -23,7 +23,7 @@ first_int = get_first_element([100, 200, 300])
 print("First string:", first_str)
 print("First int:", first_int)
 
-# 3. Generic Class với cú pháp [T]
+# Generic Class với cú pháp [T]
 class SimpleContainer[T]:
     def __init__(self, value: T):
         self.value = value

@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-# 1. Abstract Class cơ bản: Interface chung, không có thuộc tính khởi tạo
+# Abstract Class cơ bản: Interface chung, không có thuộc tính khởi tạo
 class Animal(ABC):  # Kế thừa từ Abstract Base Class (ABC)
     @abstractmethod # Decorator đánh dấu phương thức trừu tượng
     def make_sound(self) -> None: # Lớp con bắt buộc phải override phương thức này
@@ -45,7 +45,7 @@ class Bird(Animal):
 # without an implementation for abstract method 'make_sound'
 
 
-# 2. Abstract Class có __init__ và chia sẻ thuộc tính chung
+# Abstract Class có __init__ và chia sẻ thuộc tính chung
 class TalkingToy(ABC):
     def __init__(self, name: str) -> None:
         self.name = name

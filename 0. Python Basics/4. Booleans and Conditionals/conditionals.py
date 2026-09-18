@@ -1,10 +1,10 @@
-# 1. Toán tử so sánh (Trả về True / False)
+# Toán tử so sánh (Trả về True / False)
 print(3 > 4)    # False
 print(3 == 4)   # False
 print(3 != 4)   # True
 print(3 <= 4)   # True
 
-# 2. Câu lệnh điều kiện if - elif - else & từ khóa pass
+# Câu lệnh điều kiện if - elif - else & từ khóa pass
 age = 12
 
 if age >= 18:
@@ -18,7 +18,7 @@ else:
 if age < 0:
     pass
 
-# 3. Ứng dụng thực tế: Ra quyết định phương tiện di chuyển (Decision Making)
+# Ứng dụng thực tế: Ra quyết định phương tiện di chuyển (Decision Making)
 distance_mi = 5
 is_raining = False
 has_bike = True

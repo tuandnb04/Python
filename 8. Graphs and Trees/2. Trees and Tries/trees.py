@@ -1,5 +1,5 @@
-# 1. Binary Tree (Cây nhị phân): Mỗi node có tối đa 2 node con (left, right)
-# 2. Binary Search Tree - BST (Cây tìm kiếm nhị phân):
+# Binary Tree (Cây nhị phân): Mỗi node có tối đa 2 node con (left, right)
+# Binary Search Tree - BST (Cây tìm kiếm nhị phân):
 #    - Mọi node ở cây con bên trái (left subtree) có giá trị < node gốc
 #    - Mọi node ở cây con bên phải (right subtree) có giá trị > node gốc
 

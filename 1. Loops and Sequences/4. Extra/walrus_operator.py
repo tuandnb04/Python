@@ -3,7 +3,7 @@
 #    + Cho phép vừa gán giá trị vừa kiểm tra điều kiện ngay trong biểu thức.
 #    + Tránh việc phải gọi hàm hoặc tính toán 2 lần (ví dụ: tính len(w) trong List Comprehension).
 
-# 1. Dùng trong vòng lặp while để vừa gán vừa kiểm tra điều kiện
+# Dùng trong vòng lặp while để vừa gán vừa kiểm tra điều kiện
 sample_data = ["repo1", "repo2", "repo3", ""]
 index = 0
 
@@ -11,7 +11,7 @@ while (item := sample_data[index]):
     print("Processing item:", item)
     index += 1
 
-# 2. Dùng trong List Comprehension để tránh tính toán 2 lần
+# Dùng trong List Comprehension để tránh tính toán 2 lần
 words = ["python", "ast", "codegraph", "ai"]
 # Chỉ lấy các từ có độ dài > 3 và lưu luôn giá trị độ dài
 word_lengths = [(w, length) for w in words if (length := len(w)) > 3]

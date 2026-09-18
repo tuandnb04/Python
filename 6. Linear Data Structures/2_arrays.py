@@ -1,8 +1,8 @@
-# 1. Khái niệm Static Array vs Dynamic Array:
+# Khái niệm Static Array vs Dynamic Array:
 # - Static Array: Kích thước cố định (fixed size). Truy cập O(1). Khi đầy phải tạo mảng mới và copy sang.
 # - Dynamic Array: Tự động co giãn (resize) trong runtime. Trong Python, kiểu 'list' là Dynamic Array.
 
-# 2. Các thao tác và độ phức tạp trên Dynamic Array (Python list):
+# Các thao tác và độ phức tạp trên Dynamic Array (Python list):
 numbers = [3, 4, 5, 6]
 
 # Truy cập & Cập nhật theo index: O(1) - Constant Time

@@ -1,4 +1,4 @@
-# 1. Node của Singly Linked List (Danh sách liên kết đơn: duyệt 1 chiều)
+# Node của Singly Linked List (Danh sách liên kết đơn: duyệt 1 chiều)
 class Node:
     def __init__(self, data):
         self.data = data
@@ -43,7 +43,7 @@ sll.insert_at_beginning("A")       # O(1)
 sll.insert_at_end("C")             # O(n)
 print("Singly Linked List:", sll.display()) # A -> B -> C
 
-# 2. Node của Doubly Linked List (Danh sách liên kết đôi: duyệt 2 chiều)
+# Node của Doubly Linked List (Danh sách liên kết đôi: duyệt 2 chiều)
 class DoublyNode:
     def __init__(self, data):
         self.data = data

@@ -1,4 +1,4 @@
-# 1. Các loại lỗi phổ biến (Built-in Exceptions) & Cải tiến Traceback
+# Các loại lỗi phổ biến (Built-in Exceptions) & Cải tiến Traceback
 # - SyntaxError: Lỗi cú pháp
 # - NameError: Dùng biến/hàm chưa định nghĩa (Python có 'Did you mean: ...?')
 try:
@@ -34,7 +34,7 @@ try:
 except AttributeError as e:
     print(f"AttributeError: {e}")
 
-# 2. Cấu trúc đầy đủ: try - except - else - finally
+# Cấu trúc đầy đủ: try - except - else - finally
 # - try: Chứa đoạn code có khả năng phát sinh lỗi
 # - except: Bắt và xử lý lỗi cụ thể
 # - else: Chỉ chạy khi khối try không có lỗi
@@ -56,7 +56,7 @@ else:
 finally:
     print("This block always runs.")
 
-# 3. Bắt nhiều ngoại lệ (riêng lẻ hoặc dùng tuple)
+# Bắt nhiều ngoại lệ (riêng lẻ hoặc dùng tuple)
 # Cách 1: Bắt riêng lẻ từng khối except
 try:
     number = int("abc")
@@ -79,7 +79,7 @@ try:
 except (ValueError, ZeroDivisionError) as e:
     print(f"Error occurred: {e}")
 
-# 4. ExceptionGroup & except* (Python 3.11+ PEP 654)
+# ExceptionGroup & except* (Python 3.11+ PEP 654)
 # Bắt nhiều lỗi đồng thời khi chạy tác vụ song song
 def simulate_concurrent_tasks():
     errors = [

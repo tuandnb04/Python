@@ -2,7 +2,7 @@
 # - Dựa trên kiến thức: Hàm lồng nhau (Nested Functions), *args, **kwargs và functools.wraps
 import functools
 
-# 1. Cấu trúc một Decorator chuẩn hiện đại (Luôn dùng @functools.wraps)
+# Cấu trúc một Decorator chuẩn hiện đại (Luôn dùng @functools.wraps)
 # => TẠI SAO PHẢI DÙNG @functools.wraps(func)?
 #    + Nếu không có: Hàm sau khi bọc sẽ bị mất __name__, __doc__ và biến thành 'wrapper'.
 #    + Chuẩn hiện đại: Bảo toàn toàn bộ metadata gốc và hỗ trợ công cụ debug/profiler.
@@ -15,7 +15,7 @@ def my_logger(func):
         return result
     return wrapper
 
-# 2. Áp dụng Decorator bằng cú pháp @
+# Áp dụng Decorator bằng cú pháp @
 # Cú pháp @my_logger tương đương với việc gán lại: greet = my_logger(greet)
 @my_logger
 def greet(name, title="Mr."):

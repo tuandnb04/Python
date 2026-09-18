@@ -1,6 +1,6 @@
 # Khái niệm Iterable: Là đối tượng có thể lặp qua từng phần tử một (List, Tuple, String, Range, Dict, Set)
 
-# 1. Hàm range(start, stop, step) - Tạo dãy số nguyên (chỉ có 'stop' là bắt buộc)
+# Hàm range(start, stop, step) - Tạo dãy số nguyên (chỉ có 'stop' là bắt buộc)
 # - range object là BẤT BIẾN (Immutable) và sinh số dạng lười (lazy), tiết kiệm RAM tối đa.
 # - Dùng list(range(...)) nếu muốn chuyển đổi thành list các số nguyên hoàn chỉnh.
 print("range(3):", list(range(3)))              # [0, 1, 2] (từ 0 đến trước 3: chỉ truyền 'stop')
@@ -12,7 +12,7 @@ print("range(40, 0, -10):", list(range(40, 0, -10))) # [40, 30, 20, 10] (đếm 
 # - range()     -> TypeError: range expected at least 1 argument, got 0 (bắt buộc phải có stop)
 # - range(2.5)  -> TypeError: 'float' object cannot be interpreted as an integer (chỉ nhận số nguyên int)
 
-# 2. Vòng lặp for với range và sequence
+# Vòng lặp for với range và sequence
 # Lặp qua range trực tiếp (không cần bọc list()):
 for num in range(3):
     print("num in range(3):", num)
@@ -21,18 +21,18 @@ for lang in ['Rust', 'Java', 'Python', 'C++']:
     print("Language:", lang)
 
 
-# 3. Vòng lặp lồng nhau (Nested for loop)
+# Vòng lặp lồng nhau (Nested for loop)
 for category in ['Fruit', 'Vegetable']:
     for item in ['Apple', 'Carrot']:
         print(category, item)
 
-# 4. Vòng lặp while (Chạy cho đến khi điều kiện trở thành False)
+# Vòng lặp while (Chạy cho đến khi điều kiện trở thành False)
 count = 3
 while count > 0:
     print("Countdown:", count)
     count -= 1
 
-# 5. break (Dừng vòng lặp) & continue (Bỏ qua lần lặp hiện tại)
+# break (Dừng vòng lặp) & continue (Bỏ qua lần lặp hiện tại)
 devs = ['Jess', 'Naomi', 'Tom']
 
 for dev in devs:
@@ -45,7 +45,7 @@ for dev in devs:
         break    # Dừng ngay khi gặp Naomi
     print("break demo:", dev)    # In: Jess
 
-# 6. for ... else (Khối else chỉ chạy khi vòng lặp kết thúc bình thường, KHÔNG bị 'break')
+# for ... else (Khối else chỉ chạy khi vòng lặp kết thúc bình thường, KHÔNG bị 'break')
 words = ['sky', 'apple']
 for word in words:
     for char in word:

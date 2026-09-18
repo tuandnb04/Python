@@ -1,7 +1,7 @@
 # Từ điển (Dictionary) là cấu trúc dữ liệu lưu trữ các cặp khóa - giá trị (Key - Value)
 # Tương tự từ điển giấy: tra Key để tìm Value tương ứng
 
-# 1. Khai báo dictionary (ví dụ tiếng Anh gốc)
+# Khai báo dictionary (ví dụ tiếng Anh gốc)
 pizza = {
     'name': 'Margherita Pizza',
     'price': 8.9,
@@ -17,11 +17,11 @@ pizza_dict_constructor = dict([
     ('toppings', ['mozzarella', 'basil'])
 ])
 
-# 2. Quy tắc về Key và Value
+# Quy tắc về Key và Value
 # - Key phải là duy nhất và bất biến (immutable)
 # - Value có thể trùng lặp và nhận bất kỳ kiểu dữ liệu nào
 
-# 3. Truy cập và Cập nhật giá trị
+# Truy cập và Cập nhật giá trị
 # Truy cập bằng cú pháp ngoặc vuông: dictionary[key]
 print(pizza['name'])  # 'Margherita Pizza'
 
@@ -29,7 +29,7 @@ print(pizza['name'])  # 'Margherita Pizza'
 pizza['name'] = 'Margherita'
 print(pizza['name'])  # 'Margherita'
 
-# 4. Các phương thức phổ biến (Methods)
+# Các phương thức phổ biến (Methods)
 # .get(key, default) - Lấy giá trị an toàn, trả về giá trị mặc định nếu không tìm thấy key
 print(pizza.get('toppings', []))  # ['mozzarella', 'basil']
 print(pizza.get('discount', 0))   # 0
@@ -57,7 +57,7 @@ print(pizza)
 pizza.clear()
 print(pizza)  # {}
 
-# 5. Dictionary Unpacking với toán tử **
+# Dictionary Unpacking với toán tử **
 # Toán tử ** giải nén dict thành các keyword arguments truyền vào hàm
 def sum_three(a, b, c):
     return a + b + c
@@ -65,7 +65,7 @@ def sum_three(a, b, c):
 nums = {'a': 2, 'b': 4, 'c': 1}
 print(sum_three(**nums))  # 7 (tương đương: sum_three(a=2, b=4, c=1))
 
-# 6. Trích xuất & Lọc Keys từ Dictionary:
+# Trích xuất & Lọc Keys từ Dictionary:
 # - Lấy toàn bộ keys: list(d) hoặc [k for k in d]
 # - Lọc keys theo điều kiện value: [k for k, v in d.items() if condition]
 constraints = {'has_digits': True, 'has_symbols': False, 'min_length': True}

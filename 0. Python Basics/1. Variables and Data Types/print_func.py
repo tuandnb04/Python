@@ -1,11 +1,11 @@
-# 1. In chuỗi đơn giản ra màn hình
+# In chuỗi đơn giản ra màn hình
 print('Hello world!')
 
-# 2. In nhiều giá trị (ngăn cách bằng dấu phẩy, Python tự chèn khoảng trắng ở giữa)
+# In nhiều giá trị (ngăn cách bằng dấu phẩy, Python tự chèn khoảng trắng ở giữa)
 print('My favorite colors are', 'blue', 'green', 'red')
 print('Hello', 'world!') # 'Hello world!'
 
-# 3. Xuất dữ liệu qua luồng sys.stdout.write() (Cấp độ thấp hơn print)
+# Xuất dữ liệu qua luồng sys.stdout.write() (Cấp độ thấp hơn print)
 # - sys.stdout.write() KHÔNG tự động thêm ký tự xuống dòng (\n) hay khoảng trắng.
 # - Chỉ nhận một đối số duy nhất là chuỗi (str).
 import sys

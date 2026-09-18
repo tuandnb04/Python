@@ -1,4 +1,4 @@
-# 1. Class Attribute vs Instance Attribute (Class Dog)
+# Class Attribute vs Instance Attribute (Class Dog)
 class Dog:
     species = "French Bulldog"  # Class attribute (dùng chung cho cả lớp)
 
@@ -28,7 +28,7 @@ print(jack.bark())  # Jack says woof woof!
 print(jill.bark())  # Jill says woof woof!
 
 
-# 2. Instance Attributes & Method describe (Class Car)
+# Instance Attributes & Method describe (Class Car)
 class Car:
     def __init__(self, color, model):
         self.color = color  # Instance attribute

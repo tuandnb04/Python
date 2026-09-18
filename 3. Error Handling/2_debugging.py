@@ -15,7 +15,7 @@ import sys
 import logging
 import traceback
 
-# 1. DÙNG PRINT() VÀ F-STRINGS (Kỹ thuật debug nhanh & đơn giản nhất)
+# DÙNG PRINT() VÀ F-STRINGS (Kỹ thuật debug nhanh & đơn giản nhất)
 def add(a, b):
     result = a + b
     print(f"[DEBUG] Đầu vào: a={a}, b={b}, kết quả={result}")
@@ -25,7 +25,7 @@ print("--- 1. Debug bằng print() ---")
 add(10, 5)
 
 
-# 2. HÀM breakpoint() CÓ SẴN (Python 3.7+ - Chuẩn hiện đại thay thế pdb)
+# HÀM breakpoint() CÓ SẴN (Python 3.7+ - Chuẩn hiện đại thay thế pdb)
 # - Không cần gõ `import pdb; pdb.set_trace()`.
 # - Tự động mở interactive debugger khi chạy đến dòng này.
 # - Trong môi trường Production, có thể tắt toàn bộ breakpoint() bằng cách đặt:
@@ -41,7 +41,7 @@ print("\n--- 2. Hàm breakpoint() tích hợp sẵn ---")
 print("Tổng:", process_data([1, 2, 3]))
 
 
-# 3. DEBUG TRỰC QUAN BẰNG CÔNG CỤ IDE (VS Code / PyCharm Visual Debugger)
+# DEBUG TRỰC QUAN BẰNG CÔNG CỤ IDE (VS Code / PyCharm Visual Debugger)
 # - Breakpoints (F9): Đặt điểm dừng tại dòng cần kiểm tra (chấm đỏ ở lề trái)
 # - Start Debugging (F5): Chạy chương trình ở chế độ debug
 # - Step Over (F10): Thực thi dòng hiện tại và đi tới dòng kế tiếp
@@ -50,7 +50,7 @@ print("Tổng:", process_data([1, 2, 3]))
 # - Variables / Watch Panel: Theo dõi giá trị trực quan của các biến theo thời gian thực
 
 
-# 4. DÙNG MODULE logging (Giải pháp chuyên nghiệp thay thế print())
+# DÙNG MODULE logging (Giải pháp chuyên nghiệp thay thế print())
 # Ưu điểm:
 # - Phân cấp độ rõ ràng: DEBUG, INFO, WARNING, ERROR, CRITICAL
 # - Dễ dàng bật/tắt theo level cấu hình hoặc ghi log ra file mà không sửa code
@@ -76,7 +76,7 @@ divide_numbers(10, 2)
 divide_numbers(10, 0)
 
 
-# 5. TRÍCH XUẤT & XỬ LÝ TRACEBACK VỚI MODULE traceback
+# TRÍCH XUẤT & XỬ LÝ TRACEBACK VỚI MODULE traceback
 def buggy_function():
     return 1 / 0
 
@@ -91,7 +91,7 @@ except ZeroDivisionError:
     traceback.print_exc(file=sys.stdout)
 
 
-# 6. CÁC LỆNH PDB CƠ BẢN KHI VÀO TRÌNH DEBUGGER:
+# CÁC LỆNH PDB CƠ BẢN KHI VÀO TRÌNH DEBUGGER:
 # n (next)     : Thực thi dòng hiện tại và đi đến dòng kế tiếp (không nhảy vào hàm)
 # s (step)     : Nhảy vào chi tiết bên trong hàm đang gọi (Step into)
 # c (continue) : Tiếp tục chạy chương trình đến breakpoint kế tiếp hoặc khi kết thúc

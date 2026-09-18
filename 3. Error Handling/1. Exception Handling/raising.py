@@ -1,4 +1,4 @@
-# 1. Câu lệnh 'raise': Kích hoạt ngoại lệ thủ công
+# Câu lệnh 'raise': Kích hoạt ngoại lệ thủ công
 def check_age(age):
     if age < 0:
         raise ValueError(f"Age cannot be negative: {age}")
@@ -10,7 +10,7 @@ try:
 except ValueError as e:
     print("Caught ValueError:", e)
 
-# 2. Re-raising: Bắt lỗi để xử lý trung gian rồi ném tiếp
+# Re-raising: Bắt lỗi để xử lý trung gian rồi ném tiếp
 def parse_config_entry(data):
     try:
         return int(data)
@@ -24,8 +24,8 @@ try:
 except ValueError as e:
     print("Caller received re-raised error:", e)
 
-# 3. Custom Exception: Ngoại lệ tự định nghĩa
-# 3.1. Dạng tối giản: Chỉ cần kế thừa Exception và dùng 'pass'
+# Custom Exception: Ngoại lệ tự định nghĩa
+# 1. Dạng tối giản: Chỉ cần kế thừa Exception và dùng 'pass'
 class ItemNotFoundError(Exception):
     """Ngoại lệ kế thừa toàn bộ tính năng mặc định của Exception."""
     pass
@@ -36,7 +36,7 @@ try:
 except ItemNotFoundError as e:
     print("Caught:", e)
 
-# 3.2. Custom Exception có thuộc tính mở rộng (Attributes & Metadata)
+# 2. Custom Exception có thuộc tính mở rộng (Attributes & Metadata)
 class InsufficientFundsError(Exception):
     def __init__(self, balance, amount):
         self.balance = balance
@@ -55,7 +55,7 @@ except InsufficientFundsError as e:
     print("Account transaction error:", e)
     print(f"Details: Balance = {e.balance}, Requested = {e.amount}")
 
-# 3.3. Phân cấp ngoại lệ theo Module/Dự án (Exception Hierarchy)
+# 3. Phân cấp ngoại lệ theo Module/Dự án (Exception Hierarchy)
 # Giúp caller có thể bắt chung lỗi của cả module (AppBaseError) hoặc bắt chi tiết lỗi con
 class AppBaseError(Exception):
     """Lớp cha cho toàn bộ ngoại lệ trong ứng dụng."""
@@ -76,8 +76,8 @@ try:
 except AppBaseError as e:
     print(f"Caught by AppBaseError handler: {type(e).__name__} -> {e}")
 
-# 4. Exception Chaining: Chuỗi ngoại lệ với từ khóa 'from' (PEP 3134)
-# 4.1. Giữ nguyên nguyên nhân gốc (raise ... from err)
+# Exception Chaining: Chuỗi ngoại lệ với từ khóa 'from' (PEP 3134)
+# 1. Giữ nguyên nguyên nhân gốc (raise ... from err)
 print("\n--- 4.1. Exception Chaining (with cause) ---")
 try:
     try:
@@ -89,7 +89,7 @@ except RuntimeError as e:
     print("Caught outer error:", e)
     print("Root cause (__cause__):", e.__cause__)
 
-# 4.2. Ẩn nguyên nhân gốc (raise ... from None)
+# 2. Ẩn nguyên nhân gốc (raise ... from None)
 print("\n--- 4.2. Exception Chaining (suppress cause) ---")
 try:
     try:
@@ -100,7 +100,7 @@ except KeyError as e:
     print("Clean error:", e)
     print("Cause (__cause__):", e.__cause__)
 
-# 5. Câu lệnh 'assert': Kiểm tra điều kiện nội bộ khi debug/test
+# Câu lệnh 'assert': Kiểm tra điều kiện nội bộ khi debug/test
 print("\n--- 5. Assert statement ---")
 try:
     temperature_kelvin = -10
@@ -108,7 +108,7 @@ try:
 except AssertionError as e:
     print("AssertionError:", e)
 
-# 6. Gắn ghi chú chẩn đoán với Exception.add_note() (Python 3.11+ PEP 678)
+# Gắn ghi chú chẩn đoán với Exception.add_note() (Python 3.11+ PEP 678)
 print("\n--- 6. Exception.add_note() (Python 3.11+) ---")
 try:
     try:

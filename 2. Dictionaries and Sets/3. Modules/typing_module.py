@@ -1,15 +1,15 @@
 # Module typing trong Thư viện chuẩn Python (Standard Library)
 from typing import Literal, Final, TypedDict, Self
 
-# 1. Hằng số (Final) - Báo hiệu giá trị không được gán lại
+# Hằng số (Final) - Báo hiệu giá trị không được gán lại
 API_VERSION: Final[str] = "v1"
 
-# 2. Literal & Type Statement (Python 3.12+ PEP 695)
+# Literal & Type Statement (Python 3.12+ PEP 695)
 # Thay vì 'Status = Literal[...]' cũ, dùng từ khóa 'type' chuẩn hiện đại
 type Status = Literal["pending", "completed", "failed"]
 current_status: Status = "completed"
 
-# 3. TypedDict - Định nghĩa kiểu tĩnh cho cấu trúc Dictionary
+# TypedDict - Định nghĩa kiểu tĩnh cho cấu trúc Dictionary
 class UserProfile(TypedDict):
     username: str
     age: int
@@ -17,7 +17,7 @@ class UserProfile(TypedDict):
 
 user: UserProfile = {"username": "alice", "age": 25, "is_active": True}
 
-# 4. [PYTHON 3.11+ PEP 673]: typing.Self cho Fluent Interface / Method Chaining
+# [PYTHON 3.11+ PEP 673]: typing.Self cho Fluent Interface / Method Chaining
 # Tự động suy luận kiểu trả về là chính class hiện tại (không cần gõ chuỗi hoặc TypeVar)
 class QueryBuilder:
     def __init__(self):

@@ -1,6 +1,6 @@
 from itertools import zip_longest
 
-# 1. Hàm enumerate(iterable, start=0)
+# Hàm enumerate(iterable, start=0)
 # - Theo dõi index của từng phần tử trong iterable mà không cần tạo biến đếm thủ công.
 # - Trả về enumerate object, khi ép sang list() sẽ là danh sách các tuple: (index, value)
 languages = ['Spanish', 'English', 'Russian', 'Chinese']
@@ -15,7 +15,7 @@ for index, language in enumerate(languages):
 for index, language in enumerate(languages, start=1):
     print(f'Index {index} and language {language}')
 
-# 2. Hàm zip(*iterables) - Ghép song song nhiều iterables
+# Hàm zip(*iterables) - Ghép song song nhiều iterables
 developers = ['Naomi', 'Dario', 'Jessica', 'Tom']
 ids = [1, 2, 3, 4]
 
@@ -27,13 +27,13 @@ print("zipped:", zipped)
 for name, dev_id in zip(developers, ids):
     print(f'Name: {name}, ID: {dev_id}')
 
-# 3. Kỹ thuật Unzip (Tách ngược lại các list ban đầu từ danh sách cặp tuple)
+# Kỹ thuật Unzip (Tách ngược lại các list ban đầu từ danh sách cặp tuple)
 # Sử dụng toán tử giải nén (*) kết hợp với zip:
 names_unzipped, ids_unzipped = zip(*zipped)
 print("Unzipped names:", list(names_unzipped))
 print("Unzipped ids:", list(ids_unzipped))
 
-# 4. Xử lý khi các iterable lệch độ dài:
+# Xử lý khi các iterable lệch độ dài:
 extra_ids = [1, 2, 3, 4, 5]
 
 # Cách A (Python 3.10+): strict=True -> Bắt buộc bằng nhau, nếu lệch ném lỗi ValueError

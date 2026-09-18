@@ -1,12 +1,12 @@
-# 1. Nối chuỗi (+) và Lặp chuỗi (*)
+# Nối chuỗi (+) và Lặp chuỗi (*)
 print('Hello' + ' ' + 'World')  # 'Hello World'
 print('ha' * 3)                 # 'hahaha'
 
-# 2. Nối chuỗi với số bằng hàm str()
+# Nối chuỗi với số bằng hàm str()
 name, age = 'John', 26
 print(name + str(age))          # 'John26'
 
-# 3. Định dạng chuỗi với F-string (String Interpolation - Chuẩn hiện đại)
+# Định dạng chuỗi với F-string (String Interpolation - Chuẩn hiện đại)
 # => TẠI SAO F-STRING LÀ LỰA CHỌN TỐT NHẤT?
 #    + Nhanh hơn 2-3 lần (tính toán trực tiếp ở cấp bytecode thay vì gọi hàm format động).
 #    + Dễ đọc, dễ bảo trì (biến được đặt trực tiếp bên trong chuỗi).

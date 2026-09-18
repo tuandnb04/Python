@@ -1,10 +1,10 @@
 # 2 Điều kiện cốt lõi của Dynamic Programming (DP):
-# 1. Overlapping Subproblems (Các bài toán con gối nhau/trùng lặp)
-# 2. Optimal Substructure (Cấu trúc con tối ưu)
+# Overlapping Subproblems (Các bài toán con gối nhau/trùng lặp)
+# Optimal Substructure (Cấu trúc con tối ưu)
 
 # Bài toán: Climbing Stairs (Có n bậc, mỗi lần bước 1 hoặc 2 bậc. Tìm số cách lên đỉnh?)
 
-# 1. Top-Down Approach (Memoization - Đệ quy có nhớ): O(n) thời gian, O(n) không gian
+# Top-Down Approach (Memoization - Đệ quy có nhớ): O(n) thời gian, O(n) không gian
 def climb_stairs_memo(n, memo=None):
     if memo is None:
         memo = {}
@@ -15,7 +15,7 @@ def climb_stairs_memo(n, memo=None):
     memo[n] = climb_stairs_memo(n - 1, memo) + climb_stairs_memo(n - 2, memo)
     return memo[n]
 
-# 2. Bottom-Up Approach (Tabulation - Lập bảng từ dưới lên): O(n) thời gian, O(n) không gian
+# Bottom-Up Approach (Tabulation - Lập bảng từ dưới lên): O(n) thời gian, O(n) không gian
 def climb_stairs_tabulation(n):
     if n <= 2:
         return n
@@ -25,7 +25,7 @@ def climb_stairs_tabulation(n):
         dp[i] = dp[i - 1] + dp[i - 2]
     return dp[n]
 
-# 3. Tối ưu không gian (Space-Optimized Tabulation): O(n) thời gian, O(1) không gian
+# Tối ưu không gian (Space-Optimized Tabulation): O(n) thời gian, O(1) không gian
 def climb_stairs_optimized(n):
     if n <= 2:
         return n

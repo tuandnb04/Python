@@ -1,6 +1,6 @@
 from operator import itemgetter
 
-# 1. Từ hàm chính quy (def) sang hàm ẩn danh (lambda)
+# Từ hàm chính quy (def) sang hàm ẩn danh (lambda)
 # Hàm thông thường có tên:
 def square(num):
     return num ** 2
@@ -11,7 +11,7 @@ print("Regular function:", square(4)) # 16
 square_lambda = lambda num: num ** 2
 print("Lambda function:", square_lambda(4)) # 16
 
-# 2. Sử dụng Lambda trong Higher-Order Functions (filter, map, sorted)
+# Sử dụng Lambda trong Higher-Order Functions (filter, map, sorted)
 numbers = [1, 2, 3, 4, 5]
 
 # Lọc số chẵn với filter():
@@ -30,7 +30,7 @@ print("sorted() with lambda key:", sorted(pairs, key=lambda item: item[1]))
 # Thay vì viết `lambda x: x[1]`, dùng `itemgetter(1)` nhanh hơn (viết bằng C) và chuẩn Pythonic hơn
 print("sorted() with itemgetter: ", sorted(pairs, key=itemgetter(1)))
 
-# 3. Best Practices khi dùng Lambda (Quy tắc thực hành chuẩn PEP 8)
+# Best Practices khi dùng Lambda (Quy tắc thực hành chuẩn PEP 8)
 # - KHÔNG NÊN: Gán lambda vào một biến (square = lambda x: x ** 2).
 #   Lý do: Làm mất đi ý nghĩa của "hàm ẩn danh" (anonymous). Khi cần hàm có tên tái sử dụng, hãy dùng 'def'.
 # - KHÔNG NÊN: Viết lambda quá phức tạp, lồng if/else nhiều nhánh.
@@ -45,7 +45,7 @@ def calculate_expression(x):
 
 print("calculate_expression(3):", calculate_expression(3)) # 14
 
-# 4. So sánh với List Comprehension hiện đại:
+# So sánh với List Comprehension hiện đại:
 # - Trong Python hiện đại, List Comprehension thường được ưu tiên hơn map/filter + lambda:
 even_comp = [x for x in numbers if x % 2 == 0]
 squared_comp = [x ** 2 for x in numbers]

@@ -2,18 +2,18 @@
 from functools import cache
 
 # => TẠI SAO @CACHE TỐT HƠN VIẾT MEMOIZATION THỦ CÔNG (memo={})?
-# 1. Loại bỏ hoàn toàn mã lặp (Boilerplate): Không cần tự truyền tham số `memo={}` hoặc tự kiểm tra `if n in memo`.
-# 2. Tối ưu hiệu năng ở cấp độ C (C-level implementation): Nhanh hơn việc thao tác dict thủ công trong Python.
-# 3. An toàn đa luồng (Thread-safe): Được bảo vệ chống xung đột dữ liệu khi chạy đa luồng.
+# Loại bỏ hoàn toàn mã lặp (Boilerplate): Không cần tự truyền tham số `memo={}` hoặc tự kiểm tra `if n in memo`.
+# Tối ưu hiệu năng ở cấp độ C (C-level implementation): Nhanh hơn việc thao tác dict thủ công trong Python.
+# An toàn đa luồng (Thread-safe): Được bảo vệ chống xung đột dữ liệu khi chạy đa luồng.
 
-# 1. Climbing Stairs với @cache (Tương đương Memoization Top-Down O(n))
+# Climbing Stairs với @cache (Tương đương Memoization Top-Down O(n))
 @cache
 def climb_stairs_cached(n: int) -> int:
     if n <= 2:
         return n
     return climb_stairs_cached(n - 1) + climb_stairs_cached(n - 2)
 
-# 2. Min Coins (Coin Change) với @cache
+# Min Coins (Coin Change) với @cache
 @cache
 def min_coins_cached(amount: int, coins: tuple[int, ...]) -> float:
     if amount == 0:

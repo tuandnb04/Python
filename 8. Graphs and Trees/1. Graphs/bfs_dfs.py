@@ -8,7 +8,7 @@ graph = {
     'D': [], 'E': [], 'F': [], 'G': []
 }
 
-# 1. Breadth-First Search (BFS) - Dùng Queue (FIFO)
+# Breadth-First Search (BFS) - Dùng Queue (FIFO)
 # - Duyệt theo từng tầng (level-by-level)
 # - Dùng tìm đường đi ngắn nhất (shortest path) trên đồ thị không trọng số
 def bfs(start_node):
@@ -25,7 +25,7 @@ def bfs(start_node):
                 queue.append(neighbor)# Enqueue vào cuối hàng đợi
     return visited
 
-# 2. Depth-First Search (DFS) - Dùng Đệ quy (hoặc Stack LIFO)
+# Depth-First Search (DFS) - Dùng Đệ quy (hoặc Stack LIFO)
 # - Đi sâu hết từng nhánh trước khi quay lui (backtracking)
 # - Thích hợp giải mê cung, phát hiện chu trình (cycle detection)
 def dfs(node, visited=None):

@@ -6,19 +6,19 @@ class TreeNode:
         self.left = None
         self.right = None
 
-# 1. In-order (Left -> Root -> Right): Xuất các phần tử theo thứ tự tăng dần trên BST
+# In-order (Left -> Root -> Right): Xuất các phần tử theo thứ tự tăng dần trên BST
 def inorder(node):
     if not node:
         return []
     return inorder(node.left) + [node.val] + inorder(node.right)
 
-# 2. Pre-order (Root -> Left -> Right): Dùng để sao chép / serialize cấu trúc cây
+# Pre-order (Root -> Left -> Right): Dùng để sao chép / serialize cấu trúc cây
 def preorder(node):
     if not node:
         return []
     return [node.val] + preorder(node.left) + preorder(node.right)
 
-# 3. Post-order (Left -> Right -> Root): Dùng để giải phóng / xóa cây hoặc tính toán biểu thức
+# Post-order (Left -> Right -> Root): Dùng để giải phóng / xóa cây hoặc tính toán biểu thức
 def postorder(node):
     if not node:
         return []

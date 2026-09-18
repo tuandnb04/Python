@@ -8,11 +8,11 @@ products = {
     'Headphones': 70,
 }
 
-# 1. Lặp qua Values (.values())
+# Lặp qua Values (.values())
 for price in products.values():
     print(price)
 
-# 2. Lặp qua Keys (.keys() hoặc lặp trực tiếp)
+# Lặp qua Keys (.keys() hoặc lặp trực tiếp)
 for product in products.keys():
     print(product)
 
@@ -20,7 +20,7 @@ for product in products.keys():
 # for product in products:
 #     print(product)
 
-# 3. Lặp qua cả Keys và Values (.items())
+# Lặp qua cả Keys và Values (.items())
 # Mỗi phần tử trả về là 1 tuple (key, value)
 for product in products.items():
     print(product)
@@ -35,7 +35,7 @@ for product, price in products.items():
 
 print(products)
 
-# 4. Sử dụng hàm enumerate() để thêm bộ đếm (index/counter)
+# Sử dụng hàm enumerate() để thêm bộ đếm (index/counter)
 # Mặc định bộ đếm bắt đầu từ 0
 
 # Với keys:

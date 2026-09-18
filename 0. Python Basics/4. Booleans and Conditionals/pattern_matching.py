@@ -3,7 +3,7 @@
 #    + Cú pháp rõ ràng, phân nhánh trực quan theo cấu trúc dữ liệu.
 #    + Hỗ trợ 'Guards' (điều kiện if bổ sung) giúp gom nhóm logic gọn gàng hơn.
 
-# 1. Khớp giá trị cụ thể (Literal Matching)
+# Khớp giá trị cụ thể (Literal Matching)
 status_code = 404
 
 match status_code:
@@ -18,7 +18,7 @@ match status_code:
     case _:
         print("Unknown Status Code")       # case _ tương đương 'else'
 
-# 2. Khớp mẫu với điều kiện bổ sung (Guards với từ khóa 'if')
+# Khớp mẫu với điều kiện bổ sung (Guards với từ khóa 'if')
 score = 85
 
 match score:

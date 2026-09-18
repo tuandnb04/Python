@@ -1,6 +1,6 @@
 import inspect
 
-# 1. Thuộc tính cố định thông thường (Class Car)
+# Thuộc tính cố định thông thường (Class Car)
 class Car:
     def __init__(self, brand, model):
         self.brand = brand
@@ -11,7 +11,7 @@ print(my_car.brand)  # Lamborghini
 print(my_car.model)  # Gallardo
 
 
-# 2. getattr(): Đọc thuộc tính động khi tên thuộc tính chưa biết trước (Class Person)
+# getattr(): Đọc thuộc tính động khi tên thuộc tính chưa biết trước (Class Person)
 class Person:
     def __init__(self, name, age):
         self.name = name
@@ -24,7 +24,7 @@ print(getattr(person, 'age'))             # 30
 print(getattr(person, 'city', 'Milano'))  # Milano (giá trị mặc định khi không tìm thấy)
 
 
-# 3. dir() & callable(): Duyệt qua tất cả các thuộc tính dữ liệu của đối tượng
+# dir() & callable(): Duyệt qua tất cả các thuộc tính dữ liệu của đối tượng
 for attr in dir(person):
     # Bỏ qua dunder methods (__init__, __str__) và các hàm/method thông thường
     if not attr.startswith('__') and not callable(getattr(person, attr)):
@@ -36,7 +36,7 @@ data_members = [k for k, v in inspect.getmembers(person) if not k.startswith('__
 print("inspect.getmembers():", data_members)  # ['age', 'name']
 
 
-# 4. setattr(): Gán hoặc tạo mới thuộc tính động (Class Configuration)
+# setattr(): Gán hoặc tạo mới thuộc tính động (Class Configuration)
 class Configuration:
     pass
 
@@ -61,7 +61,7 @@ vars(config_fast).update(settings_data)
 print("vars().update():", config_fast.server_url)
 
 
-# 5. hasattr(): Kiểm tra sự tồn tại của thuộc tính trước khi truy cập (Class Product)
+# hasattr(): Kiểm tra sự tồn tại của thuộc tính trước khi truy cập (Class Product)
 class Product:
     def __init__(self, name, price):
         self.name = name
@@ -77,7 +77,7 @@ for attr in required_attributes:
         print(f'{attr}: {getattr(product_a, attr)}')
 
 
-# 6. delattr(): Xóa thuộc tính động (Class UserSession)
+# delattr(): Xóa thuộc tính động (Class UserSession)
 class UserSession:
     def __init__(self, user_id, token):
         self.user_id = user_id
@@ -99,7 +99,7 @@ for attr in dir(session):
         print(f' - {attr}: {getattr(session, attr)}')
 
 
-# 7. Cách hiện đại: Khóa thuộc tính động bằng __slots__ (Python 3.10+)
+# Cách hiện đại: Khóa thuộc tính động bằng __slots__ (Python 3.10+)
 # Ngăn chặn người dùng tự ý gán thêm thuộc tính lạ ngoài danh sách và tiết kiệm 30% RAM
 class StrictProduct:
     __slots__ = {'name': str, 'price': float}
