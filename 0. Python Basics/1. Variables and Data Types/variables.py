@@ -45,10 +45,10 @@ is_valid = True                    # bool (Giá trị logic True hoặc False)
 empty_val = None                   # NoneType (Đại diện cho giá trị rỗng / không có)
 
 # Tập hợp (Collections) & Trình tự (Sequences)
-items_list = [22, 'hello', True]   # list (Danh sách có thứ tự, mutable)
+items_list: list[object] = [22, 'hello', True]   # list (Danh sách có thứ tự, mutable)
 items_tuple = (7, 'hello', 8.5)    # tuple (Bộ dữ liệu cố định, immutable)
-items_set = {7, 'hello', 8.5}      # set (Tập hợp các phần tử duy nhất)
-user_dict = {'name': 'Alice', 'age': 25} # dict (Từ điển ánh xạ key-value)
+items_set: set[object] = {7, 'hello', 8.5}      # set (Tập hợp các phần tử duy nhất)
+user_dict: dict[str, object] = {'name': 'Alice', 'age': 25}  # dict (Từ điển ánh xả key-value)
 num_range = range(5)               # range (Dãy số tuần tự)
 
 print("Primitives:", num_int, num_float, text, is_valid, empty_val)
