@@ -26,13 +26,13 @@ print('My favorite colors are', 'blue', 'green', 'red') # In ra: My favorite col
 print('User info:', user_name, user_age, total_score)
 
 # Kiểu dữ liệu động (Dynamically-typed):
-# - Python tự nhận diện kiểu dữ liệu dựa trên giá trị được gán.
-# - Biến có thể được gán lại bằng giá trị thuộc kiểu dữ liệu khác:
-dynamic_var = 25             # Khởi tạo kiểu int
-print('Initial value:', dynamic_var)
+# - Python tự nhận diện kiểu dữ liệu dựa trên giá trị được gán (không cần chỉ định kiểu trước).
+# - Biến có thể được gán lại bằng giá trị thuộc kiểu dữ liệu khác bất cứ lúc nào:
+age = 25             # Ban đầu là kiểu int (số nguyên)
+print('Initial age:', age)
 
-dynamic_var = 'Twenty-five'  # Gán lại kiểu str
-print('Reassigned value:', dynamic_var)
+age = 'Twenty-five'  # Gán lại giá trị kiểu str (chuỗi ký tự)
+print('Reassigned age:', age)
 
 # 4 kiểu dữ liệu cơ bản trong Python:
 my_integer_var = 10          # Integer (Số nguyên không có phần thập phân: 10, -5)
