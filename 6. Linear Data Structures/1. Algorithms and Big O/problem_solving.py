@@ -8,18 +8,18 @@
 test_str = "hello"
 empty_str = ""  # Edge case
 
-# Cách 1: Sử dụng Slicing [::-1] (Ngắn gọn, tối ưu trong Python - O(n))
+# Sử dụng Slicing [::-1] (Ngắn gọn, tối ưu trong Python - O(n)):
 def reverse_slice(s):
     return s[::-1]
 
-# Cách 2: Vòng lặp duyệt tuần tự (Mô phỏng theo pseudocode)
+# Vòng lặp duyệt tuần tự (Mô phỏng theo pseudocode):
 def reverse_loop(s):
     res = ""
     for char in s:
         res = char + res
     return res
 
-# Cách 3: Sử dụng reversed() và join()
+# Sử dụng reversed() và join():
 def reverse_builtin(s):
     return "".join(reversed(s))
 

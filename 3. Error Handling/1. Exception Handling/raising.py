@@ -4,7 +4,7 @@ def check_age(age):
         raise ValueError(f"Age cannot be negative: {age}")
     return age
 
-print("--- 1. Manual raise ---")
+print("--- Manual raise ---")
 try:
     check_age(-5)
 except ValueError as e:
@@ -18,25 +18,25 @@ def parse_config_entry(data):
         print("[Internal Log]: Failed to parse integer, re-raising to caller...")
         raise
 
-print("\n--- 2. Re-raising ---")
+print("\n--- Re-raising ---")
 try:
     parse_config_entry("invalid_data")
 except ValueError as e:
     print("Caller received re-raised error:", e)
 
 # Custom Exception: Ngoại lệ tự định nghĩa
-# 1. Dạng tối giản: Chỉ cần kế thừa Exception và dùng 'pass'
+# Dạng tối giản: Chỉ cần kế thừa Exception và dùng 'pass'
 class ItemNotFoundError(Exception):
     """Ngoại lệ kế thừa toàn bộ tính năng mặc định của Exception."""
     pass
 
-print("\n--- 3.1. Minimal Custom Exception ---")
+print("\n--- Minimal Custom Exception ---")
 try:
     raise ItemNotFoundError("Product with ID 404 does not exist")
 except ItemNotFoundError as e:
     print("Caught:", e)
 
-# 2. Custom Exception có thuộc tính mở rộng (Attributes & Metadata)
+# Custom Exception có thuộc tính mở rộng (Attributes & Metadata)
 class InsufficientFundsError(Exception):
     def __init__(self, balance, amount):
         self.balance = balance
@@ -48,14 +48,14 @@ def withdraw(balance, amount):
         raise InsufficientFundsError(balance, amount)
     return balance - amount
 
-print("\n--- 3.2. Custom Exception with Attributes ---")
+print("\n--- Custom Exception with Attributes ---")
 try:
     withdraw(100, 150)
 except InsufficientFundsError as e:
     print("Account transaction error:", e)
     print(f"Details: Balance = {e.balance}, Requested = {e.amount}")
 
-# 3. Phân cấp ngoại lệ theo Module/Dự án (Exception Hierarchy)
+# Phân cấp ngoại lệ theo Module/Dự án (Exception Hierarchy)
 # Giúp caller có thể bắt chung lỗi của cả module (AppBaseError) hoặc bắt chi tiết lỗi con
 class AppBaseError(Exception):
     """Lớp cha cho toàn bộ ngoại lệ trong ứng dụng."""
@@ -70,15 +70,15 @@ class DatabaseError(AppBaseError):
 class RecordNotFoundError(DatabaseError):
     pass
 
-print("\n--- 3.3. Exception Hierarchy ---")
+print("\n--- Exception Hierarchy ---")
 try:
     raise DatabaseConnectionError("Failed to connect to primary replica")
 except AppBaseError as e:
     print(f"Caught by AppBaseError handler: {type(e).__name__} -> {e}")
 
 # Exception Chaining: Chuỗi ngoại lệ với từ khóa 'from' (PEP 3134)
-# 1. Giữ nguyên nguyên nhân gốc (raise ... from err)
-print("\n--- 4.1. Exception Chaining (with cause) ---")
+# Giữ nguyên nguyên nhân gốc (raise ... from err)
+print("\n--- Exception Chaining (with cause) ---")
 try:
     try:
         raw_port = "abc"
@@ -89,8 +89,8 @@ except RuntimeError as e:
     print("Caught outer error:", e)
     print("Root cause (__cause__):", e.__cause__)
 
-# 2. Ẩn nguyên nhân gốc (raise ... from None)
-print("\n--- 4.2. Exception Chaining (suppress cause) ---")
+# Ẩn nguyên nhân gốc (raise ... from None)
+print("\n--- Exception Chaining (suppress cause) ---")
 try:
     try:
         val = int("xyz")
@@ -101,7 +101,7 @@ except KeyError as e:
     print("Cause (__cause__):", e.__cause__)
 
 # Câu lệnh 'assert': Kiểm tra điều kiện nội bộ khi debug/test
-print("\n--- 5. Assert statement ---")
+print("\n--- Assert statement ---")
 try:
     temperature_kelvin = -10
     assert temperature_kelvin >= 0, "Kelvin temperature cannot be negative!"
@@ -109,7 +109,7 @@ except AssertionError as e:
     print("AssertionError:", e)
 
 # Gắn ghi chú chẩn đoán với Exception.add_note() (Python 3.11+ PEP 678)
-print("\n--- 6. Exception.add_note() (Python 3.11+) ---")
+print("\n--- Exception.add_note() (Python 3.11+) ---")
 try:
     try:
         raise ValueError("Database connection failed")

@@ -7,12 +7,12 @@ def merge_sort(arr):
     if len(arr) <= 1:
         return arr
 
-    # 1. Divide: Chia mảng thành 2 nửa
+    # Divide: Chia mảng thành 2 nửa
     mid = len(arr) // 2
     left = merge_sort(arr[:mid])
     right = merge_sort(arr[mid:])
 
-    # 2. Conquer / Merge: Trộn 2 nửa đã sắp xếp
+    # Conquer / Merge: Trộn 2 nửa đã sắp xếp
     sorted_list = []
     i = j = 0
 

@@ -51,17 +51,17 @@ print("Docstring:", add.__doc__) # A function that returns the sum of two number
 # - LƯU Ý QUAN TRỌNG: Python KHÔNG tự động ép kiểu hay báo lỗi ở runtime nếu truyền sai kiểu.
 #   Type hints chủ yếu phục vụ autocomplete, tài liệu hóa code và công cụ kiểm tra tĩnh (như mypy).
 
-# a. Type hint cho tham số và giá trị trả về của hàm:
+# Type hint cho tham số và giá trị trả về của hàm:
 def greet(name: str) -> str:
     return 'Hello, ' + name
 
 print(greet('Alice'))            # Hello, Alice
 
-# b. Type hint cho biến thông thường:
+# Type hint cho biến thông thường:
 age: int = 25
 is_active: bool = True
 
-# c. Kiểu kết hợp Union / Optional (Python 3.10+ dùng toán tử '|'):
+# Kiểu kết hợp Union / Optional (Python 3.10+ dùng toán tử '|'):
 # Có thể nhận int hoặc float; trả về int, float hoặc None:
 def divide(a: int | float, b: int | float) -> float | None:
     if b == 0:

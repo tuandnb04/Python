@@ -1,4 +1,4 @@
-﻿"""
+"""
 =============================================================================
 CÁC KỸ THUẬT DEBUGGING TRONG PYTHON (TỪ CƠ BẢN ĐẾN HIỆN ĐẠI)
 =============================================================================
@@ -21,7 +21,7 @@ def add(a, b):
     print(f"[DEBUG] Đầu vào: a={a}, b={b}, kết quả={result}")
     return result
 
-print("--- 1. Debug bằng print() ---")
+print("--- Debug bằng print() ---")
 add(10, 5)
 
 
@@ -37,7 +37,7 @@ def process_data(items):
         total += item
     return total
 
-print("\n--- 2. Hàm breakpoint() tích hợp sẵn ---")
+print("\n--- Hàm breakpoint() tích hợp sẵn ---")
 print("Tổng:", process_data([1, 2, 3]))
 
 
@@ -71,7 +71,7 @@ def divide_numbers(a, b):
         logging.exception("Bắt gặp lỗi chia cho số 0!")
         return None
 
-print("\n--- 3. Debug chuyên nghiệp với logging ---")
+print("\n--- Debug chuyên nghiệp với logging ---")
 divide_numbers(10, 2)
 divide_numbers(10, 0)
 
@@ -83,7 +83,7 @@ def buggy_function():
 def caller():
     buggy_function()
 
-print("\n--- 4. Trích xuất Traceback tùy chỉnh ---")
+print("\n--- Trích xuất Traceback tùy chỉnh ---")
 try:
     caller()
 except ZeroDivisionError:

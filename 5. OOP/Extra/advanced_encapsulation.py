@@ -1,4 +1,4 @@
-﻿import sys
+import sys
 from dataclasses import dataclass
 
 
@@ -17,7 +17,7 @@ class Child(Parent):
         super().__init__()
         self.__data: str = "Dữ liệu lớp con"
 
-print("--- 1. CƠ CHẾ NAME MANGLING & KẾ THỪA ---")
+print("--- CƠ CHẾ NAME MANGLING & KẾ THỪA ---")
 c = Child()
 print("Các thuộc tính thực tế trong object con (qua __dict__):")
 print(c.__dict__)
@@ -32,7 +32,7 @@ print(c.__dict__)
 #   Tiết kiệm 40% - 60% RAM khi tạo hàng triệu object.
 #   Ngăn chặn việc tùy tiện thêm thuộc tính rác ngoài danh sách khai báo.
 
-print("\n--- 2. TỐI ƯU BỘ NHỚ VỚI __slots__ ---")
+print("\n--- TỐI ƯU BỘ NHỚ VỚI __slots__ ---")
 class StrictWallet:
     __slots__ = ("_balance", "_tag")
 
@@ -61,7 +61,7 @@ except AttributeError as e:
 # - @dataclass(frozen=True, slots=True): Cung cấp một model bất biến hoàn hảo,
 #   vừa nhẹ RAM vừa an toàn tuyệt đối, rất hay dùng cho Config, Value Object, DTO.
 
-print("\n--- 3. ĐÓNG GÓI BẤT BIẾN VỚI @dataclass(frozen=True, slots=True) ---")
+print("\n--- ĐÓNG GÓI BẤT BIẾN VỚI @dataclass(frozen=True, slots=True) ---")
 @dataclass(frozen=True, slots=True)
 class ReadOnlyAccount:
     account_id: str

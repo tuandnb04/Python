@@ -57,7 +57,7 @@ finally:
     print("This block always runs.")
 
 # Bắt nhiều ngoại lệ (riêng lẻ hoặc dùng tuple)
-# Cách 1: Bắt riêng lẻ từng khối except
+# Bắt riêng lẻ từng khối except:
 try:
     number = int("abc")
     result = 10 / number
@@ -66,13 +66,13 @@ except ValueError:
 except ZeroDivisionError:
     print("Can't divide by zero.")
 
-# Cách 2: Sử dụng alias 'as e' để lấy thông báo lỗi
+# Sử dụng alias 'as e' để lấy thông báo lỗi:
 try:
     x = 1 / 0
 except ZeroDivisionError as e:
     print(f"Error occurred: {e}")
 
-# Cách 3: Gom nhiều ngoại lệ vào một tuple
+# Gom nhiều ngoại lệ vào một tuple:
 try:
     number = int("0")
     result = 10 / number
