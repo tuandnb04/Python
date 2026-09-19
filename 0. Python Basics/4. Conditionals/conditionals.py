@@ -28,6 +28,10 @@ elif age >= 13:
 else:
     print('You are a child')
 
+# Toán tử 3 ngôi (Ternary Operator): val_if_true if condition else val_if_false
+status = 'Adult' if age >= 18 else 'Minor'
+print("Ternary status:", status)    # 'Minor'
+
 # 'pass' dùng làm placeholder khi chưa viết code cho block
 if age < 0:
     pass

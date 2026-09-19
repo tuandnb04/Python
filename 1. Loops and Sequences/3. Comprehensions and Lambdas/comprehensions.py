@@ -17,8 +17,8 @@ word_lengths = [(w, length) for w in words_sample if (length := len(w)) > 3]
 print("Walrus in List Comp:", word_lengths) # [('python', 6), ('codegraph', 9)]
 
 
-# [MỞ RỘNG PYTHONIC]: Dict Comprehension & Set Comprehension
-# Cùng nguyên lý với List Comprehension nhưng sinh ra Dict hoặc Set trực tiếp:
+# [MỞ RỘNG PYTHONIC]: Dict, Set Comprehension & Generator Expression
+# Cùng nguyên lý với List Comprehension nhưng sinh ra Dict, Set hoặc Generator:
 
 # - Dict Comprehension: {key_expr: value_expr for item in iterable}
 names = ['Alice', 'Bob', 'Charlie']
@@ -29,6 +29,13 @@ print("Dict Comprehension:", name_lengths) # {'Alice': 5, 'Bob': 3, 'Charlie': 7
 duplicate_numbers = [1, 2, 2, 3, 4, 4, 4, 5]
 unique_squares = {x ** 2 for x in duplicate_numbers}
 print("Set Comprehension:", unique_squares) # {1, 4, 9, 16, 25}
+
+# - Generator Expression: (expression for item in iterable)
+# Sinh dữ liệu lười (Lazy Evaluation), không tạo cả danh sách trong RAM như List Comp:
+gen_squares = (x ** 2 for x in duplicate_numbers)
+print("Generator Object:", gen_squares)                    # <generator object ...>
+print("Generator Sum:", sum(gen_squares))                  # 47
+print("Join with Generator:", "-".join(str(x) for x in range(5))) # '0-1-2-3-4'
 
 # Hàm filter(func, iterable) - Lọc các phần tử thỏa mãn điều kiện trả về True
 words = ['tree', 'sky', 'mountain', 'river', 'cloud', 'sun']
