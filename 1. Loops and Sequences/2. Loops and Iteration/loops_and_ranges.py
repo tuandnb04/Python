@@ -32,6 +32,15 @@ while count > 0:
     print("Countdown:", count)
     count -= 1
 
+# Toán tử gán Walrus (:=) trong vòng lặp while (Python 3.8+ PEP 572)
+# Cho phép vừa gán giá trị vừa kiểm tra điều kiện ngay trong biểu thức:
+sample_data = ["repo1", "repo2", "repo3", ""]
+index = 0
+while (item := sample_data[index]):
+    print("Walrus while processing item:", item)
+    index += 1
+
+
 # break (Dừng vòng lặp) & continue (Bỏ qua lần lặp hiện tại)
 devs = ['Jess', 'Naomi', 'Tom']
 

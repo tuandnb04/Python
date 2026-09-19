@@ -10,6 +10,13 @@ result = [(num, 'Even') if num % 2 == 0 else (num, 'Odd') for num in numbers]
 print("Even or Odd result:", result)
 # [(1, 'Odd'), (2, 'Even'), (3, 'Odd'), (4, 'Even'), (5, 'Odd')]
 
+# [TỐI ƯU HIỆU NĂNG]: Toán tử gán Walrus (:=) trong List Comprehension (Python 3.8+)
+# Vừa gán giá trị vừa kiểm tra điều kiện để tránh phải gọi hàm/tính toán 2 lần (ví dụ: len(w)):
+words_sample = ["python", "ast", "codegraph", "ai"]
+word_lengths = [(w, length) for w in words_sample if (length := len(w)) > 3]
+print("Walrus in List Comp:", word_lengths) # [('python', 6), ('codegraph', 9)]
+
+
 # [MỞ RỘNG PYTHONIC]: Dict Comprehension & Set Comprehension
 # Cùng nguyên lý với List Comprehension nhưng sinh ra Dict hoặc Set trực tiếp:
 
@@ -32,14 +39,36 @@ def is_long_word(word):
 long_words = list(filter(is_long_word, words))
 print("filter() with function:", long_words) # ['mountain', 'river', 'cloud']
 
-# Hàm map(func, iterable) - Áp dụng hàm lên từng phần tử của iterable
-celsius = [0, 10, 20, 30, 40]
+# Hàm map(func, *iterables) - Áp dụng hàm lên từng phần tử của iterable
+# 1. Ép kiểu dữ liệu nhanh hàng loạt (viết bằng C nên rất tối ưu):
+numbers = [1, 2, 3, 4]
+strings = list(map(str, numbers))
+print("map(str):", strings)                    # ['1', '2', '3', '4']
 
+# 2. Biến đổi dữ liệu với hàm tự định nghĩa hoặc lambda:
+celsius = [0, 10, 20, 30, 40]
 def to_fahrenheit(temp):
     return (temp * 9/5) + 32
 
 fahrenheit = list(map(to_fahrenheit, celsius))
 print("map() Celsius to Fahrenheit:", fahrenheit) # [32.0, 50.0, 68.0, 86.0, 104.0]
+
+# 3. Áp dụng cùng lúc nhiều mảng (dừng ở mảng ngắn nhất, tương tự zip):
+a = [1, 2, 3]
+b = [10, 20, 30]
+total = list(map(lambda x, y: x + y, a, b))
+print("map multiple lists:", total)            # [11, 22, 33]
+
+# 4. Cơ chế "Lazy Evaluation" (Đánh giá lười):
+# map() trả về một map object (iterator), chỉ tính toán khi duyệt qua giúp tiết kiệm bộ nhớ RAM
+lazy_res = map(str, numbers)
+print("Lazy map object:", lazy_res)            # <map object at 0x...>
+print("Evaluated list:", list(lazy_res))       # ['1', '2', '3', '4']
+
+# 5. So sánh với List Comprehension:
+# - map(): Ngắn gọn, chạy nhanh nhất với hàm có sẵn như map(int, arr), map(str, arr)
+# - List Comp [f(x) for x in arr]: Dễ đọc hơn khi có logic tính toán phức tạp hoặc lọc điều kiện if/else
+
 
 # Hàm sum(iterable, [start=0]) - Tính tổng danh sách
 sum_numbers = [5, 10, 15, 20]
