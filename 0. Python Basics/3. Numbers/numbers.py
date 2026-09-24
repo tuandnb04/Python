@@ -18,6 +18,13 @@ print((4.0).is_integer())         # True
 print((4.5).is_integer())         # False
 print((5).is_integer())           # True (Python 3.12+)
 
+# Hệ cơ số (Nhị phân 0b, Thập lục phân 0x) & Toán tử Bitwise (&, |, ^, ~, <<, >>)
+bin_num, hex_num = 0b1010, 0x1F       # 10 và 31
+print(bin_num & 0b1100)               # 8 (0b1000 - Bitwise AND)
+print(bin_num | 0b0101)               # 15 (0b1111 - Bitwise OR)
+print(1 << 4)                         # 16 (Dịch trái 4 bit, tương đương 1 * 2^4)
+print(16 >> 2)                        # 4 (Dịch phải 2 bit, tương đương 16 // 2^2)
+
 # Toán tử gán kết hợp (+=, v.v. - Lưu ý: Python không hỗ trợ ++ / --)
 # Ứng dụng: Tính toán hóa đơn & chia tiền tip (Bill & Tip Splitter)
 running_total = 0

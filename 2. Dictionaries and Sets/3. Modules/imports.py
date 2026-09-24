@@ -3,7 +3,8 @@ import math
 import random   # Module sinh số ngẫu nhiên
 import re       # Module xử lý Regular Expressions (Biểu thức chính quy)
 
-print("math.sqrt(36):", math.sqrt(36))        # 6.0
+print("math.sqrt(36):", math.sqrt(36))        # 6.0 (Căn bậc hai float)
+print("math.isqrt(36):", math.isqrt(36))      # 6 (Căn nguyên chính xác int cho số nguyên lớn)
 print("random.randint(1, 10):", random.randint(1, 10))
 
 # re.search(pattern, string, flags=0) - Tìm mẫu regex trong chuỗi (trả về match object hoặc None)
