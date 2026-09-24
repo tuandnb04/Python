@@ -18,6 +18,42 @@ print(3 == 4)   # False
 print(3 != 4)   # True
 print(3 <= 4)   # True
 
+# Lưu ý: bool là lớp con của int trong Python (issubclass(bool, int) -> True)
+# Do đó: False == 0 và True == 1 đều là True.
+# Để phân biệt chính xác False với 0, cần dùng identity: `x is False` hoặc `type(x) is bool`.
+val = 0
+print(issubclass(bool, int))       # True
+print(False == val, True == 1)     # True True
+print(False is val)                # False (so sánh identity: False và 0 trỏ tới 2 đối tượng khác nhau)
+print(type(False) is bool)         # True
+
+# Phân biệt isinstance() vs type() is Class (Bẫy lọc kiểu dữ liệu):
+# - isinstance(x, int): Chấp nhận cả lớp con kế thừa (nên isinstance(True, int) -> True).
+# - type(x) is int: Kiểm tra chính xác kiểu dữ liệu, loại bỏ lớp con (type(True) is int -> False).
+print("isinstance(True, int):", isinstance(True, int))      # True (nguy cơ nhận nhầm bool là int)
+print("type(True) is int:    ", type(True) is int)          # False (chính xác int thuần túy)
+
+# Ứng dụng: Lọc danh sách chỉ lấy số nguyên, loại bỏ boolean và chuỗi:
+mixed_list = [1, 'a', 'b', 0, 15, False, True]
+integers_only = [x for x in mixed_list if type(x) is int]
+print("Integers only:", integers_only)  # [1, 0, 15] (False và True bị loại bỏ an toàn)
+
+# Kỹ thuật Boolean Indexing (Tận dụng False == 0, True == 1 để truy xuất tuple/list):
+# - Chuẩn dễ đọc (Readability first): Nên dùng toán tử 3 ngôi (Ternary Operator)
+# - Mẹo nâng cao: Dùng tuple `(val_if_false, val_if_true)[condition]` khi cần tối ưu vi mô
+name = "Ringo"
+# Cách 1 (Chuẩn Clean Code dễ đọc nhất):
+decision_clean = " plays banjo" if name.startswith(('R', 'r')) else " does not play banjo"
+# Cách 2 (Mẹo Boolean Indexing):
+decision_trick = (" does not play banjo", " plays banjo")[name.startswith(('R', 'r'))]
+print(name + decision_clean)  # "Ringo plays banjo"
+
+
+
+
+
+
+
 # Câu lệnh điều kiện if - elif - else & từ khóa pass
 age = 12
 
@@ -40,6 +76,20 @@ if age < 0:
 if age < 18:
     if age < 13:
         print('Child under 13')
+
+# Cấu trúc if - elif - else nhiều nhánh với toán tử logic (and, or, not)
+score = 75
+if score >= 90:
+    grade = 'A'
+elif score >= 75:
+    grade = 'B'
+elif score >= 50:
+    grade = 'C'
+else:
+    grade = 'F'
+print("Grade result:", grade) # 'B'
+
+
 
 # Structural Pattern Matching (match - case) trong Python 3.10+ (PEP 634)
 # Khớp giá trị cụ thể (Literal Matching)

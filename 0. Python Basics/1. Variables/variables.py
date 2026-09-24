@@ -30,3 +30,12 @@ print(empty_val, type(empty_val))     # None <class 'NoneType'>
 print(isinstance(score, float))       # True
 print(isinstance(name, int))          # False (chuỗi không phải số nguyên)
 print(isinstance(score, int | float)) # True (toán tử | cho phép kiểm tra nhiều kiểu)
+
+
+# Ép kiểu dữ liệu cơ bản (Type Casting: str, int, float, bool)
+num_str = '45'
+print(int(num_str))          # 45 (chuỗi sang số nguyên)
+print(float(num_str))        # 45.0 (chuỗi sang số thực)
+print(str(100))              # '100' (số sang chuỗi)
+print(bool(1), bool(0))      # True False (số sang boolean: 0 là False, khác 0 là True)
+print(bool('hello'), bool('')) # True False (chuỗi rỗng là False)
