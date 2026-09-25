@@ -2,7 +2,7 @@
 # - Độ phức tạp thời gian: O(n log n)
 # - Độ phức tạp không gian: O(n) (không phải in-place, cần bộ nhớ phụ để trộn)
 
-def merge_sort(arr):
+def merge_sort(arr: list[int]) -> list[int]:
     # Base case: Mảng có 0 hoặc 1 phần tử đã được sắp xếp sẵn
     if len(arr) <= 1:
         return arr
@@ -13,20 +13,20 @@ def merge_sort(arr):
     right = merge_sort(arr[mid:])
 
     # Conquer / Merge: Trộn 2 nửa đã sắp xếp
-    sorted_list = []
     i = j = 0
+    merged = []
 
     while i < len(left) and j < len(right):
         if left[i] <= right[j]:
-            sorted_list.append(left[i])
+            merged.append(left[i])
             i += 1
         else:
-            sorted_list.append(right[j])
+            merged.append(right[j])
             j += 1
 
-    sorted_list.extend(left[i:])
-    sorted_list.extend(right[j:])
-    return sorted_list
+    merged.extend(left[i:])
+    merged.extend(right[j:])
+    return merged
 
 numbers = [42, 37, 53, 17]
 print("Original:", numbers)

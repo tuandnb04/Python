@@ -2,7 +2,7 @@
 # Tương tự từ điển giấy: tra Key để tìm Value tương ứng
 
 # Khai báo dictionary (ví dụ tiếng Anh gốc)
-pizza: dict[str, object] = {
+pizza = {
     'name': 'Margherita Pizza',
     'price': 8.9,
     'calories_per_slice': 250,
@@ -33,6 +33,10 @@ print(pizza['name'])  # 'Margherita'
 # .get(key, default) - Lấy giá trị an toàn, trả về giá trị mặc định nếu không tìm thấy key
 print(pizza.get('toppings', []))  # ['mozzarella', 'basil']
 print(pizza.get('discount', 0))   # 0
+# Mẹo tối ưu thay thế giá trị (Value Mapping): Dùng dict.get(x, x) trong comprehension để map dữ liệu O(1)
+# Nếu x có trong dict thì đổi thành value, không có thì giữ nguyên chính x mà không cần if-else.
+VOWELS_MAP = {97: 'a', 101: 'e', 105: 'i', 111: 'o', 117: 'u'}
+mapped_vals = [VOWELS_MAP.get(x, x) for x in [100, 97, 105, 120]] # [100, 'a', 'i', 120]
 
 # .keys(), .values(), .items() - Trả về view object xem nội dung mà không tốn công copy
 print(pizza.keys())    # dict_keys(['name', 'price', 'calories_per_slice', 'toppings'])

@@ -99,3 +99,32 @@ print("Move 2:", pawn.make_move())
 pawn.level_up()
 print("Move after level up:", pawn.make_move())
 print("Total path:", pawn.path)
+
+
+# PHẦN 4: CHUẨN HIỆN ĐẠI (PYTHON 3.8+ / 3.12+): typing.Protocol (STRUCTURAL SUBTYPING)
+# So sánh với ABC (Nominal Subtyping - phải kế thừa tường minh):
+# - ABC: Bắt buộc class con phải kế thừa `class Dog(Animal)`.
+# - Protocol: "Duck Typing" tĩnh - bất kỳ class nào có đủ phương thức đều tự động thỏa mãn interface mà KHÔNG CẦN kế thừa!
+
+from typing import Protocol
+
+class Renderable(Protocol):
+    def render(self) -> str:
+        """Bất kỳ class nào có phương thức render() -> str đều là Renderable."""
+        ...
+
+class Button:
+    def render(self) -> str:
+        return "[Submit Button]"
+
+class Image:
+    def render(self) -> str:
+        return "<Image Asset>"
+
+def display_ui(component: Renderable) -> None:
+    print("Rendering component:", component.render())
+
+# Button và Image không hề kế thừa Renderable nhưng vẫn hoàn toàn hợp lệ về Type Hint:
+display_ui(Button())
+display_ui(Image())
+

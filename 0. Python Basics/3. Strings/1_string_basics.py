@@ -38,6 +38,7 @@ print('Hello'[2:])     # 'llo' (cắt từ index 2 đến hết)
 print(s[::2])          # 'Hlowrd' (bước nhảy 2)
 print(s[::-1])         # 'dlrow olleH' (đảo ngược chuỗi)
 
+
 # Ví dụ: Cắt chuỗi theo khoảng index [start:stop]
 code = 'DEV-2026-JD-001'
 dept = code[:3]        # 'DEV' (3 ký tự đầu)

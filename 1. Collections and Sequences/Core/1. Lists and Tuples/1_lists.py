@@ -1,5 +1,3 @@
-from typing import cast
-
 # List là cấu trúc dữ liệu tuần tự, có thứ tự, cho phép trùng lặp và CÓ THỂ THAY ĐỔI (Mutable)
 
 # Tạo List & Indexing (Zero-based & Negative)
@@ -20,9 +18,8 @@ print(langs)                         # ['JavaScript', 'Rust']
 print('Rust' in langs)               # True (kiểm tra tồn tại)
 
 # Nested List & Unpacking
-dev: list[str | int | list[str]] = ['Alice', 25, ['Python', 'Rust', 'C++']]
-skills = cast(list[str], dev[2])
-print(skills[1])                     # 'Rust' (truy cập phần tử trong list lồng nhau)
+dev = ['Alice', 25, ['Python', 'Rust', 'C++']]
+print(dev[2][1])                     # 'Rust' (truy cập phần tử trong list lồng nhau)
 
 # Unpacking cơ bản & Unpacking gom phần còn lại (*)
 name, age, skills = dev              # Gán từng phần tử vào các biến
@@ -70,14 +67,24 @@ print("sorted(reverse=True):", sorted(raw_numbers, reverse=True))
 
 raw_numbers.sort()                   # sort(): Phương thức sắp xếp trực tiếp tại chỗ (in-place)
 print("sort():", raw_numbers)
+# Lưu ý: Cả .extend() và .sort() đều là in-place và trả về None -> KHÔNG THỂ chain: a.extend(b).sort() sẽ gây AttributeError
+# Lấy k phần tử nhỏ nhất / lớn nhất chuẩn thực tế (không cần import, nhanh nhất nhờ sort in-place):
+# Sắp xếp in-place rồi cắt lát (slicing) 2 đầu:
+# - k số nhỏ nhất: arr[:k]
+# - k số lớn nhất: arr[-k:]
+sample_nums = [19, 2, 35, 1, 67, 41]
+sample_nums.sort()
+print("Smallest 2:", sample_nums[:2])  # [1, 2]
+print("Largest 2:", sample_nums[-2:])  # [41, 67]
 
 nums_to_reverse = [6, 5, 4, 3, 2, 1]
 nums_to_reverse.reverse()            # reverse(): Đảo ngược thứ tự trực tiếp tại chỗ (in-place)
 print("reverse():", nums_to_reverse)
 
-# Tìm vị trí index
-programming_languages = ['Rust', 'Java', 'Python', 'C++']
+# Tìm vị trí (index) & Đếm số lần xuất hiện (count)
+programming_languages = ['Rust', 'Java', 'Python', 'C++', 'Java']
 print("index('Java'):", programming_languages.index('Java')) # 1 (trả về index đầu tiên tìm thấy)
+print("count('Java'):", programming_languages.count('Java')) # 2 (đếm số lần 'Java' xuất hiện)
 # programming_languages.index('JavaScript')                 # Lỗi ValueError: 'JavaScript' is not in list
 
 # Python hiện đại (Python 3.9+ / 3.10+)
@@ -88,11 +95,4 @@ match dev:                                                   # Structural Patter
         print(f"Dev: {dev_name}, Main skill: {main_skill}, Other: {other_skills}")
     case _:
         pass
-
-# Unpacking vào List Literal ([*iterable]):
-# Thay vì gọi hàm `list(map(...))` tốn chi phí gọi hàm, dùng `[*map(...)]` giải nén trực tiếp ở tầng bytecode
-raw_data = "10 20 -5 42 0"
-nums = [*map(int, raw_data.split())]
-print("Unpacked into list:", nums)            # [10, 20, -5, 42, 0]
-print(f"Max: {max(nums)}, Min: {min(nums)}")  # Max: 42, Min: -5
 

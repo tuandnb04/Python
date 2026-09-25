@@ -14,18 +14,24 @@ print(not '', not 'Hi') # True False
 
 # Toán tử so sánh (Trả về True / False)
 print(3 > 4)    # False
-print(3 == 4)   # False
-print(3 != 4)   # True
+print(3 == 4)   # type: ignore # False
+print(3 != 4)   # type: ignore # True
 print(3 <= 4)   # True
 
 # Lưu ý: bool là lớp con của int trong Python (issubclass(bool, int) -> True)
 # Do đó: False == 0 và True == 1 đều là True.
 # Để phân biệt chính xác False với 0, cần dùng identity: `x is False` hoặc `type(x) is bool`.
 val = 0
-print(issubclass(bool, int))       # True
-print(False == val, True == 1)     # True True
-print(False is val)                # False (so sánh identity: False và 0 trỏ tới 2 đối tượng khác nhau)
+print(issubclass(bool, int))       # type: ignore # True
+print(False == val, True == 1)     # type: ignore # True True
+print(False is val)                # type: ignore # False (so sánh identity: False và 0 trỏ tới 2 đối tượng khác nhau)
 print(type(False) is bool)         # True
+
+# Mẹo Pythonic: Đếm số điều kiện thỏa mãn nhanh nhất bằng cộng Boolean (True == 1, False == 0):
+# Ví dụ kiểm tra có đúng 2 trong 3 số là số dương:
+a, b, c = 5, -2, 3
+is_two_positive = (a > 0) + (b > 0) + (c > 0) == 2
+print("Are exactly two positive:", is_two_positive)  # True
 
 # Phân biệt isinstance() vs type() is Class (Bẫy lọc kiểu dữ liệu):
 # - isinstance(x, int): Chấp nhận cả lớp con kế thừa (nên isinstance(True, int) -> True).
@@ -37,22 +43,6 @@ print("type(True) is int:    ", type(True) is int)          # False (chính xác
 mixed_list = [1, 'a', 'b', 0, 15, False, True]
 integers_only = [x for x in mixed_list if type(x) is int]
 print("Integers only:", integers_only)  # [1, 0, 15] (False và True bị loại bỏ an toàn)
-
-# Kỹ thuật Boolean Indexing (Tận dụng False == 0, True == 1 để truy xuất tuple/list):
-# - Chuẩn dễ đọc (Readability first): Nên dùng toán tử 3 ngôi (Ternary Operator)
-# - Mẹo nâng cao: Dùng tuple `(val_if_false, val_if_true)[condition]` khi cần tối ưu vi mô
-name = "Ringo"
-# Cách 1 (Chuẩn Clean Code dễ đọc nhất):
-decision_clean = " plays banjo" if name.startswith(('R', 'r')) else " does not play banjo"
-# Cách 2 (Mẹo Boolean Indexing):
-decision_trick = (" does not play banjo", " plays banjo")[name.startswith(('R', 'r'))]
-print(name + decision_clean)  # "Ringo plays banjo"
-
-
-
-
-
-
 
 # Câu lệnh điều kiện if - elif - else & từ khóa pass
 age = 12

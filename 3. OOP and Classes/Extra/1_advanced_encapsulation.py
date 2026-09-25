@@ -19,7 +19,7 @@ example = Example(
 
 print(example._internal)
 # Truy cập trực tiếp qua tên mới sau khi mangled:
-print(example._Example__private)
+print(example._Example__private) # type: ignore
 print("Attributes dictionary:", example.__dict__)
 
 
@@ -77,7 +77,7 @@ print("StrictWallet balance:", wallet.balance)
 
 # Thử gán thêm thuộc tính lạ không có trong __slots__:
 try:
-    wallet.hack_attr = "Unauthorized"
+    wallet.hack_attr = "Unauthorized" # type: ignore
 except AttributeError as e:
     print("Slots error when assigning unauthorized attribute:", e)
 
@@ -101,13 +101,13 @@ print("Account owner:", account.owner)
 
 # Thử thay đổi số dư -> BỊ CHẶN
 try:
-    account.balance = 9999.0
+    account.balance = 9999.0 # type: ignore
 except Exception as e:
     print("Error when mutating frozen object:", type(e).__name__, "-", e)
 
 # Thử thêm thuộc tính mới -> BỊ CHẶN
 try:
-    account.note = "VIP"
+    account.note = "VIP" # type: ignore
 except Exception as e:
     print("Error when adding new attribute to slotted object:", type(e).__name__, "-", e)
 

@@ -1,10 +1,3 @@
-# Built-in functions: print(), input(), int()
-# int() chuyển đổi float, numeric string, và boolean sang integer
-print(int(3.14))       # 3
-print(int('42'))       # 42
-print(int(True))       # 1
-print(int(False))      # 0
-
 # Định nghĩa hàm (def) & Thụt lề (Indentation)
 def hello() -> None:
     print('Hello World')
@@ -50,13 +43,17 @@ def format_user(name: str, /, age: int, *, role: str = 'Dev') -> str:
 print(format_user('Alice', 25, role='Admin'))  # name bắt buộc truyền vị trí, role bắt buộc truyền tên
 
 # Kiểu kết hợp Union / Optional (Python 3.10+ dùng '|')
-def divide(a: int | float, b: int | float) -> float | None:
+# Định nghĩa Type Alias hiện đại với từ khóa 'type' (Python 3.12+ PEP 695)
+type Number = int | float
+
+def divide(a: Number, b: Number) -> float | None:
     if b == 0:
         return None
     return a / b
 
 print("divide(10, 2):", divide(10, 2)) # 5.0
 print("divide(10, 0):", divide(10, 0)) # None
+
 
 # Scope (Phạm vi truy cập): Global Scope vs Local Scope
 tax_rate: float = 0.1                 # Biến toàn cục (Global Scope)

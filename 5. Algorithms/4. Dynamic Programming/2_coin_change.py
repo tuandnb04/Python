@@ -3,9 +3,10 @@
 # - Độ phức tạp thời gian: O(amount * số_loại_tiền)
 # - Độ phức tạp không gian: O(amount)
 
-def min_coins(amount, coins):
+def min_coins(amount: int, coins: list[int]) -> int:
     # Khởi tạo bảng dp với giá trị vô cùng (infinity)
-    dp = [float('inf')] * (amount + 1)
+    INF = amount + 1
+    dp: list[int] = [INF] * (amount + 1)
     dp[0] = 0  # Cần 0 đồng xu cho số tiền 0
 
     # Lập bảng tính số xu tối thiểu cho từng mệnh giá từ 1 đến amount
@@ -14,7 +15,7 @@ def min_coins(amount, coins):
             if coin <= i:
                 dp[i] = min(dp[i], dp[i - coin] + 1)
 
-    return dp[amount] if dp[amount] != float('inf') else -1
+    return dp[amount] if dp[amount] != INF else -1
 
 coins = [1, 3, 4]
 target_amount = 6

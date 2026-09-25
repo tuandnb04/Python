@@ -15,7 +15,8 @@ def counting_sort_digits(arr):
     # Bước 2: Tái tạo mảng đã sắp xếp (tự động theo thứ tự tăng dần từ 0 -> 9)
     sorted_arr = []
     for digit in range(10):
-        sorted_arr.extend([digit] * counts[digit])
+        for _ in range(counts[digit]):
+            sorted_arr.append(digit)
 
     return sorted_arr
 

@@ -5,7 +5,7 @@
 # Bài toán: Climbing Stairs (Có n bậc, mỗi lần bước 1 hoặc 2 bậc. Tìm số cách lên đỉnh?)
 
 # Top-Down Approach (Memoization - Đệ quy có nhớ): O(n) thời gian, O(n) không gian
-def climb_stairs_memo(n, memo=None):
+def climb_stairs_memo(n: int, memo: dict[int, int] | None = None) -> int:
     if memo is None:
         memo = {}
     if n in memo:
@@ -16,7 +16,7 @@ def climb_stairs_memo(n, memo=None):
     return memo[n]
 
 # Bottom-Up Approach (Tabulation - Lập bảng từ dưới lên): O(n) thời gian, O(n) không gian
-def climb_stairs_tabulation(n):
+def climb_stairs_tabulation(n: int) -> int:
     if n <= 2:
         return n
     dp = [0] * (n + 1)
@@ -26,7 +26,7 @@ def climb_stairs_tabulation(n):
     return dp[n]
 
 # Tối ưu không gian (Space-Optimized Tabulation): O(n) thời gian, O(1) không gian
-def climb_stairs_optimized(n):
+def climb_stairs_optimized(n: int) -> int:
     if n <= 2:
         return n
     prev2, prev1 = 1, 2

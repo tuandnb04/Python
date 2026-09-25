@@ -1,41 +1,31 @@
-# Khai báo biến (Quy ước snake_case, bắt đầu bằng chữ cái hoặc gạch dưới)
-user_name = 'Alice'
-user_age = 20
-total_score = 100
-print('User info:', user_name, user_age, total_score) # Dấu phẩy tự chèn khoảng trắng
+# 1. Khai báo biến & Các kiểu dữ liệu cơ bản (str, int, float, bool, None)
+user_name = 'Alice'        # str
+user_age = 20              # int
+total_score = 100          # int
+score = 80.5               # float
+is_student = True          # bool
+empty_val = None           # NoneType
 
-# Dynamic typing: Tự nhận diện kiểu, có thể gán lại bằng kiểu khác
+# 2. Hàm print(): In ra terminal (dấu phẩy tự chèn khoảng trắng)
+print('User info:', user_name, user_age, total_score)
+
+# 3. Dynamic typing: Tự nhận diện kiểu, có thể gán lại bằng kiểu khác
 age = 20
-print('Initial age:', age)
 age = 'Twenty'
 print('Reassigned age:', age)
 
-# Các kiểu dữ liệu cơ bản & Hàm type() kiểm tra kiểu
-name = 'Alice'
-print(name, type(name))               # Alice <class 'str'>
+# 4. Kiểm tra kiểu: type() và isinstance()
+print(type(user_name))                 # <class 'str'>
+print(type(user_age))                  # <class 'int'>
+print(type(score))                     # <class 'float'>
+print(type(is_student))                # <class 'bool'>
+print(type(empty_val))                 # <class 'NoneType'>
 
-age = 20
-print(age, type(age))                 # 20 <class 'int'>
+print(isinstance(score, float))        # True
+print(isinstance(user_name, int))      # False
+print(isinstance(score, int | float))  # type: ignore # True (kiểm tra nhiều kiểu với toán tử |)
 
-score = 80.5
-print(score, type(score))             # 80.5 <class 'float'>
-
-is_student = True
-print(is_student, type(is_student))   # True <class 'bool'>
-
-empty_val = None
-print(empty_val, type(empty_val))     # None <class 'NoneType'>
-
-# Hàm isinstance(): Kiểm tra kiểu dữ liệu của biến (trả về bool)
-print(isinstance(score, float))       # True
-print(isinstance(name, int))          # False (chuỗi không phải số nguyên)
-print(isinstance(score, int | float)) # True (toán tử | cho phép kiểm tra nhiều kiểu)
-
-
-# Ép kiểu dữ liệu cơ bản (Type Casting: str, int, float, bool)
-num_str = '45'
-print(int(num_str))          # 45 (chuỗi sang số nguyên)
-print(float(num_str))        # 45.0 (chuỗi sang số thực)
-print(str(100))              # '100' (số sang chuỗi)
-print(bool(1), bool(0))      # True False (số sang boolean: 0 là False, khác 0 là True)
-print(bool('hello'), bool('')) # True False (chuỗi rỗng là False)
+# 5. Ép kiểu dữ liệu (Type Casting)
+print(str(100))                        # '100'
+print(bool(1), bool(0))                # True False
+print(bool('hello'), bool(''))         # True False

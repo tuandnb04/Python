@@ -5,6 +5,7 @@
 # 4. Class Variable vs Instance Variable: Biến chia sẻ chung cho mọi instance vs Biến riêng của từng instance.
 
 from datetime import date
+from typing import Self
 
 
 class User:
@@ -25,15 +26,15 @@ class User:
     def is_adult(self) -> bool:
         return self.age >= User.minimum_age
 
-    # 2. Class Method: Nhận `cls`, dùng làm Alternative Constructor
+    # 2. Class Method: Nhận `cls`, dùng làm Alternative Constructor (Python 3.11+ dùng typing.Self)
     @classmethod
-    def from_birth_year(cls, name: str, birth_year: int) -> "User":
+    def from_birth_year(cls, name: str, birth_year: int) -> Self:
         current_year = date.today().year
         calculated_age = current_year - birth_year
         return cls(name, calculated_age)
 
     @classmethod
-    def from_dict(cls, data: dict) -> "User":
+    def from_dict(cls, data: dict) -> Self:
         return cls(name=data["name"], age=data["age"])
 
     # 3. Static Method: Tiện ích độc lập, không nhận self hay cls

@@ -1,8 +1,8 @@
 # Tuple là kiểu dữ liệu tuần tự có thứ tự và BẤT BIẾN (không thể sửa sau khi tạo)
 
-# Khởi tạo Tuple & Type Hints (Chuẩn Python 3.9+)
-developer: tuple[object, ...] = ('Alice', 34, 'Rust Developer')    # Tập hợp kiểu dữ liệu trong tuple
-numbers: tuple[int, ...] = (1, 2, 3, 4, 5)                         # Độ dài tùy biến (...)
+# Khởi tạo Tuple
+developer = ('Alice', 34, 'Rust Developer')
+numbers = (1, 2, 3, 4, 5)
 single_item = (1,)                                                 # BẮT BUỘC có dấu phẩy ở cuối
 coords = 10, 20                                                    # Packing (không cần ngoặc đơn)
 chars = tuple('Jessica')                                           # ('J', 'e', 's', 's', 'i', 'c', 'a')
@@ -47,10 +47,11 @@ print(fruits.index('banana'))                # 1 (tìm vị trí đầu tiên)
 print(fruits.index('banana', 2))             # 4 (bắt đầu tìm từ vị trí index 2)
 # fruits.index('orange')                     # Lỗi ValueError: x not in tuple
 
-# Hàm toàn cục sorted() (luôn trả về một list mới, không đổi tuple gốc)
-print(sorted(fruits))                        # Sắp xếp tăng dần A-Z (trả về list)
-print(sorted(fruits, key=len))               # Sắp xếp theo độ dài từ ngắn đến dài
-print(sorted(fruits, reverse=True))          # Sắp xếp đảo ngược Z-A
+# Hàm toàn cục sorted(): Sắp xếp tuple và luôn trả về một list mới (tuple gốc bất biến)
+langs = ('Rust', 'Java', 'Python', 'C++', 'Rust', 'Python')
+print(sorted(langs))                                 # ['C++', 'Java', 'Python', 'Python', 'Rust', 'Rust']
+print(sorted(langs, key=len))                        # ['C++', 'Rust', 'Rust', 'Java', 'Python', 'Python'] (sắp theo độ dài)
+print(sorted(langs, reverse=True))                   # Sắp xếp theo thứ tự giảm dần
 
 # Phép toán với Tuple: Ghép (+) và Nhân bản (*)
 print((1, 2) + (3, 4))                       # (1, 2, 3, 4) tạo tuple mới

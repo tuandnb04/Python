@@ -61,6 +61,6 @@ class B(Y, X):
 
 # Thử nghiệm tạo class xung đột thứ tự sẽ gây TypeError:
 try:
-    type("Bad", (A, B), {})
+    type("Bad", (A, B), {}) # type: ignore
 except TypeError as e:
     print("Cannot create class due to MRO conflict:", e)

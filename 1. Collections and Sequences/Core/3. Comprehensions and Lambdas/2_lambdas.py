@@ -57,8 +57,3 @@ def calculate_expression(x):
 
 print("calculate_expression(3):", calculate_expression(3)) # 14
 
-# So sánh với List Comprehension hiện đại:
-# - Trong Python hiện đại, List Comprehension thường được ưu tiên hơn map/filter + lambda:
-even_comp = [x for x in numbers if x % 2 == 0]
-squared_comp = [x ** 2 for x in numbers]
-# Lí do: Hiệu năng cao hơn ở cấp độ C (không tốn chi phí function call overhead) và cú pháp Pythonic hơn.

@@ -1,10 +1,17 @@
-# Nối chuỗi (+) và Lặp chuỗi (*)
-print('Hello' + ' ' + 'World')  # 'Hello World'
-print('ha' * 3)                 # 'hahaha'
-# print('John' + 26)            # TypeError: chỉ nối được str với str (không nối được int)
-print('John' + str(26))         # 'John26' (cách cũ: phải ép kiểu str thủ công)
+# 1. Nối chuỗi (+, +=) và Nhân bản chuỗi (*, *=)
+print('Hello' + ' ' + 'World')        # 'Hello World'
+print('ha' * 3)                       # 'hahaha'
 
-# Định dạng chuỗi với F-string (Chuẩn hiện đại, nhanh và trực quan)
+# Gán kết hợp (Augmented assignment) với chuỗi:
+greeting = 'Hello'
+greeting += ' World'                  # 'Hello World' (tương đương greeting = greeting + ' World')
+greeting *= 2                         # 'Hello WorldHello World' (lặp chuỗi 2 lần)
+# greeting -= 'World'                 # TypeError: unsupported operand type(s) for -=: 'str' and 'str'
+
+# print('Age: ' + 26)                 # Lỗi TypeError: can only concatenate str (not "int") to str
+print('Age: ' + str(26))              # 'Age: 26' (phải ép kiểu str() trước khi nối bằng '+')
+
+# 2. Định dạng chuỗi với F-string (Chuẩn hiện đại, tự động convert kiểu, trực quan)
 name, age = 'John', 26
 print(f"Name: {name}, Age: {age}") # 'Name: John, Age: 26'
 print(f"5 + 10 = {5 + 10}")        # '5 + 10 = 15'
@@ -26,12 +33,11 @@ print(formatted_list)
 names = ["Alice", "Bob", "Charlie"]
 print(f"List:\n{'\n'.join([f'- {n}' for n in names])}")
 
-# Định dạng số điện thoại chuẩn hiện đại với F-string & Slicing:
-# (Thay thế cách cũ dùng `str.format(*n)` vốn chậm và khó bảo trì)
+# Định dạng số điện thoại từ danh sách số (Ứng dụng F-string + "".join):
 phone_nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
 
 def create_phone_number(n):
-    s = ''.join(map(str, n))
+    s = "".join(map(str, n))
     return f"({s[:3]}) {s[3:6]}-{s[6:]}"
 
 print(create_phone_number(phone_nums)) # '(123) 456-7890'

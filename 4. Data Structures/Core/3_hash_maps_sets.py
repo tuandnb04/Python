@@ -11,7 +11,8 @@ print("Lookup 'B' (O(1)):", my_map['B'])  # 2
 del my_map['A']                           # Delete O(1)
 print("'C' in map:", 'C' in my_map)       # True
 
-# defaultdict: Tự động khởi tạo giá trị mặc định cho key chưa tồn tại, tránh KeyError
+# defaultdict: Tối ưu cấu trúc nhóm (Grouping) O(n) thời gian, O(1) amortized mỗi lookup/insert
+# - Cơ chế: Khi key vắng mặt, tự động gọi factory function (list, int, set...) cấp phát bộ nhớ tại chỗ, tránh 2 lần lookup (kiểm tra `in` rồi mới gán)
 group_by_len = defaultdict(list)
 words = ["apple", "banana", "cherry", "fig", "pear"]
 for word in words:
@@ -19,10 +20,11 @@ for word in words:
 
 print("defaultdict grouped by length:", dict(group_by_len))
 
-# Counter: Đếm tần suất xuất hiện của các phần tử cực nhanh (O(n))
+# Counter: Tối ưu đếm tần suất bằng C-level Hash Table O(n)
+# - Thuật toán tìm k phần tử phổ biến nhất `most_common(k)` dùng cấu trúc Min-Heap heapq ngầm định -> O(n log k) thay vì sort toàn bộ O(n log n)
 letter_counts = Counter("abracadabra")
 print("Counter frequencies:", letter_counts)
-print("Top 2 most common:", letter_counts.most_common(2))
+print("Top 2 most common (O(n log k) via heap):", letter_counts.most_common(2))
 
 
 # 2. HASH SET (Set trong Python)

@@ -3,13 +3,13 @@
 # - NameError: Dùng biến/hàm chưa định nghĩa (Python có 'Did you mean: ...?')
 try:
     user_name = "Alice"
-    print(usr_name)  # Did you mean: 'user_name'?
+    print(usr_name)  # type: ignore # Did you mean: 'user_name'?
 except NameError as e:
     print(f"NameError: {e}")
 
 # - TypeError: Phép toán sai kiểu dữ liệu
 try:
-    result = 5 + "5"
+    result = 5 + "5" # type: ignore
 except TypeError as e:
     print(f"TypeError: {e}")
 
@@ -30,7 +30,7 @@ except KeyError as e:
 # - AttributeError: Gọi thuộc tính không tồn tại
 try:
     num = 42
-    num.append(5)
+    num.append(5) # type: ignore
 except AttributeError as e:
     print(f"AttributeError: {e}")
 
@@ -45,6 +45,19 @@ try:
     x = 10 / 0
 except ZeroDivisionError:
     print("You can't divide by zero!")
+
+# Triết lý Pythonic: EAFP vs LBYL & Zero-cost Exception (Python 3.11+)
+# - LBYL (Look Before You Leap): Dùng if kiểm tra trước -> Tốn chi phí rẽ nhánh ở MỌI lần gọi.
+# - EAFP (Easier to Ask for Forgiveness): Cứ thực hiện trong try, bắt ngoại lệ nếu xảy ra.
+# Từ Python 3.11+, khối try là Zero-cost Exception (0 overhead khi chạy đúng).
+def find_average(numbers: list[int | float]) -> float:
+    try:
+        return sum(numbers) / len(numbers)
+    except ZeroDivisionError:
+        return 0
+
+print("Average [10, 20, 30]:", find_average([10, 20, 30]))  # 20.0
+print("Average empty list:", find_average([]))              # 0 (ZeroDivisionError an toàn)
 
 # Ví dụ 2: Đầy đủ try - except - else - finally
 try:
@@ -96,22 +109,6 @@ except* ValueError as e:
 except* (FileNotFoundError, TimeoutError) as e:
     print("Caught File/Network error group:", e.exceptions)
 
-# Triết lý Python: EAFP vs LBYL
-# - LBYL (Look Before You Leap): Kiểm tra điều kiện bằng if/else trước khi thực hiện.
-# - EAFP (Easier to Ask for Forgiveness than Permission): Cứ thực hiện trong try, bắt lỗi qua except.
-# Trong Python, EAFP được ưu tiên (Idiomatic Python) vì chạy nhanh hơn khi lỗi hiếm khi xảy ra và tránh kiểm tra 2 lần.
-data = {'user': 'Alice'}
-
-# Cách 1 - LBYL:
-role_lbyl = data['role'] if 'role' in data else 'guest'
-
-# Cách 2 - EAFP:
-try:
-    role_eafp = data['role']
-except KeyError:
-    role_eafp = 'guest'
-
-print(f"LBYL: {role_lbyl} | EAFP: {role_eafp}")
 
 
 # Context Managers & Cú pháp 'with': Quản lý tài nguyên an toàn (thay thế try...finally)

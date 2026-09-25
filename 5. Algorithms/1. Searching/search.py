@@ -1,6 +1,6 @@
 # Linear Search (Tìm kiếm tuyến tính) - O(n) thời gian, O(1) không gian
 # - Không yêu cầu mảng phải được sắp xếp
-def linear_search(arr, target):
+def linear_search(arr: list[int], target: int) -> int:
     for i in range(len(arr)):
         if arr[i] == target:
             return i

@@ -35,13 +35,13 @@ config_obj = Configuration()
 for attr_name, attr_value in settings_data.items():
     setattr(config_obj, attr_name, attr_value)
 
-print(config_obj.server_url)   # https://api.example.com
-print(config_obj.timeout_sec)  # 30
+print(config_obj.server_url)   # type: ignore # https://api.example.com
+print(config_obj.timeout_sec)  # type: ignore # 30
 
 # Cách hiện đại: Dùng vars().update() nạp toàn bộ dict vào object trong 1 dòng
 config_fast = Configuration()
 vars(config_fast).update(settings_data)
-print("vars().update():", config_fast.server_url)
+print("vars().update():", config_fast.server_url) # type: ignore
 
 
 # hasattr(): Kiểm tra sự tồn tại của thuộc tính trước khi truy cập (Class Product)

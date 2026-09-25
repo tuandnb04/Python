@@ -7,13 +7,20 @@ languages = ['Spanish', 'English', 'Russian', 'Chinese']
 print(list(enumerate(languages)))
 # [(0, 'Spanish'), (1, 'English'), (2, 'Russian'), (3, 'Chinese')]
 
-# Duyệt trực tiếp bằng vòng lặp for (mặc định start=0):
+# 1. Duyệt cơ bản (mặc định start=0):
 for index, language in enumerate(languages):
-    print(f'Index {index} and language {language}')
+    print(f"Index {index}: {language}")
 
-# Tùy chỉnh giá trị index bắt đầu với tham số start:
-for index, language in enumerate(languages, start=1):
-    print(f'Index {index} and language {language}')
+# 2. Đánh số thứ tự hiển thị người dùng (tùy biến start=1):
+for rank, language in enumerate(languages, start=1):
+    print(f"Top {rank}: {language}")
+
+# 3. Ứng dụng thực tế: Tìm vị trí của phần tử đầu tiên thỏa mãn điều kiện
+target_lang = "Russian"
+for index, language in enumerate(languages):
+    if language == target_lang:
+        print(f"Found '{target_lang}' at index {index}")
+        break
 
 # Hàm zip(*iterables) - Ghép song song nhiều iterables
 developers = ['Naomi', 'Dario', 'Jessica', 'Tom']

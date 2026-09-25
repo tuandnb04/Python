@@ -1,9 +1,11 @@
 # * [BỔ SUNG NÂNG CAO] Quick Sort & Python Timsort (sort với key=lambda)
 
+from typing import Optional
+
 # Thuật toán Quick Sort (Divide and Conquer - Chia để trị):
 # - Chuẩn công nghiệp: Phân hoạch tại chỗ (In-place Partition - Lomuto/Hoare), Space O(log n)
 # - Tránh cách viết [x for x in arr] vì tốn O(n) bộ nhớ phụ ở mỗi tầng đệ quy!
-def quick_sort_inplace(arr, low=0, high=None):
+def quick_sort_inplace(arr: list[int], low: int = 0, high: Optional[int] = None) -> list[int]:
     if high is None:
         high = len(arr) - 1
 

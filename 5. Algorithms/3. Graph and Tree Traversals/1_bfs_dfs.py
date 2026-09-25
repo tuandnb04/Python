@@ -1,7 +1,7 @@
 from collections import deque
 
 # Đồ thị / Cây mẫu dạng Adjacency List
-graph = {
+graph: dict[str, list[str]] = {
     'A': ['B', 'C'],
     'B': ['D', 'E'],
     'C': ['F', 'G'],
@@ -11,10 +11,10 @@ graph = {
 # Breadth-First Search (BFS) - Dùng Queue (FIFO)
 # - Duyệt theo từng tầng (level-by-level)
 # - Dùng tìm đường đi ngắn nhất (shortest path) trên đồ thị không trọng số
-def bfs(start_node):
-    visited = []
-    queue = deque([start_node])
-    seen = {start_node}
+def bfs(start_node: str) -> list[str]:
+    visited: list[str] = []
+    queue: deque[str] = deque([start_node])
+    seen: set[str] = {start_node}
 
     while queue:
         node = queue.popleft()        # Dequeue phần tử đầu hàng đợi
@@ -28,9 +28,10 @@ def bfs(start_node):
 # Depth-First Search (DFS) - Dùng Đệ quy (hoặc Stack LIFO)
 # - Chuẩn tối ưu: Dùng `seen` (set) để kiểm tra O(1), tránh bẫy O(V^2) khi dùng `in list`!
 # - Độ phức tạp: O(V + E) thời gian, O(V) không gian
-def dfs(node, visited=None, order=None):
+def dfs(node: str, visited: set[str] | None = None, order: list[str] | None = None) -> list[str]:
     if visited is None:
         visited = set()
+    if order is None:
         order = []
 
     visited.add(node)
