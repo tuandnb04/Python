@@ -170,7 +170,7 @@ print("String Slicing Decomposition (2017):", next_bigger_sliced(2017))  # 2071
 
 # Hoán vị kế tiếp nhỏ hơn (Next Smaller Permutation) & Bẫy số 0 đứng đầu (Leading Zero):
 # - Tìm số nhỏ hơn lớn nhất có cùng các chữ số, nhưng KHÔNG được phép có số 0 ở đầu (ví dụ: 1027 -> -1).
-def next_smaller(n):
+def next_smaller(n: int) -> int:
     if n < 21:
         return -1
 

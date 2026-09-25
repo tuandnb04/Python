@@ -12,7 +12,7 @@ print("Linear search (find 5):", linear_search(unsorted_list, 5))   # -1
 
 # Binary Search (Tìm kiếm nhị phân) - O(log n) thời gian, O(1) không gian
 # - ĐIỀU KIỆN BẮT BUỘC: Danh sách phải được sắp xếp tăng dần!
-def binary_search(arr, target):
+def binary_search(arr: list[int], target: int) -> int:
     low, high = 0, len(arr) - 1
 
     while low <= high:

@@ -102,6 +102,15 @@ print("MRO for class D:", [cls.__name__ for cls in D.mro()])
 # "Favor composition over inheritance" (Ưu tiên bao hàm hơn là kế thừa)
 # - Inheritance (Is-A): An ElectricCar IS A Vehicle.
 # - Composition (Has-A): A Car HAS AN Engine and HAS A GPS.
+#
+# LƯU Ý QUAN TRỌNG VỀ QUAN HỆ KẾ THỪA (IS-A) TRONG OOP:
+# Quan hệ Is-A trong OOP phải dựa trên "HÀNH VI" (Behavior), không chỉ dựa vào phân loại đời thực.
+# Ví dụ kinh điển (Cạm bẫy Square - Rectangle):
+# - Toán học: Hình vuông IS-A Hình chữ nhật.
+# - Lập trình OOP: Nếu Square kế thừa Rectangle, khi người dùng gọi set_width(w) trên Rectangle
+#   họ kỳ vọng height không đổi. Nhưng Square lại buộc phải đổi cả height -> phá vỡ kỳ vọng hành vi
+#   (Vi phạm nguyên lý Liskov Substitution Principle - LSP).
+# => Khi đó giải pháp tốt hơn là cả hai cùng kế thừa lớp cha trừu tượng Shape, hoặc dùng Composition.
 
 class Engine:
     def __init__(self, horsepower: int) -> None:
