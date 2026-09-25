@@ -34,8 +34,7 @@ print(nums[1::2])                    # [2, 4, 6] (bước nhảy 2)
 print(nums[::-1])                    # [6, 5, 4, 3, 2, 1] (mẹo đảo ngược list)
 
 # Thêm phần tử: append, extend, insert
-numbers: list[int | float] = [1, 2, 3, 4, 5]
-numbers.append(6)                    # append(): Thêm 1 phần tử vào cuối
+numbers: list[int | float] = [1, 2, 3, 4, 5, 6]
 print("append:", numbers)            # [1, 2, 3, 4, 5, 6]
 
 even_numbers = [8, 10]

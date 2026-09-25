@@ -80,7 +80,7 @@ print("Power of 2 in 24:", power_of_two)  # 3
 # Gosper's Hack: Tìm số nguyên lớn hơn tiếp theo có cùng số lượng bit 1 trong O(1):
 def next_higher_bits(n: int) -> int:
     c = n & -n
-    r = n + c
+    r: int = n + c
     return (((r ^ n) >> 2) // c) | r
 
 print("Next higher with same set bits (129 -> 130):", next_higher_bits(129)) # 130

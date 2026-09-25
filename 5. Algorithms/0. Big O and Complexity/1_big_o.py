@@ -16,7 +16,7 @@ print("O(1) Check:", check_even_or_odd(42))
 
 # O(n) - Linear Time: Thời gian tăng tuyến tính tỉ lệ thuận với kích thước n
 def print_elements(items):
-    for item in items:
+    for _ in items:
         pass  # Duyệt qua từng phần tử trong danh sách n phần tử
 
 print_elements([1, 2, 3, 4, 5])

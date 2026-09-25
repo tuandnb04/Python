@@ -4,7 +4,7 @@ print('ha' * 3)                       # 'hahaha'
 
 # Gán kết hợp (Augmented assignment) với chuỗi:
 greeting = 'Hello'
-greeting += ' World'                  # 'Hello World' (tương đương greeting = greeting + ' World')
+greeting += ' World'                  # "Hello World" (tương đương greeting = greeting + " World")
 greeting *= 2                         # 'Hello WorldHello World' (lặp chuỗi 2 lần)
 # greeting -= 'World'                 # TypeError: unsupported operand type(s) for -=: 'str' and 'str'
 

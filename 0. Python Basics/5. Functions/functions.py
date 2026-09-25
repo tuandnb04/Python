@@ -1,4 +1,7 @@
 # Định nghĩa hàm (def) & Thụt lề (Indentation)
+from unittest import result
+
+
 def hello() -> None:
     print('Hello World')
 
@@ -10,7 +13,7 @@ def print_sum(a: int, b: int) -> None:
 
 # Từ khóa return vs Giá trị mặc định None (NoneType)
 # Hàm chỉ print() mà không có return thì mặc định trả về None
-result = print_sum(3, 1)              # In: 4
+print_sum(3, 1)
 print("Result:", result)              # Result: None
 
 # Dùng return để trả kết quả về biến lưu trữ
