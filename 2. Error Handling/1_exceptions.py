@@ -133,9 +133,10 @@ with ManagedResource("Database Connection") as res:
 
 # Cách 2: Tạo Context Manager siêu ngắn gọn bằng @contextmanager từ thư viện contextlib
 from contextlib import contextmanager
+from collections.abc import Iterator
 
 @contextmanager
-def timer_scope(task_name):
+def timer_scope(task_name: str) -> Iterator[None]:
     import time
     start = time.perf_counter()
     print(f"\n[Timer] Bat dau task: '{task_name}'")

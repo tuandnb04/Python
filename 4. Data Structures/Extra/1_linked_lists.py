@@ -1,109 +1,72 @@
 # Custom Linked Lists (Danh sách liên kết tự cài đặt bằng Node con trỏ)
-# - Ghi chú: Thường dùng trong phỏng vấn thuật toán (LeetCode) hoặc cấu trúc dữ liệu kinh điển.
+# - Đặc tính: Cấu trúc dữ liệu tuyến tính kích thước động (dynamic), các node kết nối qua tham chiếu (reference).
+# - Ứng dụng: Nền tảng xây dựng Stacks, Queues, Deques và danh sách kề trong duyệt đồ thị (BFS / DFS).
+# - Chi phí bộ nhớ (Space): Mọi thao tác chèn / xóa đều đạt O(1) auxiliary space (không cần dịch chuyển mảng như Array).
 # - Trong thực tế dự án Python, ưu tiên dùng 'collections.deque' hoặc 'list' có sẵn với hiệu năng C vượt trội.
 
 from __future__ import annotations
 
-# 1. Singly Linked List (Danh sách liên kết đơn: duyệt 1 chiều)
-class Node:
-    def __init__(self, data):
-        self.data = data
-        self.next: Node | None = None  # Tham chiếu tới node tiếp theo
+# 1. Singly Linked List (Cài đặt dạng OOP Inner-Class: Node lồng bên trong LinkedList)
+class LinkedList:
+    class Node:
+        def __init__(self, element):
+            self.element = element
+            self.next = None
 
-class SinglyLinkedList:
     def __init__(self):
-        self.head: Node | None = None
+        self.length = 0
+        self.head = None
 
-    # Chèn vào đầu danh sách: O(1) - Constant Time
-    def insert_at_beginning(self, data):
-        new_node = Node(data)
-        new_node.next = self.head
-        self.head = new_node
+    def is_empty(self):
+        return self.length == 0
 
-    # Chèn vào cuối danh sách: O(n) - Phải duyệt qua n node
-    def insert_at_end(self, data):
-        new_node = Node(data)
-        if not self.head:
-            self.head = new_node
+    def add(self, element):
+        """Thêm phần tử vào cuối danh sách: O(n)"""
+        node = self.Node(element)
+        if self.is_empty():
+            self.head = node
+        else:
+            current_node = self.head
+            while current_node.next is not None:
+                current_node = current_node.next
+            current_node.next = node
+        self.length += 1
+
+    def remove(self, element):
+        """Xóa phần tử đầu tiên khớp giá trị: O(n)"""
+        previous_node = None
+        current_node = self.head
+        while current_node is not None and current_node.element != element:
+            previous_node = current_node
+            current_node = current_node.next
+        if current_node is None:
             return
-        curr = self.head
-        while curr.next:
-            curr = curr.next
-        curr.next = new_node
-
-    # Xóa ở đầu: O(1)
-    def remove_from_beginning(self):
-        if not self.head:
-            return None
-        removed_data = self.head.data
-        self.head = self.head.next
-        return removed_data
-
-    # Xóa ở cuối: O(n)
-    def remove_from_end(self):
-        if not self.head:
-            return None
-        if not self.head.next:
-            removed_data = self.head.data
-            self.head = None
-            return removed_data
-
-        curr = self.head
-        while curr.next and curr.next.next:
-            curr = curr.next
-
-        last_node = curr.next
-        if last_node is None:
-            return None
-
-        removed_data = last_node.data
-        curr.next = None
-        return removed_data
-
-    # Chèn vào sau một giá trị mục tiêu (ở giữa): O(n) tìm kiếm, O(1) chèn
-    def insert_after(self, target_data, new_data):
-        curr = self.head
-        while curr and curr.data != target_data:
-            curr = curr.next
-        if curr:
-            new_node = Node(new_data)
-            new_node.next = curr.next
-            curr.next = new_node
-
-    # Xóa một node theo giá trị: O(n)
-    def remove_node(self, target_data):
-        if not self.head:
-            return False
-        if self.head.data == target_data:
-            self.head = self.head.next
-            return True
-
-        curr = self.head
-        while curr.next and curr.next.data != target_data:
-            curr = curr.next
-        if curr.next:
-            curr.next = curr.next.next
-            return True
-        return False
+        elif previous_node is not None:
+            previous_node.next = current_node.next
+        else:
+            self.head = current_node.next
+        self.length -= 1
 
     def display(self):
         res, curr = [], self.head
         while curr:
-            res.append(curr.data)
+            res.append(curr.element)
             curr = curr.next
         return " -> ".join(map(str, res)) if res else "Empty"
 
-sll = SinglyLinkedList()
-sll.insert_at_beginning("B")
-sll.insert_at_beginning("A")       # O(1) -> A -> B
-sll.insert_at_end("D")             # O(n) -> A -> B -> D
-sll.insert_after("B", "C")         # O(n) -> A -> B -> C -> D
-print("Singly Linked List:", sll.display()) # A -> B -> C -> D
 
-sll.remove_node("B")
-print("After removing 'B':", sll.display())  # A -> C -> D
-sll.remove_from_end()
-print("After removing end:", sll.display())  # A -> C
+my_list = LinkedList()
+print("my_list is_empty:", my_list.is_empty())
+
+my_list.add(1)
+my_list.add(2)
+print("my_list is_empty:", my_list.is_empty())
+print("my_list length:", my_list.length)
+print("Elements:", my_list.display())
+
+my_list.remove(1)
+print("After removing 1:", my_list.display())
+print("Length after remove:", my_list.length)
 
 
 # 2. Doubly Linked List (Danh sách liên kết đôi: duyệt 2 chiều)

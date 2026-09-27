@@ -1,11 +1,20 @@
 from collections import defaultdict, Counter
 
+# Khái niệm ADT (Abstract Data Type) & Map vs Hash Map:
+# - ADT: Bản thiết kế logic định nghĩa thao tác và tính chất dữ liệu, tách biệt khỏi cách cài đặt.
+# - Map (ADT): Tập hợp cặp key-value với key duy nhất (unique), value có thể trùng lặp.
+# - Hash Map (Hash Table): Cấu trúc cài đặt cụ thể của Map ADT dùng hàm băm (Hash Function) ánh xạ Key -> Index trong mảng ngầm định.
+# - Xung đột băm (Hash Collision):
+#   + Chaining: Mỗi ô mảng (bucket) trỏ đến một Linked List lưu các phần tử trùng index.
+#   + Open Addressing: Dò tìm ô trống kế tiếp trong mảng (Python dict/set dùng Open Addressing).
+# - Độ phức tạp:
+#   + Time: O(1) average cho insert/lookup/delete; O(n) worst case khi nhiều xung đột.
+#   + Space: O(1) average; O(n) worst case khi đầy mảng cần cấp phát lại (Resizing / Rehashing).
+
 # 1. HASH MAP (Dictionary trong Python)
-# - Cơ chế: Dùng hàm băm (Hash Function) tính vị trí ô nhớ -> Thao tác O(1) amortized
-# - Hash Collision (Xung đột băm): Khi 2 key khác nhau có cùng hash value (Python giải quyết bằng Open Addressing)
 my_map = {'A': 1, 'B': 2, 'C': 3}
 
-# Thao tác cơ bản: Insert, Access, Update, Delete -> O(1)
+# Thao tác cơ bản: Insert, Access, Update, Delete -> O(1) average
 my_map['D'] = 4                           # Insert O(1)
 print("Lookup 'B' (O(1)):", my_map['B'])  # 2
 del my_map['A']                           # Delete O(1)
@@ -28,11 +37,12 @@ print("Top 2 most common (O(n log k) via heap):", letter_counts.most_common(2))
 
 
 # 2. HASH SET (Set trong Python)
-# - Tập hợp các phần tử đơn lẻ duy nhất (unique), không trùng lặp và không có thứ tự
-# - Cài đặt bằng bảng băm chỉ lưu key (chỉ nhận các phần tử bất biến / hashable)
+# - Set (ADT): Tập hợp các phần tử đơn lẻ duy nhất (unique), không trùng lặp, không thứ tự, kích thước động (dynamic).
+# - Cài đặt vật lý: Dùng bảng băm chỉ lưu key (không có value), yêu cầu phần tử phải bất biến (hashable).
+# - Độ phức tạp: Add/Remove/Membership test đạt O(1) trung bình, O(n) worst-case (do xung đột băm).
 my_set = {1, 2, 3, 4}
-my_set.add(5)                             # Add O(1)
-my_set.remove(2)                          # Remove O(1)
+my_set.add(5)                             # Add O(1) avg
+my_set.remove(2)                          # Remove O(1) avg
 print("5 in set (O(1)):", 5 in my_set)    # True
 
 # Các phép toán đại số tập hợp tối ưu

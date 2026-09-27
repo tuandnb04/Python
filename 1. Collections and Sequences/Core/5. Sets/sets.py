@@ -10,12 +10,17 @@ my_set.add(6)
 my_set.add(5)  # Không thay đổi vì 5 đã tồn tại
 print("Sau khi add:", my_set)  # {1, 2, 3, 4, 5, 6}
 
-# Xóa phần tử: .remove() (báo lỗi KeyError nếu không thấy) vs .discard() (an toàn, không báo lỗi)
+# Xóa phần tử:
+# - .remove(): Xóa giá trị, báo lỗi KeyError nếu không tìm thấy
+# - .discard(): Xóa an toàn, không báo lỗi nếu giá trị không tồn tại
+# - .pop(): Lấy và xóa một phần tử ngẫu nhiên/tùy ý (báo KeyError nếu set rỗng)
 my_set.remove(4)
 my_set.discard(10)  # 10 không có trong set nhưng không bị lỗi
+popped_elem = my_set.pop()
+print("Popped element (.pop()):", popped_elem)
 
-# Kiểm tra phần tử tồn tại với toán tử 'in'
-print(5 in my_set)  # True
+# Kiểm tra phần tử tồn tại với toán tử 'in' (thời gian trung bình O(1))
+print(5 in my_set)
 
 # Kiểm tra quan hệ giữa các tập hợp
 my_set = {1, 2, 3, 4, 5}
@@ -26,17 +31,22 @@ print("issuperset:", my_set.issuperset(your_set))  # False (my_set có là tập
 print("isdisjoint:", my_set.isdisjoint(your_set))  # False (2 tập có rời nhau hoàn toàn không)
 
 # Các phép toán tập hợp (Mathematical Set Operations)
-# Union (|) - Hợp: Lấy tất cả phần tử từ cả 2 tập hợp
-print("Union (|):", my_set | your_set)  # {1, 2, 3, 4, 5, 6}
+# Hỗ trợ cả toán tử (operators) và phương thức (methods) tương ứng:
+# 1. Union (| hoặc .union()): Hợp - Lấy tất cả phần tử từ cả 2 tập hợp
+print("Union (|):", my_set | your_set)                       # {1, 2, 3, 4, 5, 6}
+print("Union (.union()):", my_set.union(your_set))
 
-# Intersection (&) - Giao: Chỉ lấy các phần tử chung
-print("Intersection (&):", my_set & your_set)  # {2, 3, 4}
+# 2. Intersection (& hoặc .intersection()): Giao - Chỉ lấy các phần tử chung
+print("Intersection (&):", my_set & your_set)               # {2, 3, 4}
+print("Intersection (.intersection()):", my_set.intersection(your_set))
 
-# Difference (-) - Hiệu: Lấy phần tử thuộc my_set nhưng KHÔNG thuộc your_set
-print("Difference (-):", my_set - your_set)  # {1, 5}
+# 3. Difference (- hoặc .difference()): Hiệu - Lấy phần tử thuộc my_set nhưng KHÔNG thuộc your_set
+print("Difference (-):", my_set - your_set)                 # {1, 5}
+print("Difference (.difference()):", my_set.difference(your_set))
 
-# Symmetric Difference (^) - Hiệu đối xứng: Thuộc tập này hoặc tập kia nhưng KHÔNG thuộc cả hai
-print("Symmetric Diff (^):", my_set ^ your_set)  # {1, 5, 6}
+# 4. Symmetric Difference (^ hoặc .symmetric_difference()): Hiệu đối xứng - Thuộc một trong hai tập nhưng không thuộc cả hai
+print("Symmetric Diff (^):", my_set ^ your_set)             # {1, 5, 6}
+print("Symmetric Diff (.symmetric_difference()):", my_set.symmetric_difference(your_set))
 
 # Toán tử gán kết hợp (Compound assignment): |=, &=, -=, ^=
 my_set -= your_set  # Cập nhật trực tiếp my_set = my_set - your_set
