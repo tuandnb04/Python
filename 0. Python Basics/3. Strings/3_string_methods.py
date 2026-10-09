@@ -14,11 +14,11 @@ contraction = "they're"
 print(contraction.title())       # "They'Re"  (lỗi chính tả do viết hoa sau dấu nháy)
 print(contraction.capitalize())  # "They're"  (chuẩn ngữ pháp)
 
-# Ứng dụng .title(): Chuyển đổi snake_case / kebab-case sang camelCase nhanh nhất (C-level):
-# .title() tự viết hoa chữ cái sau '-' và '_', sau đó chỉ cần .replace() xóa dấu phân cách
-camel_sample = "the-stealth_warrior"
-res_camel = camel_sample[:1] + camel_sample.title().replace("-", "").replace("_", "")[1:]
-print("CamelCase:", res_camel)  # 'theStealthWarrior'
+# Chuỗi phương thức liên tiếp (Method Chaining): Vừa cắt khoảng trắng vừa viết hoa
+messy_name = '  sARaH dAVis  '
+clean_name = messy_name.strip().title()
+print(f"Original name: '{messy_name}'")
+print(f"Cleaned name: '{clean_name}'")  # 'Sarah Davis'
 
 
 # Cắt khoảng trắng & Thay thế
@@ -41,11 +41,17 @@ raw_input = "Hello, World! How's it going?"
 print("Clean text:", raw_input.translate(clean_table))  # "Hello World How's it going"
 
 
-# Nối chuỗi với str.join():
-words = s.split()
+# Nối chuỗi với str.join() và Tách chuỗi:
+words = s.split()                  # Mặc định: tách theo khoảng trắng
 print(words)
 print("Joined with hyphen:", "-".join(words))  # 'hello-world'
 print("Joined with comma: ", ", ".join(words))  # 'hello, world'
+
+# Tách chuỗi với dấu phân cách tùy biến (.split(sep)):
+full_address = '123 Main Street, Springfield, IL'
+address_parts = full_address.split(', ')
+print("Address parts:", address_parts)         # ['123 Main Street', 'Springfield', 'IL']
+print("Rejoined:     ", ' | '.join(address_parts)) # '123 Main Street | Springfield | IL'
 
 # Tách dòng: splitlines() vs split('\n') vs split()
 poem = "Hello world\nPython code\n"
@@ -73,14 +79,18 @@ print(f'Position of @: {at_position}')
 username = email[:at_position]
 print(f'Username: {username}')
 
-print(s.count('o'))                # 2
+# Chuẩn hóa tên hiển thị từ username (kết hợp .replace và .title):
+display_name = username.replace('.', ' ').title()
+print(f'Display name: {display_name}')  # 'Alice Johnson'
+
+# Kiểm tra tiền tố, hậu tố & Đếm số lần xuất hiện (.count):
 print(s.startswith('hello'))       # True
 print(s.endswith('world'))         # True
 print(s.endswith('N'))             # False (câu hỏi trắc nghiệm)
 
-# Đếm số lượng ký tự với .count():
 print("Count 'l':", s.count('l'))  # 2
 print("Count 'o':", s.count('o'))  # 2
+
 
 
 # Kiểm tra định dạng (isupper, islower)
