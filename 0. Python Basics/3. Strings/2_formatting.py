@@ -17,30 +17,19 @@ print(f"Name: {name}, Age: {age}") # 'Name: John, Age: 26'
 print(f"5 + 10 = {5 + 10}")        # '5 + 10 = 15'
 
 # Cải tiến f-strings trong Python 3.12+ (PEP 701)
-# Tái sử dụng cùng loại dấu ngoặc kép bên trong biểu thức
-user_data = {"name": "Antigravity", "role": "AI Assistant"}
-print(f"User: {user_data['name']} with role: {user_data['role']}")
+# Cho phép tái sử dụng cùng loại dấu ngoặc kép bên trong biểu thức {}
+print(f"Inline method: {'Hello World'.lower()}")
 
-# Lồng f-string bên trong f-string (Nested f-strings)
-# Cách viết Clean Code: Tách bước xử lý list ra trước giúp code dễ đọc hơn thay vì nhồi nhét
-items = ["apple", "banana", "cherry"]
-item_tags = [f"item_{i}:{item}" for i, item in enumerate(items)]
-formatted_list = f"Items: {', '.join(item_tags)}"
-print(formatted_list)
+# Lồng biểu thức định dạng bên trong f-string (Dynamic format specifiers)
+value = 12.3456
+precision = 2
+print(f"Dynamic precision: {value:.{precision}f}") # '12.35'
 
+# Định dạng chuỗi số điện thoại bằng Slicing và F-string:
+raw_phone = "1234567890"
+formatted_phone = f"({raw_phone[:3]}) {raw_phone[3:6]}-{raw_phone[6:]}"
+print("Formatted phone:", formatted_phone) # '(123) 456-7890'
 
-# Ký tự backslash '\' bên trong biểu thức {}
-names = ["Alice", "Bob", "Charlie"]
-print(f"List:\n{'\n'.join([f'- {n}' for n in names])}")
-
-# Định dạng số điện thoại từ danh sách số (Ứng dụng F-string + "".join):
-phone_nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
-
-def create_phone_number(n):
-    s = "".join(map(str, n))
-    return f"({s[:3]}) {s[3:6]}-{s[6:]}"
-
-print(create_phone_number(phone_nums)) # '(123) 456-7890'
 
 
 # Căn lề và định dạng khoảng đệm với F-string (Format Specifiers: <, >, ^)

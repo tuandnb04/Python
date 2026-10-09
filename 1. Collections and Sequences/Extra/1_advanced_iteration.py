@@ -1,29 +1,22 @@
 import itertools
 from collections import deque
 
-# Khái niệm Iterable vs Iterator & Giao thức lặp (Iteration Protocol)
-# Iterable cung cấp __iter__(), Iterator duyệt qua từng phần tử bằng next() / __next__()
+# Khái niệm Iterable vs Iterator:
+# - Iterable là đối tượng chứa dữ liệu có thể lặp (List, Tuple, Dict, Set, chuỗi...).
+# - Iterator là luồng duyệt qua dữ liệu, dùng iter() để tạo và next() để lấy từng phần tử kế tiếp.
 numbers = [10, 20, 30]
 iterator = iter(numbers)
 print("Iterator next():", next(iterator))  # 10
 print("Iterator next():", next(iterator))  # 20
 
-# Tự tạo Custom Iterator bằng __iter__() và __next__()
-class Countdown:
-    def __init__(self, start):
-        self.current = start
+# Tự tạo luồng lặp Iterator bằng hàm Generator (yield)
+def countdown(start: int):
+    current = start
+    while current > 0:
+        yield current
+        current -= 1
 
-    def __iter__(self):
-        return self
-
-    def __next__(self):
-        if self.current <= 0:
-            raise StopIteration
-        val = self.current
-        self.current -= 1
-        return val
-
-print("Custom Countdown iterator:", list(Countdown(3)))  # [3, 2, 1]
+print("Custom Countdown iterator:", list(countdown(3)))  # [3, 2, 1]
 
 # Generator Function (yield) & Ủy quyền lặp (yield from)
 def count_up_to(max_num):

@@ -33,28 +33,25 @@ try:
 except ItemNotFoundError as e:
     print("Caught:", e)
 
-# Custom Exception có thuộc tính mở rộng (Attributes & Metadata)
+# Custom Exception với thông điệp chi tiết:
 class InsufficientFundsError(Exception):
-    def __init__(self, balance, amount):
-        self.balance = balance
-        self.amount = amount
-        super().__init__(f"Insufficient funds: Balance is ${balance}, requested ${amount}")
+    """Ngoại lệ khi tài khoản không đủ số dư để thực hiện giao dịch."""
+    pass
 
 def withdraw(balance, amount):
     if amount > balance:
-        raise InsufficientFundsError(balance, amount)
+        raise InsufficientFundsError(f"Insufficient funds: Balance is ${balance}, requested ${amount}")
     return balance - amount
 
 try:
     withdraw(100, 150)
 except InsufficientFundsError as e:
     print("Account transaction error:", e)
-    print(f"Details: Balance = {e.balance}, Requested = {e.amount}")
 
-# Phân cấp ngoại lệ theo Module/Dự án (Exception Hierarchy)
-# Giúp caller có thể bắt chung lỗi của cả module (AppBaseError) hoặc bắt chi tiết lỗi con
+# Phân cấp nhóm ngoại lệ theo Module/Dự án:
+# Giúp caller có thể bắt chung lỗi của cả nhóm (AppBaseError) hoặc bắt chi tiết từng loại lỗi
 class AppBaseError(Exception):
-    """Lớp cha cho toàn bộ ngoại lệ trong ứng dụng."""
+    """Ngoại lệ gốc cho toàn bộ module ứng dụng."""
     pass
 
 class DatabaseConnectionError(AppBaseError):
@@ -113,3 +110,30 @@ except ValueError as err:
     print("Attached notes (__notes__):")
     for note in getattr(err, "__notes__", []):
         print(f"  * {note}")
+
+# Gom nhóm và ném nhiều ngoại lệ cùng lúc với ExceptionGroup (Python 3.11+ PEP 654)
+# - Bài toán thực tế (Batch Validation): Thay vì dừng lại ngay ở lỗi đầu tiên,
+#   ta thu thập toàn bộ các lỗi vi phạm dữ liệu rồi ném ra cùng một lúc.
+def validate_user_registration(username: str, email: str, age: int) -> None:
+    errors: list[Exception] = []
+    if len(username) < 3:
+        errors.append(ValueError(f"Username '{username}' is too short (min 3 chars)"))
+    if "@" not in email:
+        errors.append(ValueError(f"Email '{email}' is missing '@'"))
+    if age < 18:
+        errors.append(PermissionError(f"Age {age} is below minimum requirement (18+)"))
+
+    if errors:
+        raise ExceptionGroup("User registration validation failed", errors)
+
+try:
+    validate_user_registration(username="al", email="invalid-email", age=16)
+except ExceptionGroup as eg:
+    print(f"Validation failed with {len(eg.exceptions)} errors:")
+    for err in eg.exceptions:
+        print(f"  - [{type(err).__name__}]: {err}")
+
+# Ghi chú: Để tìm hiểu chi tiết cách BẮT và XỬ LÝ từng loại lỗi song song bằng cú pháp `except*`,
+# tham khảo file: 2. Error Handling/1_exceptions.py
+
+

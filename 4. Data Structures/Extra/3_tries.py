@@ -1,7 +1,16 @@
 # Custom Trie (Prefix Tree - Cây tiền tố tự cài đặt bằng TrieNode)
-# - Cấu trúc cây dùng để lưu trữ tập hợp các chuỗi ký tự
-# - Tối ưu cho tính năng Autocomplete (tự động gợi ý từ) và Spell Check (kiểm tra chính tả)
-# - Độ phức tạp tìm kiếm/chèn: O(L) với L là độ dài của từ
+# - Cấu trúc cây dùng để lưu trữ tập hợp các chuỗi ký tự (strings).
+# - Đặc điểm hoạt động:
+#   + Gốc (Root) không chứa ký tự nào (đại diện cho chuỗi rỗng "").
+#   + Mỗi node đại diện cho 1 ký tự; đường đi từ gốc tới một node biểu diễn một tiền tố (prefix).
+#   + Các từ có cùng tiền tố sẽ dùng chung các node (nhánh) đó (ví dụ "tea" và "ten" dùng chung nhánh "te").
+#   + Node kết thúc của một từ hoàn chỉnh được đánh dấu bằng `is_end_of_word = True`.
+# - Ưu điểm:
+#   + Thao tác tìm kiếm và chèn cực nhanh: O(L) với L là độ dài chuỗi (không phụ thuộc số lượng từ).
+#   + Tối ưu cho tính năng Autocomplete (gợi ý từ) và Spell Check (kiểm tra chính tả).
+# - Nhược điểm:
+#   + Tốn bộ nhớ nếu tập chuỗi có nhiều ký tự phân tán, ít dùng chung tiền tố (vì phải tạo nhiều node riêng biệt).
+
 
 class TrieNode:
     def __init__(self):

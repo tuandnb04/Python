@@ -24,16 +24,22 @@ print(r"re.search('\d+'):", re.search(r'\d+', book))  # Match '451' (span=(11, 1
 print(r"re.fullmatch('\d+'):", re.fullmatch(r'\d+', book))  # None (vì có chữ 'Fahrenheit ')
 print(r"re.fullmatch('Fahrenheit \d+'):", re.fullmatch(r'Fahrenheit \d+', book))  # Match 'Fahrenheit 451'
 
-# 3. re.findall(): Tìm TẤT CẢ các đoạn khớp và trả về list[str]
-# Ví dụ: Chia chuỗi thành các cặp 2 ký tự (tự động bù '_' nếu độ dài lẻ):
-pair_sample = "abcde"
-pairs = re.findall(r".{2}", pair_sample + "_")
-print("re.findall pairs (.{2}):", pairs)  # ['ab', 'cd', 'e_']
+# 3. re.search() với Capture Groups: Trích xuất các phần con trong mẫu
+date_text = "2026-10-09"
+date_match = re.search(r"(\d{4})-(\d{2})-(\d{2})", date_text)
+if date_match:
+    print("Extracted year:", date_match.group(1))   # 2026
+    print("Extracted month:", date_match.group(2))  # 10
+    print("Extracted day:", date_match.group(3))    # 09
 
-# 4. re.sub(): Thay thế chuỗi theo mẫu regex & callback function
+# 4. re.sub(): Thay thế chuỗi theo mẫu regex & hàm xử lý
 # Ví dụ đảo ngược các từ có độ dài >= 5 ký tự mà vẫn giữ nguyên khoảng trắng:
 spin_sample = "Hey fellow warriors"
-spun = re.sub(r"\w{5,}", lambda m: m.group()[::-1], spin_sample)
+
+def reverse_word(match: re.Match) -> str:
+    return match.group()[::-1]
+
+spun = re.sub(r"\w{5,}", reverse_word, spin_sample)
 print("re.sub spun words:", spun)  # 'Hey wollef sroirraw'
 
 # Đặt bí danh cho module (import module_name as alias)
@@ -55,16 +61,14 @@ print("UTC Time (Python 3.11+ aware):", now_utc.strftime("%Y-%m-%d %H:%M:%S %Z")
 
 # Import các hàm/hằng số cụ thể (from module_name import func / as alias)
 # Gọi trực tiếp tên hàm giúp tránh bước tra cứu qua dấu chấm (attribute lookup: module.func)
-from statistics import mean
-from math import radians, sin
+from math import gcd, radians, sin
 from math import pow as math_pow
 
-scores = [85, 90, 78, 92]
-print("statistics.mean:", mean(scores))  # 86.25
+print("math.gcd(48, 18):", gcd(48, 18))       # 6 (Uoc chung lon nhat)
 print("sin(radians(40)):", sin(radians(40)))  # 0.6427876096865393
 
 # Lưu ý: math.pow() luôn trả về float (16.0), còn built-in pow(2, 4) trả về int (16) và hỗ trợ tham số thứ 3 modulo.
-print("math_pow(2, 4):", math_pow(2, 4))  # 16.0
+print("math_pow(2, 4):", math_pow(2, 4))      # 16.0
 
 # Lưu ý: Tránh dùng 'from module import *' vì dễ gây xung đột tên (namespace collision)
 

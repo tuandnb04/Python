@@ -35,18 +35,23 @@ print(pow(2, 3))                  # 8 (tương đương 2 ** 3)
 print(pow(7, 100, 10))            # 1 (chữ số tận cùng của 7^100 mà không gây tràn bộ nhớ)
 
 # Tối ưu toán học: Chuyển phép chia sang phép nhân khi so sánh giá trị trung bình
-# Thay vì `val > sum(arr) / len(arr)` (dễ dính sai số float), viết: `val * len(arr) > sum(arr)`
-scores = [70, 80, 90]
+# Thay vì `my_score > (score1 + score2 + score3) / 3` (dễ dính sai số float),
+# viết dưới dạng nhân: `my_score * 3 > score1 + score2 + score3`
+score1, score2, score3 = 70, 80, 90
+count = 3
 my_score = 85
-is_better = my_score * len(scores) > sum(scores)
+is_better = my_score * count > (score1 + score2 + score3)
 print("Is score better than average:", is_better)  # True
 
-# 5. Xử lý các chữ số của một số (Digit Manipulation)
+# 5. Xử lý các chữ số của một số bằng toán tử số học (Digit Manipulation)
+# Lấy chữ số cuối cùng bằng chia dư (%), loại bỏ chữ số cuối bằng chia nguyên (//):
 num_input = 13579
-digits = [int(d) for d in str(num_input)]
-print("Digits:", digits)                                    # [1, 3, 5, 7, 9]
-print("Number of digits:", len(str(num_input)))             # 5
-print("Sum of digits:", sum(digits))                        # 25
+last_digit = num_input % 10          # 9 (hàng đơn vị)
+remaining = num_input // 10          # 1357 (phần còn lại)
+second_last = remaining % 10         # 7 (hàng chục)
+print("Last digit (n % 10):", last_digit)
+print("Remaining (n // 10):", remaining)
+print("Second to last:", second_last)
 
 # 6. Hệ cơ số & Toán tử Bitwise (Dành cho xử lý nhị phân và tối ưu hiệu năng)
 bin_num, hex_num = 0b1010, 0x1F       # 10 và 31
@@ -65,41 +70,19 @@ print(16 >> 2)                        # 4 (Dịch phải 2 bit, tương đương
 num_check = 42
 print(f"Is {num_check} even:", not (num_check & 1))  # True
 
-# Chuyển mảng bit [1, 0, 1, 1] sang số nguyên:
-bits_arr = [1, 0, 1, 1]
-bin_accum = 0
-for b in bits_arr:
-    bin_accum = (bin_accum << 1) | b
-print(f"Binary array {bits_arr} to int:", bin_accum)  # 11
-
 # Đếm số lượng thừa số 2 trong O(1):
 val = 24  # 24 = 2^3 * 3
 power_of_two = (val & -val).bit_length() - 1
 print("Power of 2 in 24:", power_of_two)  # 3
-
-# Gosper's Hack: Tìm số nguyên lớn hơn tiếp theo có cùng số lượng bit 1 trong O(1):
-def next_higher_bits(n: int) -> int:
-    c = n & -n
-    r: int = n + c
-    return (((r ^ n) >> 2) // c) | r
-
-print("Next higher with same set bits (129 -> 130):", next_higher_bits(129)) # 130
 
 # int.bit_count() (Python 3.10+): Đếm số bit 1 trong O(1)
 n_sample = 1234
 print(f"Bits '1' of {n_sample}:", n_sample.bit_count())    # 5
 print(f"Bit length of {n_sample}:", n_sample.bit_length()) # 11
 
-# Bộ lọc số chính phương siêu tốc bằng Bitmask:
-from math import isqrt
+# Kiểm tra số chính phương bằng lũy thừa số học:
+check_num = 144
+sqrt_val = int(check_num ** 0.5)
+is_square = (sqrt_val * sqrt_val == check_num)
+print("Is 144 square:", is_square) # True
 
-_SQUARE_MASK = 0x2613
-
-def is_square(n): # type: ignore
-    if n < 0 or not (_SQUARE_MASK & (1 << (n & 15))):
-        return False
-    r = isqrt(n)
-    return r * r == n # type: ignore
-
-print("Is 144 square (Bitmask filter):", is_square(144)) # True
-print("Is 145 square (Bitmask filter):", is_square(145)) # False

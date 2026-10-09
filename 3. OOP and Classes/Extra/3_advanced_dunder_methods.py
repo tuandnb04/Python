@@ -62,6 +62,7 @@ print("Total invocations:", counter.calls)
 
 # Cho phép class sử dụng với cú pháp `with ... as ...:`
 # Tự động dọn dẹp tài nguyên (kết nối DB, lock, file) kể cả khi có ngoại lệ xảy ra.
+# (Ghi chú: Xem góc độ Quản lý ngoại lệ / Error Handling và @contextmanager tại file: 2. Error Handling/1_exceptions.py)
 
 class DatabaseSession:
     def __init__(self, db_name: str) -> None:

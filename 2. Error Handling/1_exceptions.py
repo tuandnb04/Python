@@ -112,26 +112,8 @@ except* (FileNotFoundError, TimeoutError) as e:
 
 
 # Context Managers & Cú pháp 'with': Quản lý tài nguyên an toàn (thay thế try...finally)
-# Câu lệnh 'with' tự động đảm bảo dọn dẹp tài nguyên (file, socket, timer...) ngay cả khi có lỗi.
-
-# Cách 1: Tạo Context Manager bằng Class (__enter__ và __exit__)
-class ManagedResource:
-    def __init__(self, name):
-        self.name = name
-
-    def __enter__(self):
-        print(f"[Resource] Acquiring: {self.name}")
-        return self
-
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        print(f"[Resource] Releasing: {self.name}")
-        # Trả về True nếu muốn triệt tiêu (suppress) ngoại lệ, False để tiếp tục ném lỗi
-        return False
-
-with ManagedResource("Database Connection") as res:
-    print(f"Working with {res.name}...")
-
-# Cách 2: Tạo Context Manager siêu ngắn gọn bằng @contextmanager từ thư viện contextlib
+# Câu lệnh 'with' tự động đảm bảo dọn dẹp tài nguyên (file, kết nối, timer...) ngay cả khi có lỗi.
+# Tự tạo Context Manager thuận tiện dựa trên try...finally với @contextmanager từ thư viện contextlib:
 from contextlib import contextmanager
 from collections.abc import Iterator
 

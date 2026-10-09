@@ -43,13 +43,14 @@ print("Unzipped ids:", list(ids_unzipped))
 # Xử lý khi các iterable lệch độ dài:
 extra_ids = [1, 2, 3, 4, 5]
 
-# Cách A (Python 3.10+): strict=True -> Bắt buộc bằng nhau, nếu lệch ném lỗi ValueError
-try:
-    for name, dev_id in zip(developers, extra_ids, strict=True):
-        pass
-except ValueError as error:
-    print("zip(strict=True) caught mismatched lengths:", error)
+# Mặc định: zip() tự động dừng lại ở iterable ngắn nhất (bỏ qua phần tử thừa)
+print("Default zip (stops at shortest):", list(zip(developers, extra_ids)))
+# [('Naomi', 1), ('Dario', 2), ('Jessica', 3), ('Tom', 4)]
 
-# Cách B (itertools.zip_longest): Không bỏ sót phần tử thừa, tự điền fillvalue
+# Python 3.10+: strict=True đảm bảo các iterable bắt buộc phải có cùng độ dài (báo lỗi nếu lệch)
+print("Strict zip (equal lengths):", list(zip(developers, ids, strict=True)))
+
+# itertools.zip_longest: Không bỏ sót phần tử thừa, tự điền fillvalue
 print("zip_longest:", list(zip_longest(developers, extra_ids, fillvalue='N/A')))
 # [('Naomi', 1), ('Dario', 2), ('Jessica', 3), ('Tom', 4), ('N/A', 5)]
+

@@ -1,4 +1,4 @@
-# Khái niệm Iterable: Là đối tượng có thể lặp qua từng phần tử một (List, Tuple, String, Range, Dict, Set)
+# Khái niệm Iterable: Là đối tượng có thể lặp qua từng phần tử một (List, Tuple, String, Range)
 
 # Hàm range(start, stop, step) - Tạo dãy số nguyên (chỉ có 'stop' là bắt buộc)
 # - range object là BẤT BIẾN (Immutable) và sinh số dạng lười (lazy), tiết kiệm RAM tối đa.

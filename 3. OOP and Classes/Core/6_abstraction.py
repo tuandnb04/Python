@@ -1,35 +1,38 @@
 from abc import ABC, abstractmethod
 import random
 
-# PHẦN 1: ABSTRACT CLASS CƠ BẢN (INTERFACE CHUNG)
+# PHẦN 1: ABSTRACT CLASS CƠ BẢN (INTERFACE / CONTRACT CHUNG)
+# Abstract class định nghĩa một "bản hợp đồng" (contract): mọi lớp con kế thừa
+# BẮT BUỘC phải cài đặt (override) tất cả các phương thức có gắn @abstractmethod.
 
-class Animal(ABC):  # Kế thừa từ Abstract Base Class (ABC)
-    @abstractmethod  # Đánh dấu phương thức trừu tượng
-    def make_sound(self) -> None:  # Lớp con bắt buộc phải override phương thức này
+class PaymentGateway(ABC):  # Kế thừa từ Abstract Base Class (ABC)
+    @abstractmethod
+    def pay(self, amount: float) -> str:  # Lớp con bắt buộc phải override phương thức này
         pass
 
 
-class Dog(Animal):
-    def make_sound(self) -> None:
-        print('Woof!')
+class CreditCardPayment(PaymentGateway):
+    def pay(self, amount: float) -> str:
+        return f"Processing credit card payment of ${amount:.2f}"
 
 
-class Cat(Animal):
-    def make_sound(self) -> None:
-        print('Meow!')
+class PayPalPayment(PaymentGateway):
+    def pay(self, amount: float) -> str:
+        return f"Redirecting to PayPal for checkout: ${amount:.2f}"
 
 
-class Monkey(Animal):
-    def make_sound(self) -> None:
-        print('Ooh ooh aah aah!')
+class CryptoPayment(PaymentGateway):
+    def pay(self, amount: float) -> str:
+        return f"Broadcasting transaction to blockchain: ${amount:.2f}"
 
 
-animals: list[Animal] = [Dog(), Cat(), Monkey()]
-for animal in animals:
-    animal.make_sound()
+gateways: list[PaymentGateway] = [CreditCardPayment(), PayPalPayment(), CryptoPayment()]
+for gateway in gateways:
+    print(gateway.pay(49.99))
 
 # Không thể khởi tạo trực tiếp instance từ abstract class:
-# dog = Animal() -> TypeError: Can't instantiate abstract class Animal
+# gateway = PaymentGateway() -> TypeError: Can't instantiate abstract class PaymentGateway with abstract method pay
+
 
 
 # PHẦN 2: ABSTRACT CLASS CÓ __init__ VÀ THUỘC TÍNH DÙNG CHUNG

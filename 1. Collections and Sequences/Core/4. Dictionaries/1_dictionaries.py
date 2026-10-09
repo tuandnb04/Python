@@ -78,6 +78,11 @@ def sum_three(a: int, b: int, c: int) -> int:
 nums = {'a': 2, 'b': 4, 'c': 1}
 print(sum_three(**nums))  # 7 (tương đương: sum_three(a=2, b=4, c=1))
 
+# Dict Comprehension: {key_expr: value_expr for item in iterable}
+names = ['Alice', 'Bob', 'Charlie']
+name_lengths = {name: len(name) for name in names}
+print("Dict Comprehension:", name_lengths) # {'Alice': 5, 'Bob': 3, 'Charlie': 7}
+
 # Trích xuất & Lọc Keys từ Dictionary:
 # - Lấy toàn bộ keys: list(d) hoặc [k for k in d]
 # - Lọc keys theo điều kiện value: [k for k, v in d.items() if condition]

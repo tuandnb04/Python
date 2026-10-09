@@ -24,6 +24,15 @@ print("CamelCase:", res_camel)  # 'theStealthWarrior'
 # Cắt khoảng trắng & Thay thế
 print(text.strip())                # 'hello world'
 print(s.replace('hello', 'hi'))    # 'hi world'
+print(s.replace(' ', '', 1))       # 'helloworld' (tham số count: chỉ thay thế 1 lần đầu tiên)
+
+# Xóa khoảng trắng: .replace(" ", "") vs "".join(s.split())
+# - s.replace(" ", ""): Cực nhanh (C-level), nhưng CHỈ xóa dấu cách đơn ' ' (bỏ sót \t, \n, \r)
+# - "".join(s.split()): Chuẩn Pythonic xóa MỌI loại whitespace (space, tab, newline)
+mixed_space = "Hello \t world \n !"
+print("replace(' ', ''):", mixed_space.replace(" ", ""))     # 'Hello\tworld\n!' (còn sót \t, \n)
+print("join(split()):   ", "".join(mixed_space.split()))     # 'Helloworld!' (sạch hoàn toàn whitespace)
+
 
 # Thay thế / Xóa ký tự hàng loạt với str.maketrans & str.translate (Chuẩn thực tế: làm sạch dữ liệu):
 # Tham số 1 & 2: ánh xạ từng ký tự; Tham số 3: các ký tự muốn xóa sạch
@@ -32,15 +41,11 @@ raw_input = "Hello, World! How's it going?"
 print("Clean text:", raw_input.translate(clean_table))  # "Hello World How's it going"
 
 
-# Tách (split) & Nối (join) chuỗi
-words = s.split()                  # ['hello', 'world']
+# Nối chuỗi với str.join():
+words = s.split()
 print(words)
-print('-'.join(words))             # 'hello-world'
-
-# Mẫu hình Pythonic: Biến đổi từng từ trong câu và giữ nguyên khoảng cách gốc (dùng split(' ') + generator expression):
-sentence_demo = "the of and python"
-capitalized_words = " ".join(w.capitalize() if len(w) > 2 else w for w in sentence_demo.split(" "))
-print("Pythonic word transformation:", capitalized_words) # 'the of and Python'
+print("Joined with hyphen:", "-".join(words))  # 'hello-world'
+print("Joined with comma: ", ", ".join(words))  # 'hello, world'
 
 # Tách dòng: splitlines() vs split('\n') vs split()
 poem = "Hello world\nPython code\n"
@@ -49,36 +54,33 @@ print(poem.splitlines(True))    # ['Hello world\n', 'Python code\n'] (keepends=T
 print(poem.split('\n'))         # ['Hello world', 'Python code', ''] (Thừa '' ở cuối nếu có \n)
 print(poem.split())             # ['Hello', 'world', 'Python', 'code'] (Tách theo từng từ)
 
-# Hiệu năng nối chuỗi & nhân bản ký tự (Best Practices)
-# 1. Nhân bản ký tự/chuỗi (String replication): 'c' * n (khi n <= 0 trả về chuỗi rỗng '')
+# Nhân bản ký tự / chuỗi: 'c' * n (khi n <= 0 trả về chuỗi rỗng '')
 print('x' * 3)   # 'xxx'
-print('x' * 0)   # '' (hữu ích khi kết hợp với index trong loop/comprehension)
+print('x' * 0)   # ''
 
-# 2. str.join() vs toán tử '+' (+=):
-# - Chuỗi trong Python là IMMUTABLE: Nối bằng '+=' trong vòng lặp liên tục tạo object mới -> O(N^2).
-# - Dùng str.join() gom dữ liệu trước và cấp phát bộ nhớ 1 lần duy nhất -> O(N).
-# Ví dụ thực chiến (bài toán accum: 'abcd' -> 'A-Bb-Ccc-Dddd'):
-s_sample = 'abcd'
-# c.upper() + c.lower() * i (chỉ biến đổi hoa/thường 1 ký tự, tránh gọi .capitalize() trên cả chuỗi dài)
-accum_fast = "-".join(c.upper() + c.lower() * i for i, c in enumerate(s_sample))
-print(accum_fast)  # 'A-Bb-Ccc-Dddd'
-
-# 3. Chuyển list số thành chuỗi nhanh nhất: "".join(map(str, arr))
-# map(str, arr) chạy hoàn toàn ở tầng C, nhanh hơn cả List Comprehension [str(x) for x in arr]
-digits_list = [0, 0, 0, 1]
-print("".join(map(str, digits_list)))  # '0001'
 
 
 # Tìm kiếm, Đếm & Kiểm tra tiền tố/hậu tố
 print(s.find('world'))             # 6 (trả về -1 nếu không thấy)
+
+# Cắt chuỗi theo chỉ số động từ .find(): string[:var_index]
+email = 'alice.johnson@company.com'
+print(f'Email: {email}')
+
+at_position = email.find('@')
+print(f'Position of @: {at_position}')
+
+username = email[:at_position]
+print(f'Username: {username}')
+
 print(s.count('o'))                # 2
 print(s.startswith('hello'))       # True
 print(s.endswith('world'))         # True
 print(s.endswith('N'))             # False (câu hỏi trắc nghiệm)
 
-# Đếm số lượng ký tự thuộc một tập hợp (ví dụ nguyên âm 'aeiou'):
-vowel_count = sum(s.count(v) for v in 'aeiou')
-print("Vowels count:", vowel_count)  # 3 ('e', 'o', 'o')
+# Đếm số lượng ký tự với .count():
+print("Count 'l':", s.count('l'))  # 2
+print("Count 'o':", s.count('o'))  # 2
 
 
 # Kiểm tra định dạng (isupper, islower)

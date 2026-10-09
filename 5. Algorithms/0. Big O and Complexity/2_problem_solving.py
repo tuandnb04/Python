@@ -35,7 +35,8 @@ print("Edge case (empty):", repr(reverse_slice(empty_str))) # ''
 
 # Lưu ý tối ưu hiệu năng chuỗi (String Optimization & Big O):
 # - Chuỗi (str) là immutable: cộng chuỗi dồn dập trong vòng lặp (res += char) tốn O(n^2) do phải cấp phát và sao chép lại bộ nhớ liên tục.
-# - Giải pháp tối ưu O(n): gom các ký tự vào list (list.append) rồi dùng ''.join(list), hoặc dùng generator expression bên trong ''.join().
+# - Giải pháp tối ưu O(n): gom các ký tự vào list (list.append) rồi dùng ''.join(list).
+# (Chi tiết cơ chế cấp phát bộ nhớ & đo đạc hiệu năng: xem file: 0. Python Basics/3. Strings/3_string_methods.py)
 chars = ['a', 'b', 'c', 'd']
 print("Optimized O(n):", ''.join(chars))  # 'abcd'
 
@@ -44,9 +45,9 @@ print("Optimized O(n):", ''.join(chars))  # 'abcd'
 # - Dùng 1 con trỏ (read pointer) để duyệt qua toàn bộ mảng, 1 con trỏ (write pointer) đánh dấu vị trí cần ghi đè tiếp theo.
 def move_zeros_inplace(arr: list[int | bool]) -> list[int | bool]:
     write_idx = 0
-    for read_idx in range(len(arr)):
-        if arr[read_idx] != 0 or arr[read_idx] is False:
-            arr[write_idx] = arr[read_idx]
+    for val in arr:
+        if val != 0 or val is False:
+            arr[write_idx] = val
             write_idx += 1
     while write_idx < len(arr):
         arr[write_idx] = 0
@@ -56,10 +57,11 @@ def move_zeros_inplace(arr: list[int | bool]) -> list[int | bool]:
 sample_arr: list[int | bool] = [0, 1, 0, 3, 12, False]
 print("Two Pointers (In-place O(1) Space):", move_zeros_inplace(sample_arr))
 
-# Kỹ thuật Tích lũy tổng một lần (Prefix Sum / Pivot Index / Equal Sides of Array):
+# Kỹ thuật Duy trì tổng tích lũy tức thời (Running Total / Pivot Index / Equal Sides of Array):
 # - Tìm index i sao cho sum(arr[:i]) == sum(arr[i+1:]).
 # - Tránh gọi sum() trong vòng lặp (gây O(n^2)).
-# - Tối ưu O(n) Time & O(1) Space: Tính trước total_sum = sum(arr), duy trì left_sum và suy ra right_sum.
+# - Tối ưu O(n) Time & O(1) Space: Tính trước total_sum = sum(arr), duy trì left_sum và suy ra right_sum trực tiếp.
+# (Ghi chú: Xem mẫu Mảng tiền tố Prefix Sum mảng phụ phục vụ Range Query ở Mục 2, Phần 2).
 def find_even_index(arr: list[int]) -> int:
     total_sum = sum(arr)
     left_sum = 0
@@ -147,87 +149,6 @@ def next_permutation(digits: list[int]) -> list[int] | None:
     return digits
 
 print("Next Permutation [1, 2, 4, 3]:", next_permutation([1, 2, 4, 3]))  # [1, 3, 2, 4]
-
-# Kỹ thuật Đường tắt hiệu năng (Fast-Path Optimization):
-# - Nhận diện trường hợp xuất hiện với xác suất cao nhất (common case) và xử lý bằng phép toán siêu nhanh (O(1)) trước.
-# - Ví dụ: Trong bài toán số kế tiếp, hoán vị 2 số cuối chiếm ~50% trường hợp ngẫu nhiên.
-# - Số học: Đổi chỗ chữ số hàng chục (d1) và đơn vị (d0) chỉ tốn phép tính: n + 9 * (d0 - d1)
-def next_bigger_fast_path(n: int) -> int | None:
-    d0 = n % 10
-    d1 = (n // 10) % 10
-    diff = d0 - d1
-    if diff > 0:
-        return n + 9 * diff  # Fast-path xử lý trong ~15 nanoseconds, không tốn loop hay array
-    # Logic tổng quát phía sau cho trường hợp phức tạp...
-    return None
-
-print("Fast-Path (5917 -> 5971):", next_bigger_fast_path(5917))  # 5971
-
-# Kỹ thuật Tách ghép chuỗi (String Slicing Decomposition):
-# - Ghép hoán vị kế tiếp trực tiếp trên chuỗi chỉ bằng 1 lần cấp phát bộ nhớ (Zero Array Allocation):
-# - Cấu trúc: s[:i] + s[j] + s[L-1:j:-1] + pivot + s[j-1:i:-1]
-def next_bigger_sliced(n: int) -> int:
-    s = str(n)
-    L = len(s)
-    i = L - 2
-    while i >= 0 and s[i] >= s[i + 1]:
-        i -= 1
-    if i < 0:
-        return -1
-
-    pivot = s[i]
-    j = L - 1
-    while s[j] <= pivot:
-        j -= 1
-
-    # Tái tạo chuỗi kết quả gồm 5 phần ghép lại:
-    # 1. s[:i]           : Phần đầu giữ nguyên
-    # 2. s[j]            : Ký tự nhỏ nhất lớn hơn pivot đưa lên đầu đoạn hoán vị
-    # 3. s[L-1 : j : -1] : Đoạn sau j đảo ngược
-    # 4. pivot           : Ký tự s[i] cũ đưa vào giữa
-    # 5. s[j-1 : i : -1] : Đoạn trước j đảo ngược
-    return int(s[:i] + s[j] + s[L - 1 : j : -1] + pivot + s[j - 1 : i : -1])
-
-print("String Slicing Decomposition (2017):", next_bigger_sliced(2017))  # 2071
-
-
-# Hoán vị kế tiếp nhỏ hơn (Next Smaller Permutation) & Bẫy số 0 đứng đầu (Leading Zero):
-# - Tìm số nhỏ hơn lớn nhất có cùng các chữ số, nhưng KHÔNG được phép có số 0 ở đầu (ví dụ: 1027 -> -1).
-def next_smaller(n: int) -> int:
-    if n < 21:
-        return -1
-
-    # Fast-path 2 chữ số cuối
-    d0 = n % 10
-    n1 = n // 10
-    d1 = n1 % 10
-    diff = d1 - d0
-    if diff > 0:
-        if d0 or n1 > 9:
-            return n - 9 * diff
-        return -1
-
-    s = str(n)
-    L = len(s)
-    i = L - 3
-    while i >= 0 and s[i] <= s[i + 1]:
-        i -= 1
-    if i < 0:
-        return -1
-
-    pivot = s[i]
-    j = L - 1
-    while s[j] >= pivot:
-        j -= 1
-
-    # Chặn số 0 đứng đầu
-    if i == 0 and s[j] == '0':
-        return -1
-
-    return int(s[:i] + s[j] + s[L - 1 : j : -1] + pivot + s[j - 1 : i : -1])
-
-print("Next Smaller (2071):", next_smaller(2071))  # 2017
-print("Next Smaller with Leading Zero (1027):", next_smaller(1027))  # -1
 
 
 # PHẦN 2: CÁC MẪU GIẢI THUẬT KINH ĐIỂN (CLASSIC ALGORITHMIC PATTERNS)

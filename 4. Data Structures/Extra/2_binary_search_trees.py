@@ -1,8 +1,26 @@
-# Custom Binary Search Tree - BST (Cây tìm kiếm nhị phân tự cài đặt bằng Node)
-# - Quy tắc BST:
+# TREE & BINARY SEARCH TREE (CÂY & CÂY TÌM KIẾM NHỊ PHÂN)
+#
+# 1. CÁC KHÁI NIỆM & THUẬT NGỮ CƠ BẢN VỀ CÂY (TREE TERMINOLOGY):
+# - Định nghĩa: Cây là một đồ thị đặc biệt: liên thông (connected) và KHÔNG có chu trình (acyclic / no loops).
+# - Root (Gốc): Node trên cùng, không có cha. Điểm bắt đầu để truy cập và duyệt cây.
+# - Parent / Child / Sibling: Node cha / Node con / Node anh em (cùng cha).
+# - Leaf (Lá): Node ở cuối cành, không có con (bậc = 0).
+# - Subtree (Cây con): Một nhánh của cây tự bản thân nó cũng tạo thành một cây độc lập.
+# - Depth (Độ sâu của node): Khoảng cách (số cạnh) từ Root đến node đó.
+# - Height (Chiều cao của node): Đường đi dài nhất từ node đó xuống node lá.
+#   -> Chiều cao của cây = Chiều cao của node Root.
+# - Degree (Bậc của node): Số node con của node đó.
+#
+# 2. CÂY NHỊ PHÂN & CÂY TÌM KIẾM NHỊ PHÂN (BST):
+# - Binary Tree: Mỗi node có TỐI ĐA 2 con (trái và phải).
+# - Binary Search Tree (BST):
 #    - Mọi node ở cây con bên trái (left subtree) có giá trị < node gốc
 #    - Mọi node ở cây con bên phải (right subtree) có giá trị > node gốc
-# - Ứng dụng: Thao tác tìm kiếm, chèn, xóa trung bình O(log n)
+#    - Cả 2 cây con trái và phải cũng phải là cây BST
+# - Balanced Tree (Cây cân bằng - AVL, Red-Black Tree):
+#    - Đảm bảo độ cao 2 cây con cân đối, giúp tìm kiếm/chèn/xóa đạt O(log n),
+#      tránh trường hợp cây bị lệch (thoái hóa) thành danh sách liên kết O(n).
+
 
 class BSTNode:
     def __init__(self, val):

@@ -18,31 +18,33 @@ print(3 == 4)  # type: ignore # False
 print(3 != 4)  # type: ignore # True
 print(3 <= 4)  # True
 
-# Lưu ý: bool là lớp con của int trong Python (issubclass(bool, int) -> True)
-# Do đó: False == 0 và True == 1 đều là True.
-# Để phân biệt chính xác False với 0, cần dùng identity: `x is False` hoặc `type(x) is bool`.
+# Lưu ý về so sánh Boolean và Số nguyên:
+# Trong Python, False == 0 và True == 1 đều là True khi so sánh giá trị.
+# Để phân biệt chính xác False với 0, ta dùng toán tử identity 'is' hoặc kiểm tra 'type(x) is bool':
 val = 0
-print(issubclass(bool, int))  # type: ignore # True
 print(False == val, True == 1)  # type: ignore # True True
-print(False is val)  # type: ignore # False (so sánh identity: False và 0 trỏ tới 2 đối tượng khác nhau)
+print(False is val)  # type: ignore # False (False và 0 là hai đối tượng khác nhau)
 print(type(False) is bool)  # True
 
-# Mẹo Pythonic: Đếm số điều kiện thỏa mãn nhanh nhất bằng cộng Boolean (True == 1, False == 0):
+# Mẹo Pythonic: Đếm số điều kiện thỏa mãn bằng cộng Boolean (True tương đương 1, False tương đương 0):
 # Ví dụ kiểm tra có đúng 2 trong 3 số là số dương:
 a, b, c = 5, -2, 3
 is_two_positive = (a > 0) + (b > 0) + (c > 0) == 2
 print("Are exactly two positive:", is_two_positive)  # True
 
-# Phân biệt isinstance() vs type() is Class (Bẫy lọc kiểu dữ liệu):
-# - isinstance(x, int): Chấp nhận cả lớp con kế thừa (nên isinstance(True, int) -> True).
-# - type(x) is int: Kiểm tra chính xác kiểu dữ liệu, loại bỏ lớp con (type(True) is int -> False).
-print("isinstance(True, int):", isinstance(True, int))  # True (nguy cơ nhận nhầm bool là int)
-print("type(True) is int:    ", type(True) is int)  # False (chính xác int thuần túy)
+# Phân biệt isinstance() vs type() is (Kiểm tra kiểu dữ liệu):
+# - isinstance(True, int) trả về True vì bool được coi như dạng số nguyên trong Python.
+# - type(True) is int trả về False vì kiểm tra chính xác kiểu dữ liệu thuần túy.
+print("isinstance(True, int):", isinstance(True, int))  # True
+print("type(True) is int:    ", type(True) is int)  # False (chính xác kiểu số nguyên)
 
-# Ứng dụng: Lọc danh sách chỉ lấy số nguyên, loại bỏ boolean và chuỗi:
-mixed_list = [1, 'a', 'b', 0, 15, False, True]
-integers_only = [x for x in mixed_list if type(x) is int]
-print("Integers only:", integers_only)  # [1, 0, 15] (False và True bị loại bỏ an toàn)
+# Kiểm tra an toàn trước khi xử lý (không nhầm lẫn True/False với 1/0):
+test_val = True
+if type(test_val) is int:
+    print("Exact integer:", test_val)
+else:
+    print("Not an integer (type is bool or other):", type(test_val).__name__)
+
 
 # Câu lệnh điều kiện if - elif - else & từ khóa pass
 age = 12
@@ -107,3 +109,26 @@ match score:
         print("Grade: C")
     case _:
         print("Grade: F")
+
+# Khớp mẫu với nhiều giá trị (OR pattern với '|')
+day = "Saturday"
+
+match day:
+    case "Saturday" | "Sunday":
+        print("Weekend")
+    case "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday":
+        print("Weekday")
+    case _:
+        print("Unknown day")
+
+# Khớp mẫu kết hợp gán biến (as pattern)
+role = "admin"
+
+match role:
+    case "admin" | "superuser" as privileged_role:
+        print(f"Privileged access granted for: {privileged_role}")
+    case "guest":
+        print("Guest access only")
+    case _:
+        print("Standard user access")
+

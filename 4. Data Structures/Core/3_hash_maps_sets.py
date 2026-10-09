@@ -45,8 +45,6 @@ my_set.add(5)                             # Add O(1) avg
 my_set.remove(2)                          # Remove O(1) avg
 print("5 in set (O(1)):", 5 in my_set)    # True
 
-# Các phép toán đại số tập hợp tối ưu
-s1, s2 = {1, 2, 3}, {3, 4, 5}
-print("Union (|):", s1 | s2)              # {1, 2, 3, 4, 5}
-print("Intersection (&):", s1 & s2)       # {3}
-print("Difference (-):", s1 - s2)         # {1, 2}
+# Ghi chú: Chi tiết các phép toán đại số tập hợp (| Union, & Intersection, - Difference)
+# tham khảo tại: 1. Collections and Sequences/Core/5. Sets/1_sets.py
+

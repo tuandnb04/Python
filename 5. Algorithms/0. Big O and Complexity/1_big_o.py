@@ -31,13 +31,41 @@ def count_pairs(n):
 
 print("O(n^2) operations for n=3:", count_pairs(3)) # 9 operations
 
+# O(2^n) - Exponential Time: Đệ quy phân nhánh (VD: Bài toán Tháp Hà Nội - Tower of Hanoi)
+# Số bước di chuyển tăng gấp đôi mỗi khi n tăng thêm 1 đĩa: T(n) = 2^n - 1 bước
+def hanoi_solver(n: int) -> str:
+    """
+    Giải bài toán Tháp Hà Nội và ghi lại toàn bộ trạng thái của 3 cọc.
+    - Time complexity: O(n * 2^n) do mỗi bước chuyển đĩa tốn O(n) để ghi snapshot trạng thái.
+      (Nếu chỉ di chuyển đĩa thuần túy: O(2^n) thao tác).
+    - Space complexity: O(n * 2^n) để lưu history; độ sâu ngăn xếp đệ quy (Call Stack) là O(n).
+    """
+    rods: list[list[int]] = [list(range(n, 0, -1)), [], []]
+    history: list[str] = []
+
+    def record() -> None:
+        history.append(" ".join(str(r) for r in rods))
+
+    def solve(k: int, src: int, dst: int, aux: int) -> None:
+        if k > 0:
+            solve(k - 1, src, aux, dst)
+            rods[dst].append(rods[src].pop())
+            record()
+            solve(k - 1, aux, dst, src)
+
+    record()
+    solve(n, 0, 2, 1)
+    return "\n".join(history)
+
+print("O(2^n) Hanoi Solver (n=2):\n" + hanoi_solver(2))
+
 # Tóm tắt các cấp độ Big O (từ nhanh nhất đến chậm nhất):
 # - O(1)       : Constant Time (Truy cập phần tử, so sánh cơ bản)
 # - O(log n)   : Logarithmic Time (Tăng rất chậm vì loại bỏ 1/2 không gian bài toán sau mỗi bước - VD: Binary Search)
 # - O(n)       : Linear Time (1 vòng lặp duyệt mảng tỉ lệ thuận với n)
 # - O(n log n) : Log-Linear Time (Thuật toán sắp xếp hiệu quả: Merge Sort, Quick Sort, Timsort)
 # - O(n^2)     : Quadratic Time (2 vòng lặp lồng nhau, kém hiệu quả khi n lớn)
-# - O(2^n)     : Exponential Time (Đệ quy nhánh - Fibonacci ngây thơ)
+# - O(2^n)     : Exponential Time (Đệ quy nhánh - Tower of Hanoi, Fibonacci ngây thơ)
 # - O(n!)      : Factorial Time (Sinh hoán vị, không khả thi trong thực tế khi n lớn)
 #
 # SO SÁNH TRỰC QUAN TRÊN ĐỒ THỊ (COMPLEXITY GRAPH):

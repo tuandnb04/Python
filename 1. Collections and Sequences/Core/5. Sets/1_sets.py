@@ -79,7 +79,8 @@ s_lower = text_sample.lower()
 dup_count = sum(s_lower.count(char) > 1 for char in set(s_lower))
 print(f"Duplicates count in '{text_sample}':", dup_count)  # 1 ('i' occurs 6 times)
 
-
-
-
+# Set Comprehension: {expression for item in iterable} (Tự động loại bỏ trùng lặp)
+duplicate_numbers = [1, 2, 2, 3, 4, 4, 4, 5]
+unique_squares = {x ** 2 for x in duplicate_numbers}
+print("Set Comprehension:", sorted(unique_squares))  # [1, 4, 9, 16, 25]
 

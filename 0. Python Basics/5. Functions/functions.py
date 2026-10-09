@@ -1,7 +1,4 @@
 # Định nghĩa hàm (def) & Thụt lề (Indentation)
-from unittest import result
-
-
 def hello() -> None:
     print('Hello World')
 
@@ -13,7 +10,7 @@ def print_sum(a: int, b: int) -> None:
 
 # Từ khóa return vs Giá trị mặc định None (NoneType)
 # Hàm chỉ print() mà không có return thì mặc định trả về None
-print_sum(3, 1)
+result = print_sum(3, 1)
 print("Result:", result)              # Result: None
 
 # Dùng return để trả kết quả về biến lưu trữ
@@ -58,13 +55,66 @@ print("divide(10, 2):", divide(10, 2)) # 5.0
 print("divide(10, 0):", divide(10, 0)) # None
 
 
-# Scope (Phạm vi truy cập): Global Scope vs Local Scope
+# Scope & Variable Binding: Global vs Local vs Nonlocal
 tax_rate: float = 0.1                 # Biến toàn cục (Global Scope)
+
+def update_tax_rate(new_rate: float) -> None:
+    global tax_rate                   # Từ khóa 'global': cho phép sửa đổi biến ngoài scope
+    tax_rate = new_rate
 
 def calculate_tax(price: float) -> float:
     tax: float = price * tax_rate     # price và tax là biến cục bộ (Local Scope)
     return tax
 
 print("Tax (50$):", calculate_tax(50.0)) # 5.0
-print("Tax rate:", tax_rate)             # 0.1
-# print(tax)                             # NameError: Không thể truy cập biến local từ bên ngoài
+update_tax_rate(0.15)
+print("New Tax rate:", tax_rate)         # 0.15
+print("Tax after update:", calculate_tax(50.0)) # 7.5
+
+# CƠ CHẾ TRUYỀN ĐỐI SỐ: Pass-by-assignment & Variable Shadowing
+# - Với kiểu Immutable (int, float, str, bool): Gán lại tham số bên trong hàm chỉ làm trỏ biến local sang object mới,
+#   không làm đổi biến gốc bên ngoài. Muốn cập nhật ra ngoài, caller BẮT BUỘC phải gán lại giá trị trả về: x = func(x).
+# - Tên tham số trùng tên biến ngoài scope sẽ che khuất biến ngoài đó (Variable Shadowing).
+
+
+# Closure & từ khóa 'nonlocal' (can thiệp biến của hàm bao bọc)
+def create_counter(start: int = 0):
+    count = start
+    def step() -> int:
+        nonlocal count                # 'nonlocal': sửa đổi biến của hàm cha ngoài frame hiện tại
+        count += 1
+        return count
+    return step
+
+counter = create_counter(10)
+print("Counter call 1:", counter())   # 11
+print("Counter call 2:", counter())   # 12
+
+
+# Generic Functions với cú pháp Type Parameter [T] (Python 3.12+ PEP 695)
+# Thay thế hoàn toàn cách dùng TypeVar cũ từ thư viện 'typing'
+def identity[T](value: T) -> T:
+    """Hàm generic: Giữ nguyên kiểu dữ liệu của tham số truyền vào."""
+    return value
+
+def choose_first[T](first: T, second: T) -> T:
+    """Hàm generic: Nhận hai giá trị cùng kiểu và chọn giá trị đầu tiên."""
+    return first
+
+print("Generic identity (int):", identity(42))            # 42
+print("Generic identity (str):", identity("Hello"))       # Hello
+print("Generic choose_first:", choose_first(100, 200))    # 100
+
+
+# Đối số tùy biến số lượng: *args & **kwargs
+def make_label(prefix: str, *tags: str, sep: str = " | ") -> str:
+    """*tags thu thập các đối số vị trí tùy biến."""
+    return prefix + sep + sep.join(tags)
+
+print(make_label("Report", "2026", "Q1", "Draft"))        # Report | 2026 | Q1 | Draft
+
+def log_event(event_name: str, **attributes: str) -> None:
+    """**attributes thu thập các đối số từ khóa tùy biến."""
+    print(f"Event: {event_name}, attribute count: {len(attributes)}")
+
+log_event("LOGIN", user="Alice", status="SUCCESS")

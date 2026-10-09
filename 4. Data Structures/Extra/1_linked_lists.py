@@ -1,10 +1,8 @@
 # Custom Linked Lists (Danh sách liên kết tự cài đặt bằng Node con trỏ)
 # - Đặc tính: Cấu trúc dữ liệu tuyến tính kích thước động (dynamic), các node kết nối qua tham chiếu (reference).
-# - Ứng dụng: Nền tảng xây dựng Stacks, Queues, Deques và danh sách kề trong duyệt đồ thị (BFS / DFS).
+# - Ứng dụng: Nền tảng xây dựng Stacks, Queues, Deques và danh sách kề của đồ thị.
 # - Chi phí bộ nhớ (Space): Mọi thao tác chèn / xóa đều đạt O(1) auxiliary space (không cần dịch chuyển mảng như Array).
 # - Trong thực tế dự án Python, ưu tiên dùng 'collections.deque' hoặc 'list' có sẵn với hiệu năng C vượt trội.
-
-from __future__ import annotations
 
 # 1. Singly Linked List (Cài đặt dạng OOP Inner-Class: Node lồng bên trong LinkedList)
 class LinkedList:

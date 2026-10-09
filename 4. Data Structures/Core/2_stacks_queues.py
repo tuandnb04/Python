@@ -23,6 +23,9 @@ print("Queue front (peek):", queue[0]) # Alice
 print("Queue dequeue (FIFO):", queue.popleft()) # Alice (lấy ra phần tử đầu hàng)
 print("Remaining queue:", list(queue)) # ['Bob', 'Charlie']
 
-# Ghi chú: Để xem cách tự xây dựng Class Generic Stack & Queue theo hướng đối tượng (OOP),
-# vui lòng tham khảo file: 4. Data Structures/Extra/4_custom_stack_queue.py
+# Ghi chú:
+# - Xem cách tự xây dựng Class Generic Stack & Queue theo hướng đối tượng (OOP):
+#   tham khảo file: 4. Data Structures/Extra/4_custom_stack_queue.py
+# - Xem ứng dụng thực tế của Stack trong cơ chế Call Stack của Đệ quy (Recursion):
+#   tham khảo file: 4. Data Structures/Extra/6_recursion_call_stack.py
 
