@@ -1,4 +1,113 @@
-# Special / Dunder Methods (__name__): Phương thức đặc biệt tự động gọi khi dùng toán tử hoặc hàm built-in
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
++# Special / Dunder Methods (__name__): Phương thức đặc biệt tự động gọi khi dùng toán tử hoặc hàm built-in
 
 # Ví dụ Class Book: __len__, __str__, __repr__, __eq__
 class Book:
@@ -41,13 +150,13 @@ book1 = Book("Built Wealth Like a Boss", 420)
 book2 = Book("Be Your Own Start", 420)
 book3 = Book("Python Clean Code", 350)
 
-print(len(book1))        # 420 (gọi ngầm book1.__len__())
-print(len(book2))        # 420
-print(str(book1))        # 'Built Wealth Like a Boss' has 420 pages (gọi ngầm book1.__str__())
-print(str(book2))        # 'Be Your Own Start' has 420 pages
-print(repr(book1))       # Book('Built Wealth Like a Boss', 420) (gọi ngầm book1.__repr__())
-print(eval(repr(book1)) == book1) # True (tái tạo lại chính đối tượng từ chuỗi repr)
-print(book1 == book2)    # True (gọi ngầm book1.__eq__(book2))
+print(len(book1))  # 420 (gọi ngầm book1.__len__())
+print(len(book2))  # 420
+print(str(book1))  # 'Built Wealth Like a Boss' has 420 pages (gọi ngầm book1.__str__())
+print(str(book2))  # 'Be Your Own Start' has 420 pages
+print(repr(book1))  # Book('Built Wealth Like a Boss', 420) (gọi ngầm book1.__repr__())
+print(eval(repr(book1)) == book1)  # True (tái tạo lại chính đối tượng từ chuỗi repr)
+print(book1 == book2)  # True (gọi ngầm book1.__eq__(book2))
 
 # So sánh và sắp xếp (__lt__):
 print("book3 < book1:", book3 < book1)  # True (350 < 420)
@@ -101,19 +210,16 @@ cart.add('Monitor')
 
 # Duyệt từng phần tử trong giỏ (gọi ngầm cart.__iter__())
 for item in cart:
-    print(item, end=' ') # Laptop Wireless mouse Ergo keyboard Monitor
+    print(item, end=' ')  # Laptop Wireless mouse Ergo keyboard Monitor
 print()
 
-print(len(cart))          # 4 (gọi ngầm cart.__len__())
-print(cart[3])            # Monitor (gọi ngầm cart.__getitem__(3))
+print(len(cart))  # 4 (gọi ngầm cart.__len__())
+print(cart[3])  # Monitor (gọi ngầm cart.__getitem__(3))
 
 print('Monitor' in cart)  # True (gọi ngầm cart.__contains__('Monitor'))
-print('banana' in cart)   # False
+print('banana' in cart)  # False
 
 cart.remove('Ergo keyboard')
 print(cart.list_items())  # ['Laptop', 'Wireless mouse', 'Monitor']
 
-cart.remove('banana')     # banana is not in cart
-
-
-
+cart.remove('banana')  # banana is not in cart

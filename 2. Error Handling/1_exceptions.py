@@ -9,7 +9,7 @@ except NameError as e:
 
 # - TypeError: Phép toán sai kiểu dữ liệu
 try:
-    result = 5 + "5" # type: ignore
+    result = 5 + "5"  # type: ignore
 except TypeError as e:
     print(f"TypeError: {e}")
 
@@ -30,7 +30,7 @@ except KeyError as e:
 # - AttributeError: Gọi thuộc tính không tồn tại
 try:
     num = 42
-    num.append(5) # type: ignore
+    num.append(5)  # type: ignore
 except AttributeError as e:
     print(f"AttributeError: {e}")
 
@@ -46,18 +46,18 @@ try:
 except ZeroDivisionError:
     print("You can't divide by zero!")
 
-# Triết lý Pythonic: EAFP vs LBYL & Zero-cost Exception (Python 3.11+)
-# - LBYL (Look Before You Leap): Dùng if kiểm tra trước -> Tốn chi phí rẽ nhánh ở MỌI lần gọi.
-# - EAFP (Easier to Ask for Forgiveness): Cứ thực hiện trong try, bắt ngoại lệ nếu xảy ra.
-# Từ Python 3.11+, khối try là Zero-cost Exception (0 overhead khi chạy đúng).
+
+# Phong cách EAFP (Easier to Ask for Forgiveness) vs LBYL:
+# Thực hiện thao tác trong khối try và bắt ngoại lệ thay vì if-else kiểm tra trước:
 def find_average(numbers: list[int | float]) -> float:
     try:
         return sum(numbers) / len(numbers)
     except ZeroDivisionError:
         return 0
 
+
 print("Average [10, 20, 30]:", find_average([10, 20, 30]))  # 20.0
-print("Average empty list:", find_average([]))              # 0 (ZeroDivisionError an toàn)
+print("Average empty list:", find_average([]))  # 0 (ZeroDivisionError an toàn)
 
 # Ví dụ 2: Đầy đủ try - except - else - finally
 try:
@@ -92,7 +92,8 @@ try:
 except (ValueError, ZeroDivisionError) as e:
     print(f"Error occurred: {e}")
 
-# ExceptionGroup & except* (Python 3.11+ PEP 654)
+
+# ExceptionGroup & except* (bắt nhóm ngoại lệ):
 # Bắt nhiều lỗi đồng thời khi chạy tác vụ song song
 def simulate_concurrent_tasks():
     errors = [
@@ -102,6 +103,7 @@ def simulate_concurrent_tasks():
     ]
     raise ExceptionGroup("Multiple pipeline errors occurred", errors)
 
+
 try:
     simulate_concurrent_tasks()
 except* ValueError as e:
@@ -110,23 +112,21 @@ except* (FileNotFoundError, TimeoutError) as e:
     print("Caught File/Network error group:", e.exceptions)
 
 
-
 # Context Managers & Cú pháp 'with': Quản lý tài nguyên an toàn (thay thế try...finally)
 # Câu lệnh 'with' tự động đảm bảo dọn dẹp tài nguyên (file, kết nối, timer...) ngay cả khi có lỗi.
-# Tự tạo Context Manager thuận tiện dựa trên try...finally với @contextmanager từ thư viện contextlib:
-from contextlib import contextmanager
-from collections.abc import Iterator
+# Tự định nghĩa Context Manager thuần bằng class (__enter__ & __exit__) không cần import:
+class ManagedResource:
+    def __init__(self, name: str) -> None:
+        self.name = name
 
-@contextmanager
-def timer_scope(task_name: str) -> Iterator[None]:
-    import time
-    start = time.perf_counter()
-    print(f"\n[Timer] Bat dau task: '{task_name}'")
-    try:
-        yield
-    finally:
-        elapsed = (time.perf_counter() - start) * 1000
-        print(f"[Timer] Task '{task_name}' hoan thanh trong {elapsed:.2f} ms")
+    def __enter__(self):
+        print(f"\n[Acquire] Resource '{self.name}' acquired successfully.")
+        return self
 
-with timer_scope("Processing items"):
-    _ = sum(i * i for i in range(100_000))
+    def __exit__(self, exc_type, exc_val, exc_tb) -> bool:
+        print(f"[Release] Resource '{self.name}' released safely.")
+        return False
+
+
+with ManagedResource("DatabaseConnection"):
+    print("  Executing safe operations inside with-block...")

@@ -30,14 +30,14 @@ class CustomList:
 
 
 cl = CustomList(["Python", "Rust", "Go"])
-print("cl[1]:", cl[1])               # Rust
+print("cl[1]:", cl[1])  # Rust
 print("Is 'Python' in cl?", "Python" in cl)  # True
 
 cl[1] = "TypeScript"
-print("After updating cl[1]:", cl[1])   # TypeScript
+print("After updating cl[1]:", cl[1])  # TypeScript
 
 del cl[0]
-print("After deleting cl[0], length is:", len(cl))      # 2
+print("After deleting cl[0], length is:", len(cl))  # 2
 
 
 # __call__ cho phép đối tượng instance có thể được gọi như một function: obj()
@@ -62,7 +62,6 @@ print("Total invocations:", counter.calls)
 
 # Cho phép class sử dụng với cú pháp `with ... as ...:`
 # Tự động dọn dẹp tài nguyên (kết nối DB, lock, file) kể cả khi có ngoại lệ xảy ra.
-# (Ghi chú: Xem góc độ Quản lý ngoại lệ / Error Handling và @contextmanager tại file: 2. Error Handling/1_exceptions.py)
 
 class DatabaseSession:
     def __init__(self, db_name: str) -> None:

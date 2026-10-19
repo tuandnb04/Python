@@ -34,7 +34,7 @@ acct_one.deposit(50)
 print("Wallet balance:", acct_one.get_balance())  # 53
 
 
-# PHẦN 2: GETTER, SETTER VÀ DELETER VỚI @property (PYTHONIC ENCAPSULATION)
+# PHẦN 2: GETTER, SETTER VÀ DELETER VỚI @property
 # QUY TẮC VỀ GETTER & SETTER TRONG PYTHON (@property):
 # 1. Cả Getter và Setter đều KHÔNG bắt buộc phải có.
 #    - Chỉ có Getter (không Setter): Thuộc tính chỉ đọc (Read-only), như ví dụ `area` bên dưới.
@@ -73,11 +73,11 @@ class Circle:
 
 my_circle = Circle(5)
 print("Initial radius:", my_circle.radius)  # Initial radius: 5
-print("Initial area:", my_circle.area)      # Initial area: 78.5
+print("Initial area:", my_circle.area)  # Initial area: 78.5
 
 my_circle.radius = 8
 print("After modifying radius:", my_circle.radius)  # After modifying radius: 8
-print("After modifying area:", my_circle.area)      # 200.96
+print("After modifying area:", my_circle.area)  # 200.96
 
 del my_circle.radius  # Deleting radius...
 try:

@@ -14,9 +14,10 @@ class Animal:
 class SimpleDog(Animal):
     bark = 'woof! woof!! woof!!!'
 
+
 jack = SimpleDog('Jack')
 print(jack.sound())  # Jack makes a sound
-print(jack.bark)     # woof! woof!! woof!!!
+print(jack.bark)  # woof! woof!! woof!!!
 
 
 # 2. Ghi đè phương thức (Method Overriding)
@@ -25,6 +26,7 @@ class OverridingDog(Animal):
 
     def sound(self) -> str:
         return f'{self.name} barks {self.bark}'
+
 
 max_dog = OverridingDog('Max')
 print(max_dog.sound())  # Max barks woof! woof!! woof!!!
@@ -37,6 +39,7 @@ class Dog(Animal):
     def sound(self) -> str:
         base = super().sound()
         return f'{base}, then {self.name} barks {self.bark}'
+
 
 buddy = Dog('Buddy')
 print(buddy.sound())  # Buddy makes a sound, then Buddy barks woof! woof!! woof!!!
@@ -79,22 +82,28 @@ class A:
     def greet(self) -> str:
         return "Greeting from A"
 
+
 class B(A):
     def greet(self) -> str:
         return "Greeting from B"
+
 
 class C(A):
     def greet(self) -> str:
         return "Greeting from C"
 
+
 class D(B, C):
     pass
+
 
 d = D()
 print("d.greet() output:", d.greet())  # Kết quả: "Greeting from B" (vì B đứng trước C)
 
 # Xem thứ tự tìm kiếm phương thức qua MRO:
 print("MRO for class D:", [cls.__name__ for cls in D.mro()])
+
+
 # Thứ tự: D -> B -> C -> A -> object
 
 
@@ -130,7 +139,7 @@ class Car:
     def __init__(self, brand: str, horsepower: int) -> None:
         self.brand = brand
         self.engine = Engine(horsepower)  # Composition
-        self.gps = GPS()                  # Composition
+        self.gps = GPS()  # Composition
 
     def drive(self) -> None:
         print(f"Starting {self.brand}:")

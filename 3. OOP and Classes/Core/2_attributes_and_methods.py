@@ -4,9 +4,6 @@
 # 3. Static Method (@staticmethod): Hàm tiện ích độc lập được gom chung vào namespace của class.
 # 4. Class Variable vs Instance Variable: Biến chia sẻ chung cho mọi instance vs Biến riêng của từng instance.
 
-from datetime import date
-from typing import Self
-
 
 class User:
     # CLASS VARIABLE: Chia sẻ chung cho TOÀN BỘ các instances tạo từ User
@@ -26,15 +23,15 @@ class User:
     def is_adult(self) -> bool:
         return self.age >= User.minimum_age
 
-    # 2. Class Method: Nhận `cls`, dùng làm Alternative Constructor (Python 3.11+ dùng typing.Self)
+    # 2. Class Method: Nhận `cls`, dùng làm Alternative Constructor
     @classmethod
-    def from_birth_year(cls, name: str, birth_year: int) -> Self:
-        current_year = date.today().year
+    def from_birth_year(cls, name: str, birth_year: int) -> 'User':
+        current_year = 2026
         calculated_age = current_year - birth_year
         return cls(name, calculated_age)
 
     @classmethod
-    def from_dict(cls, data: dict) -> Self:
+    def from_dict(cls, data: dict) -> 'User':
         return cls(name=data["name"], age=data["age"])
 
     # 3. Static Method: Tiện ích độc lập, không nhận self hay cls
@@ -56,4 +53,4 @@ print("Total registered users now:", User.total_users)  # 3
 
 # Kiểm tra static method:
 print("Is 'John123' valid?", User.is_valid_name("John123"))  # False
-print("Is 'Emily' valid?", User.is_valid_name("Emily"))      # True
+print("Is 'Emily' valid?", User.is_valid_name("Emily"))  # True

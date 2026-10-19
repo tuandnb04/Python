@@ -11,6 +11,7 @@ class Example:
         self._internal = internal
         self.__private = private
 
+
 example = Example(
     'I can be accessed from outside the class, but should not',
     'I cannot be accessed directly from outside the class'
@@ -18,7 +19,7 @@ example = Example(
 
 print(example._internal)
 # Truy cập trực tiếp qua tên mới sau khi mangled:
-print(example._Example__private) # type: ignore
+print(example._Example__private)  # type: ignore
 print("Attributes dictionary:", example.__dict__)
 
 
@@ -27,13 +28,17 @@ class Parent:
     def __init__(self) -> None:
         self.__data: str = "Parent data"
 
+
 class Child(Parent):
     def __init__(self) -> None:
         super().__init__()
         self.__data: str = "Child data"
 
+
 c = Child()
 print("Attributes with name mangling:", c.__dict__)
+
+
 # Cả dữ liệu của cha và con đều được lưu độc lập, không bị đè:
 # {'_Parent__data': 'Parent data', '_Child__data': 'Child data'}
 
@@ -43,10 +48,12 @@ class UnsafeParent:
     def __init__(self) -> None:
         self.data: str = "Parent data"
 
+
 class UnsafeChild(UnsafeParent):
     def __init__(self) -> None:
         super().__init__()
         self.data: str = "Child data"
+
 
 unsafe_c = UnsafeChild()
 print("Without name mangling (parent data overwritten):", unsafe_c.__dict__)  # {'data': 'Child data'}
@@ -76,7 +83,7 @@ print("StrictWallet balance:", wallet.balance)
 
 # Thử gán thêm thuộc tính lạ không có trong __slots__:
 try:
-    wallet.hack_attr = "Unauthorized" # type: ignore
+    wallet.hack_attr = "Unauthorized"  # type: ignore
 except AttributeError as e:
     print("Slots error when assigning unauthorized attribute:", e)
 
@@ -100,13 +107,13 @@ print("Account owner:", account.owner)
 
 # Thử thay đổi số dư -> BỊ CHẶN
 try:
-    account.balance = 9999.0 # type: ignore
+    account.balance = 9999.0  # type: ignore
 except Exception as e:
     print("Error when mutating frozen object:", type(e).__name__, "-", e)
 
 # Thử thêm thuộc tính mới -> BỊ CHẶN
 try:
-    account.note = "VIP" # type: ignore
+    account.note = "VIP"  # type: ignore
 except Exception as e:
     print("Error when adding new attribute to slotted object:", type(e).__name__, "-", e)
 

@@ -1,11 +1,11 @@
 """
-CÁC KỸ THUẬT DEBUGGING TRONG PYTHON (TỪ CƠ BẢN ĐẾN HIỆN ĐẠI)
+CÁC KỸ THUẬT DEBUGGING TRONG PYTHON
 
 1. print() & f-strings (Debug nhanh, xem biến và luồng thực thi)
-2. breakpoint() tích hợp (Python 3.7+ PEP 553 - Thay thế pdb.set_trace())
+2. breakpoint() tích hợp
 3. Module pdb (Interactive Debugger)
 4. Công cụ IDE Debugger (VS Code / PyCharm: Breakpoints, Step Over/Into/Out)
-5. Module logging (Chuẩn công nghiệp thay thế print)
+5. Module logging
 6. Module traceback (Trích xuất & hiển thị chi tiết stack trace)
 """
 
@@ -13,16 +13,18 @@ import sys
 import logging
 import traceback
 
+
 # DÙNG PRINT() VÀ F-STRINGS (Kỹ thuật debug nhanh & đơn giản nhất)
 def add(a, b):
     result = a + b
     print(f"[DEBUG] Input: a={a}, b={b}, result={result}")
     return result
 
+
 add(10, 5)
 
 
-# HÀM breakpoint() CÓ SẴN (Python 3.7+ - Chuẩn hiện đại thay thế pdb)
+# HÀM breakpoint() CÓ SẴN
 # - Không cần gõ `import pdb; pdb.set_trace()`.
 # - Tự động mở interactive debugger khi chạy đến dòng này.
 # - Trong môi trường Production, có thể tắt toàn bộ breakpoint() bằng cách đặt:
@@ -34,8 +36,8 @@ def process_data(items):
         total += item
     return total
 
-print("Total:", process_data([1, 2, 3]))
 
+print("Total:", process_data([1, 2, 3]))
 
 # DEBUG TRỰC QUAN BẰNG CÔNG CỤ IDE (VS Code / PyCharm Visual Debugger)
 # - Breakpoints (F9): Đặt điểm dừng tại dòng cần kiểm tra (chấm đỏ ở lề trái)
@@ -56,6 +58,7 @@ logging.basicConfig(
     datefmt="%H:%M:%S"
 )
 
+
 def divide_numbers(a, b):
     logging.debug(f"Calling divide_numbers(a={a}, b={b})")
     try:
@@ -67,6 +70,7 @@ def divide_numbers(a, b):
         logging.exception("ZeroDivisionError encountered!")
         return None
 
+
 divide_numbers(10, 2)
 divide_numbers(10, 0)
 
@@ -75,15 +79,16 @@ divide_numbers(10, 0)
 def buggy_function():
     return 1 / 0
 
+
 def caller():
     buggy_function()
+
 
 try:
     caller()
 except ZeroDivisionError:
     print("Caught exception, detailed traceback:")
     traceback.print_exc(file=sys.stdout)
-
 
 # CÁC LỆNH PDB CƠ BẢN KHI VÀO TRÌNH DEBUGGER:
 # n (next)     : Thực thi dòng hiện tại và đi đến dòng kế tiếp (không nhảy vào hàm)

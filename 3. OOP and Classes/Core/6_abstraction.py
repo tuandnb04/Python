@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-import random
+
 
 # PHẦN 1: ABSTRACT CLASS CƠ BẢN (INTERFACE / CONTRACT CHUNG)
 # Abstract class định nghĩa một "bản hợp đồng" (contract): mọi lớp con kế thừa
@@ -30,9 +30,9 @@ gateways: list[PaymentGateway] = [CreditCardPayment(), PayPalPayment(), CryptoPa
 for gateway in gateways:
     print(gateway.pay(49.99))
 
+
 # Không thể khởi tạo trực tiếp instance từ abstract class:
 # gateway = PaymentGateway() -> TypeError: Can't instantiate abstract class PaymentGateway with abstract method pay
-
 
 
 # PHẦN 2: ABSTRACT CLASS CÓ __init__ VÀ THUỘC TÍNH DÙNG CHUNG
@@ -75,7 +75,7 @@ class Player(ABC):
         self.path: list[tuple[int, int]] = [self.position]
 
     def make_move(self) -> tuple[int, int]:
-        move: tuple[int, int] = random.choice(self.moves)
+        move: tuple[int, int] = self.moves[len(self.path) % len(self.moves)]
         self.position = (self.position[0] + move[0], self.position[1] + move[1])
         self.path.append(self.position)
         return self.position
@@ -103,31 +103,34 @@ pawn.level_up()
 print("Move after level up:", pawn.make_move())
 print("Total path:", pawn.path)
 
-
-# PHẦN 4: CHUẨN HIỆN ĐẠI (PYTHON 3.8+ / 3.12+): typing.Protocol (STRUCTURAL SUBTYPING)
+# PHẦN 4: PROTOCOL & STRUCTURAL SUBTYPING (typing.Protocol)
 # So sánh với ABC (Nominal Subtyping - phải kế thừa tường minh):
 # - ABC: Bắt buộc class con phải kế thừa `class Dog(Animal)`.
 # - Protocol: "Duck Typing" tĩnh - bất kỳ class nào có đủ phương thức đều tự động thỏa mãn interface mà KHÔNG CẦN kế thừa!
 
 from typing import Protocol
 
+
 class Renderable(Protocol):
     def render(self) -> str:
         """Bất kỳ class nào có phương thức render() -> str đều là Renderable."""
         ...
 
+
 class Button:
     def render(self) -> str:
         return "[Submit Button]"
+
 
 class Image:
     def render(self) -> str:
         return "<Image Asset>"
 
+
 def display_ui(component: Renderable) -> None:
     print("Rendering component:", component.render())
+
 
 # Button và Image không hề kế thừa Renderable nhưng vẫn hoàn toàn hợp lệ về Type Hint:
 display_ui(Button())
 display_ui(Image())
-

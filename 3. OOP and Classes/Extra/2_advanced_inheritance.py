@@ -11,17 +11,20 @@ class Base:
     def action(self) -> None:
         print("Base action")
 
+
 class Step1(Base):
     def action(self) -> None:
         print("Step1 action (before)")
         super().action()
         print("Step1 action (after)")
 
+
 class Step2(Base):
     def action(self) -> None:
         print("Step2 action (before)")
         super().action()
         print("Step2 action (after)")
+
 
 class Combined(Step1, Step2):
     def action(self) -> None:
@@ -50,17 +53,21 @@ c.action()
 class X:
     pass
 
+
 class Y:
     pass
+
 
 class A(X, Y):
     pass
 
+
 class B(Y, X):
     pass
 
+
 # Thử nghiệm tạo class xung đột thứ tự sẽ gây TypeError:
 try:
-    type("Bad", (A, B), {}) # type: ignore
+    type("Bad", (A, B), {})  # type: ignore
 except TypeError as e:
     print("Cannot create class due to MRO conflict:", e)
